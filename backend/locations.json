@@ -1,0 +1,32 @@
+[
+    {
+        "locationID":1,
+        "title":"",
+        "lat":"55.604958",
+        "lng":"13.003125",
+        "circleRadius":50,
+        "mainRiddleID":4,
+        "code":1234,
+        "diaryID":1
+    },
+    {
+        "locationID":2,
+        "title":"",
+        "lat":"55.602412",
+        "lng":"12.995289",
+        "circleRadius":100,
+        "mainRiddleID":2,
+        "code":2022,
+        "diaryID":2
+    },
+    {
+        "locationID":3,
+        "title":"",
+        "lat":"55.591704",
+        "lng":"13.014402",
+        "circleRadius":120,
+        "mainRiddleID":8,
+        "code":6587,
+        "diaryID":3
+    }
+]

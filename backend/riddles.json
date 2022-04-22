@@ -1,0 +1,78 @@
+{
+    "mainRiddles": [
+        {
+            "riddleID":1,
+            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "img":"",
+            "correctAnswer":"", //Kanske ska inte med
+            "response":"Gå till ....",
+            "locationID":5,
+            "relatedPreRiddles": [1,2],
+            "relatedClues":[1]
+        },
+        {
+            "riddleID":2,
+            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "img":"",
+            "correctAnswer":"",
+            "response":"Gå till ....",
+            "locationID":7,
+            "relatedPreRiddles": [3,6],
+            "relatedClues":[]
+        }
+    ],
+
+    "preRiddles":[
+        {
+            "riddleID":1,
+            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "img":"",
+            "correctAnswer":"",
+            "response":"Gå till ....",
+            "locationID":1,
+            "relatedMainRiddle":1
+        },
+        {
+            "riddleID":2,
+            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "img":"",
+            "correctAnswer":"",
+            "response":"Bra, keep going! ",
+            "locationID":5,
+            "relatedMainRiddle":1
+        },
+        {
+            "riddleID":3,
+            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "img":"",
+            "correctAnswer":"",
+            "response":"Keep this in mind  ......",
+            "locationID":3,
+            "relatedMainRiddle":2
+        }
+    ],
+
+    "clues":[
+        {
+            "clueID":1,
+            "clue":"Kolla på ....",
+            "img":"",
+            "relatedMainRiddle":1,
+            "relatedPreRiddle":0
+        },
+        {
+            "clueID":2,
+            "clue":"U92 ....",
+            "img":"",
+            "relatedMainRiddle":0,
+            "relatedPreRiddle":2
+        },
+        {
+            "clueID":3,
+            "clue":"Gå in på ....",
+            "img":"",
+            "relatedMainRiddle":5,
+            "relatedPreRiddle":0
+        }
+    ]
+}
