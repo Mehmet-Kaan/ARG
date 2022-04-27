@@ -1,0 +1,84 @@
+:root{
+    /* FÄRGER */
+    --mainColor: #ADFF02 ;
+    --accentColor: #FFDD00 ;
+    --darkColor: #1C1018;
+    --lightColor: #F6F6F6;
+
+    /* TYPSNITT */
+    --titleFont: 'Rajdhani', sans-serif;
+    --bodyTextFont: 'Source Code Pro', monospace;
+    /* --specialFont: ; */
+
+    /* STORLEK TEXT */
+    font-size: 62.5%; /* <--- meaning the default value will be 10 px = 1 rem */
+
+    --bodyFontSz: 1.6rem;
+    --middleTitleSz:2rem;
+    --titleFontSz: 3rem;
+
+    /* MARGINALER, PADDING, BORDER */
+    --viewerMargin: 20px;
+    --textPadding:8px;
+    --buttonPadding:13px;
+    --buttonBorder: 1px solid #ADFF02;
+
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+#wrapper {
+    background-color: var(--darkColor);
+    height: 100vh;
+    width: 100vw;
+}
+
+.title {
+    font-size: var(--titleFontSz);
+    font-family: var(--titleFont);
+    color: var(--mainColor);
+    font-weight: 800;
+}
+
+.middleTitle {
+    font-size: var(--middleTitleSz);
+    font-family: var(--bodyTextFont);
+    text-transform: uppercase;
+    color: var(--mainColor);
+    font-weight: 500;
+}
+
+.bodyText {
+    font-size: var(--bodyFontSz);
+    font-family: var(--bodyTextFont);
+    color: var(--mainColor);
+    font-weight: 300;
+}
+.button.bodyText{
+    font-weight: 400;
+}
+
+.button {
+    padding: var(--buttonPadding);
+    background-color: var(--darkColor);
+    border: var(--buttonBorder);
+    color: var(--mainColor)
+}
+
+.button.callToAction {
+    background-color: var(--mainColor);
+    color: var(--darkColor);
+}
+
+button.button.callToAction:active {
+    background-color: var(--darkColor);
+    color: var(--mainColor);
+}
