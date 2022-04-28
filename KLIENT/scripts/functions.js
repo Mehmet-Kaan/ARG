@@ -51,3 +51,16 @@ async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved)
             return data;
         })
 }
+
+function postFormData(formData) {
+    let postData = JSON.stringify(Object.fromEntries(formData));
+    let settings = {
+      method: "POST",
+      body: postData,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    return settings;
+}
