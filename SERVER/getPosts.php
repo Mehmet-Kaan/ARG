@@ -20,7 +20,7 @@ $dataPHP = file_get_contents("php://input");
 $requestData = json_decode($dataPHP, true);
 
 checkContentType();
-$posts = openJSON("databas/posts.json");
+$posts = openJSON("database/posts.json");
 
 sendJSON($posts, 200);
 

@@ -20,7 +20,7 @@ $dataPHP = file_get_contents("php://input");
 $requestData = json_decode($dataPHP, true);
 
 checkContentType();
-$data = openJSON("databas/users.json");
+$data = openJSON("database/users.json");
 
 if(isset($requestData["username"], $requestData["password"])) {
     $username = $requestData["username"];

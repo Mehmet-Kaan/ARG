@@ -10,7 +10,7 @@ checkContentType();
 requestMethod("POST");
 
 // Hämtar users
-$users = openJSON("databas/users.json");
+$users = openJSON("database/users.json");
 
 // Hämtar data som skickats med requesten
 $data = file_get_contents("php://input");

@@ -9,7 +9,7 @@ checkContentType();
 requestMethod("POST");
 
 // Hämtar users
-$users = openJSON("databas/users.json");
+$users = openJSON("database/users.json");
 
 // Hämtar data som skickats med requesten
 $data = file_get_contents("php://input");
@@ -28,8 +28,8 @@ if (!isset($requestData["username"]) && !isset($requestData["email"])) {
 $username = $requestData["username"]; 
 $email =  $requestData["email"];
 
-    //Fetching data from database
-    $data = openJSON("databas/users.json");
+    //Fetching data from databasee
+    $data = openJSON("database/users.json");
     //Creating a user
     $newUser = [
         "username" => $username,
@@ -68,9 +68,9 @@ $email =  $requestData["email"];
 
     //Saving the new user
     array_push($data, $newUser);
-    saveToJSON("databas/users.json", $data);
+    saveToJSON("database/users.json", $data);
 
-    if (saveToJSON("databas/users.json", $data)) {
+    if (saveToJSON("database/users.json", $data)) {
         sendJSON($newUser);
     } else{
         sendJSON("Writing to file failed", 500);
