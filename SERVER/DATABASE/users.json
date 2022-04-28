@@ -3,16 +3,84 @@
         "userID": 1,
         "username": "Alice",
         "email": "alice@hotmail.com",
-        "teamID":1,
-        "riddlesSolved":[1,2,5],
-        "locationAchieved":[1,2,3,4]
+        "teamID": 1,
+        "riddlesSolved": [
+            1,
+            2,
+            5
+        ],
+        "preRiddlesSolved": [
+            1,
+            2,
+            5
+        ],
+        "locationAchieved": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "diariesTaken":[]
     },
     {
         "userID": 2,
         "username": "Elsa",
         "email": "elsa@hotmail.com",
-        "teamID":2,
-        "riddlesSolved":[1,2,5,6,7],
-        "locationAchieved":[1,2,3,4]
+        "teamID": 2,
+        "riddlesSolved": [
+            1,
+            2,
+            5,
+            6,
+            7
+        ],
+        "preRiddlesSolved": [
+            1,
+            2
+        ],
+        "locationAchieved": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "diariesTaken":[]
+    },
+    {
+        "username": "Niklas",
+        "email": "niklas.sta@hotmail.com",
+        "riddlesSolved": [
+            5,
+            5,
+            5,
+            5,
+            5
+        ],
+        "preRiddlesSolved": [
+            6,
+            6,
+            6,
+            6,
+            6
+        ],
+        "locationAchieved": [
+            7,
+            5
+        ],
+        "diariesTaken":[],
+        "userID": 3,
+        "password": "iklnikl3",
+        "teamID": 1
+    },
+    {
+        "username": "Mehmet",
+        "email": "mehmet@hotmail.com",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diariesTaken":[],
+        "userID": 4,
+        "password": "ehmmehm4",
+        "teamID": 2
     }
 ]
