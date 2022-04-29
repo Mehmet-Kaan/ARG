@@ -1,4 +1,55 @@
 /* MAP */
+header {
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	height: 6.2%;
+	width: 100%;
+	background: black;
+	color: lightgreen;
+	font-weight: bolder;
+	font-size: larger;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid lightgreen;
+}
+
+.codeBox {
+	height: 25%;
+	width: 70%;
+	position: absolute;
+	top: 35%;
+	left: 15%;
+	z-index: 10;
+	background: black;
+	border: 1px solid lightgreen;
+	overflow: scroll;
+}
+
+.closeButton {
+	height: 10%;
+	width: 8%;
+	background-color: lightgreen;
+	color: black;
+	position: relative;
+	left: 87%;
+	top: 5%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 25%;
+
+	cursor: pointer;
+}
+
+.codeText {
+	color: lightgreen;
+	margin: 0;
+	padding: 11%;
+	text-align: justify;
+}
 
 /* RIDDLES */
 
