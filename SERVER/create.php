@@ -36,7 +36,8 @@ $email =  $requestData["email"];
         "email" => $email,
         "riddlesSolved" => [],
         "preRiddlesSolved" => [],
-        "locationAchieved" => []
+        "locationAchieved" => [],
+        "diaryExcerpts" => []
     ];
 
     foreach($data as $user) {

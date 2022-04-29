@@ -1,52 +1,5 @@
 [
     {
-        "userID": 1,
-        "username": "Alice",
-        "email": "alice@hotmail.com",
-        "teamID": 1,
-        "riddlesSolved": [
-            1,
-            2,
-            5
-        ],
-        "preRiddlesSolved": [
-            1,
-            2,
-            5
-        ],
-        "locationAchieved": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "diariesTaken":[]
-    },
-    {
-        "userID": 2,
-        "username": "Elsa",
-        "email": "elsa@hotmail.com",
-        "teamID": 2,
-        "riddlesSolved": [
-            1,
-            2,
-            5,
-            6,
-            7
-        ],
-        "preRiddlesSolved": [
-            1,
-            2
-        ],
-        "locationAchieved": [
-            1,
-            2,
-            3,
-            4
-        ],
-        "diariesTaken":[]
-    },
-    {
         "username": "Niklas",
         "email": "niklas.sta@hotmail.com",
         "riddlesSolved": [
@@ -67,8 +20,8 @@
             7,
             5
         ],
-        "diariesTaken":[],
-        "userID": 3,
+        "diaryExcerpts": [],
+        "userID": 1,
         "password": "0000",
         "teamID": 1
     },
@@ -78,9 +31,42 @@
         "riddlesSolved": [],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diariesTaken":[],
-        "userID": 4,
-        "password": "ehmmehm4",
+        "diaryExcerpts": [],
+        "userID": 2,
+        "password": "ehmmehm2",
         "teamID": 2
+    },
+    {
+        "username": "Mercie",
+        "email": "mercie@hotmail.com",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 3,
+        "password": "ercmerc3",
+        "teamID": 1
+    },
+    {
+        "username": "Alice",
+        "email": "alice@hotmail.com",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 4,
+        "password": "licalic4",
+        "teamID": 2
+    },
+    {
+        "username": "Elsa",
+        "email": "elsa@hotmail.com",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 5,
+        "password": "lsaelsa5",
+        "teamID": 1
     }
 ]
