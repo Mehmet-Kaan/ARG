@@ -187,7 +187,7 @@ function initMap() {
   });
 
   //Players location image
-  const image = "navIcon.png";
+  const image = "../images/navIcon.png";
 
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
