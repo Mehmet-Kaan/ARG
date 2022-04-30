@@ -15,6 +15,88 @@ header {
 	border-bottom: 1px solid lightgreen;
 }
 
+/* Content icons */
+#subContent {
+	background-color: black;
+	height: 22%;
+	width: 100%;
+	z-index: 1;
+	position: absolute;
+	bottom: 0;
+	border-top: 1px solid lightgreen;
+}
+img{
+	position: absolute;
+}
+#geigermeter{
+	width: 42%;
+	top: 1%;
+	left: 2%;
+}
+#diary_icon {
+	width: 18.5%;
+	right: 5%;
+	top: 4%;
+}
+#riddles_icon {
+	width: 20%;
+	right: 4.4%;
+	bottom: 5.5%;
+}
+
+/* RIDDLES */
+.riddlesBox {
+	height: 100%;
+	z-index: 2;
+	position: absolute;
+	background: black;
+	color: lightgreen;
+	overflow: scroll;
+	width: 100%;
+	transition: all ease .5s;
+}
+
+.riddleBox{
+	height: 15%;
+	width: 30%;
+	background-color: white;
+}
+
+/* COMMAND INTERPRETER */
+.diaryBox {
+	height: 100%;
+	z-index: 2;
+	position: absolute;
+	top: 100%;
+	background: black;
+	color: lightgreen;
+	padding: 5%;
+	overflow: scroll;
+
+	transition: all ease .5s;
+}
+.excerptBox{
+	margin-bottom: 10%;
+}
+.closeBtn {
+	transform: rotate(90deg);
+	position: fixed;
+	left: calc(50% - 20px);
+	bottom: 5%;
+	font-size: 20px;
+	border-radius: 100%;
+	border: 1px solid lightgreen;
+	color: lightgreen;
+	background: black;
+	width: 40px;
+	height: 40px;
+	box-shadow: -1px 0.75px 4px 0px white;
+
+	opacity: 0%;
+	transition: all ease 1s;
+}
+
+/* MESSAGES */
 .codeBox {
 	height: 25%;
 	width: 70%;
@@ -51,8 +133,9 @@ header {
 	text-align: justify;
 }
 
-/* RIDDLES */
-
-/* COMMAND INTERPRETER */
-
-/* MESSAGES */
+.up{
+    top: 6.3%;
+}
+.opacity {
+	opacity: 100%;
+}
