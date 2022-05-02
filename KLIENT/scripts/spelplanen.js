@@ -189,13 +189,12 @@ function initMap() {
   });
 
   //Players location image
-  const image = "navIcon.png";
+  // const image = "../images/navIcon.png";
 
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
   let locPlayer = new google.maps.Marker({
     position: currentPositionOfPlayer,
-    icon: image,
     map: map,
   });
 
@@ -213,13 +212,12 @@ function initMap() {
     //Creates new marker for the current position
     locPlayer = new google.maps.Marker({
       position: currentPositionOfPlayer,
-      icon: image,
       map: map,
     });
 
     //Controls if player in the circle
     playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
-    console.log(playerInCircle);
+    console.log(locPlayer.getPosition());
 
   }, 20000);
 
@@ -229,6 +227,8 @@ function initMap() {
   // console.log(circleFour.getBounds().contains(locfive.getPosition()));
 
 }
+
+
 
 // //Dagboksutdrag
 // //Fetchs excerpts from diary.json
@@ -341,3 +341,11 @@ function initMap() {
 //   riddlesBox.append(closeBtn);
 //   document.body.append(riddlesBox);
 // })
+
+
+// DAGBOKSINLÄGG I EN FUNKTION
+
+// RIDDLES I EN FUNKTION 
+
+
+// EVENTLISTENER PÅ IKONERNA SOM FINNS SOM STATISKA ELEMENT I PHP FILEN

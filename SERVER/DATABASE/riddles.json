@@ -1,57 +1,46 @@
 {
     "mainRiddles": [
         {
-            "riddleID":1,
-            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "riddleID":0,
+            "riddle":"First four in...",
             "img":"",
-            "correctAnswer":"",
-            "response":"Gå till ....",
+            "correctAnswer":9780, 
             "locationID":5,
-            "relatedPreRiddles": [1,2],
-            "relatedClues":[1]
+            "diaryid": 0,
+            "relatedPreRiddles": [],
+            "relatedClues":[]
+        },
+        {
+            "riddleID":1,
+            "riddle":"Minns ni vad vi exprimenterade med i labbet?",
+            "img":"",
+            "correctAnswer":94,
+            "locationID":6,
+            "diaryid": 1,
+            "relatedPreRiddles": [],
+            "relatedClues":[]
         },
         {
             "riddleID":2,
-            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "riddle":"Klyv atomerna",
             "img":"",
-            "correctAnswer":"",
-            "response":"Gå till ....",
-            "locationID":7,
-            "relatedPreRiddles": [3,6],
+            "correctAnswer":94,
+            "locationID":0,
+            "diaryid": 2,
+            "relatedPreRiddles": [0],
             "relatedClues":[]
         }
     ],
-
     "preRiddles":[
         {
-            "riddleID":1,
-            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
+            "riddleID":0,
+            "riddle":"Klyv atomerna",
             "img":"",
-            "correctAnswer":"",
-            "response":"Gå till ....",
+            "correctAnswer":97432,
             "locationID":1,
             "relatedMainRiddle":1
-        },
-        {
-            "riddleID":2,
-            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
-            "img":"",
-            "correctAnswer":"",
-            "response":"Bra, keep going! ",
-            "locationID":5,
-            "relatedMainRiddle":1
-        },
-        {
-            "riddleID":3,
-            "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
-            "img":"",
-            "correctAnswer":"",
-            "response":"Keep this in mind  ......",
-            "locationID":3,
-            "relatedMainRiddle":2
         }
     ],
-
     "clues":[
         {
             "clueID":1,
