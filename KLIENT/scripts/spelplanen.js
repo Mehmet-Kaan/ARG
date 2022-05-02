@@ -1,9 +1,32 @@
-"use strict!";
+"use strict";
 
 let latitude, longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser;
 
+let riddles;
+console.log(diary);
+console.log(locations);
+
 //To get inloggeduser
 // login("Niklas", "0000");
+
+
+//Fetches all riddles
+
+  fetch("http://localhost:9000/get.php",{
+    method: 'POST',
+    body: JSON.stringify({riddles:true}),
+    headers: {"Content-type": "application/json"},
+  })
+  .then(r => {
+    console.log(r);
+    r.json();
+  })
+  .then(data => {
+    console.log(data);
+    riddles = data;
+  });
+
+console.log(riddles);
 
 const successCallback = (position) => {
   latitude = position.coords.latitude;

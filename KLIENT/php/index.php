@@ -17,6 +17,7 @@
       <img id="riddles_icon" src="../images/riddle_icon.png" alt="riddles_icon">
     </div>
 
+    <script src="../scripts/DB.js"></script>
     <script src="../scripts/functions.js"></script>
     <script src="../scripts/logIn.js"></script>
     <script src="../scripts/spelplanen.js"></script>
