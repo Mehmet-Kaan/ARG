@@ -4,10 +4,10 @@ let geigermeter = document.getElementById("geigermeter");
 let diaryIcon = document.getElementById("diary_icon");
 let riddlesIcon = document.getElementById("riddles_icon");
 
-let latitude,longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser, excerpts;
+let latitude,longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser, excerpts, riddles;
 
 //To get inloggeduser
-login("Niklas", "iklnikl3");
+login("Niklas", "0000");
 
 const successCallback = (position) => {
           latitude = position.coords.latitude;
@@ -234,9 +234,12 @@ function initMap() {
 
 //Dagboksutdrag
 //Fetchs excerpts from diary.json
-fetch("../json/diary.json").then(r => r.json()).then(data => {
+fetch("http://localhost:8000/json/diary.json").then(r => r.json()).then(data => {
   excerpts = data;
 });
+// fetch("http://localhost:9000/database/riddles.json").then(r => r.json()).then(data => {
+//   riddles = data;
+// });
 
 diaryIcon.addEventListener("click", ()=>{
   let diaryBox = document.createElement("div");
