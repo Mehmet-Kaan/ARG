@@ -274,12 +274,12 @@ function pageThree(info, button, user){
                 document.getElementById("titleO").classList.remove("hide");
                 document.getElementById("subContent").classList.remove("hide");
        
-                document.body.innerHTML += `
-                     <?php
-                         require_once "/api-key.php";                            
-                     ?>
-                    <script src="../scripts/spelplanen.js"></script>
-                `;
+                // document.body.innerHTML += `
+                //      <?php
+                //          require_once "/api-key.php";                            
+                //      ?>
+                //     <script src="../scripts/spelplanen.js"></script>
+                // `;
 
                 // Här kallar vi på funktion som ska visa spelplanen, som kodas i spelplanen då :)
             }, 1700);    
