@@ -275,10 +275,12 @@ function pageThree(info, button, user){
                 document.getElementById("subContent").classList.remove("hide");
        
                 document.body.innerHTML += `
+                     <?php
+                         require_once "/api-key.php";                            
+                     ?>
                     <script src="../scripts/spelplanen.js"></script>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94Qi9OPA7V43ooB5f0gqSv8lmYm730RE&callback=initMap" async defer></script>
                 `;
-               
+
                 // Här kallar vi på funktion som ska visa spelplanen, som kodas i spelplanen då :)
             }, 1700);    
     })
