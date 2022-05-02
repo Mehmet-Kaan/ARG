@@ -4,7 +4,7 @@
             "riddleID":1,
             "riddle":"Minns ni vad vi gjorde med Plutonium i labbet?",
             "img":"",
-            "correctAnswer":"", //Kanske ska inte med
+            "correctAnswer":"",
             "response":"Gå till ....",
             "locationID":5,
             "relatedPreRiddles": [1,2],

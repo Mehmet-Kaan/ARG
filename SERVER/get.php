@@ -20,8 +20,11 @@ $dataPHP = file_get_contents("php://input");
 $requestData = json_decode($dataPHP, true);
 
 checkContentType();
-$posts = openJSON("database/posts.json");
 
-sendJSON($posts, 200);
+if(isset($requestData["riddles"])){
+    $riddles = openJSON("database/riddles.json");
+    sendJSON($riddles, 200);
+}
+
 
 exit();

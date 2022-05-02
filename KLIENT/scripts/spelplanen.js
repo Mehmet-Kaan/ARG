@@ -237,9 +237,15 @@ function initMap() {
 fetch("http://localhost:8000/json/diary.json").then(r => r.json()).then(data => {
   excerpts = data;
 });
-// fetch("http://localhost:9000/database/riddles.json").then(r => r.json()).then(data => {
-//   riddles = data;
-// });
+
+fetch("http://localhost:9000/get.php",{
+  method: 'POST',
+  body: JSON.stringify({"riddle":true}),
+  headers: {"Content-type": "application/json; charset=UTF-8"},
+}).then(r => r.json()).then(data => {
+  riddles = data;
+  console.log(data);
+});
 
 diaryIcon.addEventListener("click", ()=>{
   let diaryBox = document.createElement("div");
