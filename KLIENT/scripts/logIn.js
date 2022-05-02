@@ -269,18 +269,21 @@ function pageThree(info, button, user){
 
             setTimeout(()=> {
                 wrapper.innerHTML = "";
-                wrapper.remove();
-                document.getElementById("map").classList.remove("hide");
+                // wrapper.remove();
+                // document.getElementById("map").classList.remove("hide");
                 document.getElementById("titleO").classList.remove("hide");
                 document.getElementById("subContent").classList.remove("hide");
        
-                document.body.innerHTML += `
-                     <?php
-                         require_once "/api-key.php";                            
-                     ?>
-                    <script src="../scripts/spelplanen.js"></script>
-                `;
+                // document.body.innerHTML += `
+                //      <?php
+                //          require_once "/api-key.php";                            
+                //      ?>
+                //     <script src="../scripts/spelplanen.js"></script>
+                // `;
 
+                wrapper.setAttribute("id", "map");
+                initMap();
+                // window.location.replace("php/gameFrame.php");
                 // Här kallar vi på funktion som ska visa spelplanen, som kodas i spelplanen då :)
             }, 1700);    
     })
