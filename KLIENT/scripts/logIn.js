@@ -269,6 +269,7 @@ function pageThree(info, button, user){
 
             setTimeout(()=> {
                 wrapper.innerHTML = "";
+<<<<<<< Updated upstream
                 wrapper.remove();
                 document.getElementById("map").classList.remove("hide");
                 document.getElementById("titleO").classList.remove("hide");
@@ -281,6 +282,11 @@ function pageThree(info, button, user){
                     <script src="../scripts/spelplanen.js"></script>
                 `;
 
+=======
+                wrapper.setAttribute("id", "map");
+                initMap();
+                // window.location.replace("php/gameFrame.php");
+>>>>>>> Stashed changes
                 // Här kallar vi på funktion som ska visa spelplanen, som kodas i spelplanen då :)
             }, 1700);    
     })

@@ -7,7 +7,11 @@ let riddlesIcon = document.getElementById("riddles_icon");
 let latitude,longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser, excerpts, riddles;
 
 //To get inloggeduser
+<<<<<<< Updated upstream
 login("Niklas", "0000");
+=======
+// login("Niklas", "0000");
+>>>>>>> Stashed changes
 
 const successCallback = (position) => {
           latitude = position.coords.latitude;
@@ -297,6 +301,7 @@ diaryIcon.addEventListener("click", ()=>{
     }, 750);
   })
 
+<<<<<<< Updated upstream
   diaryBox.append(closeBtn);
   document.body.append(diaryBox);
 })
@@ -331,6 +336,81 @@ riddlesIcon.addEventListener("click", ()=>{
   closeBtn.innerText = `→`;
 
   closeBtn.addEventListener("click", ()=>{
+=======
+  const locfour = new google.maps.Marker({
+    position: spotFour,
+    icon: svgMarker,
+    map: map,
+  });
+
+  const spotFive = new google.maps.LatLng(55.58716605414764, 12.982450138149538);
+  const locfive = new google.maps.Marker({
+    position: spotFive,
+    icon: svgMarker,
+    map: map,
+  });
+
+
+  // //Onclick
+  // locfive.addListener("click", () => {
+  //   let codeBox = document.createElement("div");
+  //   codeBox.classList.add("codeBox");
+
+  //   let closeButton = document.createElement("button");
+  //   closeButton.classList.add("closeButton");
+  //   closeButton.innerText = "X";
+
+  //   playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
+
+  //   if (!playerInCircle) {
+  //     codeBox.innerHTML = `
+  //               <p class="codeText"> you’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter</p>
+  //             `;
+  //   }
+
+  //   closeButton.addEventListener("click", () => {
+  //     codeBox.remove();
+  //   });
+
+  //   codeBox.prepend(closeButton);
+  //   document.body.append(codeBox);
+  // });
+
+  // //Players location image
+  // const image = "navIcon.png";
+
+  // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  // currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
+  // let locPlayer = new google.maps.Marker({
+  //   position: currentPositionOfPlayer,
+  //   icon: image,
+  //   map: map,
+  // });
+
+  // //Updates the position of player
+  // setInterval(() => {
+  //   //Deletes the latest position marker from map
+  //   locPlayer.setMap(null);
+
+  //   //Gets new location
+  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+  //   //Updates the lat and lang
+  //   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
+
+  //   //Creates new marker for the current position
+  //   locPlayer = new google.maps.Marker({
+  //     position: currentPositionOfPlayer,
+  //     icon: image,
+  //     map: map,
+  //   });
+
+  //   //Controls if player in the circle
+  //   playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
+  //   console.log(playerInCircle);
+
+  // }, 20000);
+>>>>>>> Stashed changes
 
     riddlesBox.classList.remove("up");
     closeBtn.remove();
