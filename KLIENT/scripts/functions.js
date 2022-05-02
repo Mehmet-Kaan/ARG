@@ -64,3 +64,27 @@ function postFormData(formData) {
     };
     return settings;
 }
+
+function createCloseButton(contianerBox) {
+    let closeBtn = document.createElement("button");
+    closeBtn.classList.add("closeBtn");
+  
+    setTimeout(() => {
+      closeBtn.classList.add("opacity");
+    }, 750);
+  
+    closeBtn.innerText = `→`;
+  
+    closeBtn.addEventListener("click", ()=>{
+  
+        contianerBox.classList.remove("up");
+        closeBtn.remove();
+    
+        setTimeout(() => {
+            contianerBox.remove();
+        }, 750);
+    })
+  
+    contianerBox.append(closeBtn);
+    document.body.append(contianerBox);
+}

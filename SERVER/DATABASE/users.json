@@ -20,7 +20,7 @@
             7,
             5
         ],
-        "diaryExcerpts": [],
+        "diaryExcerpts": [1,2,3],
         "userID": 1,
         "password": "0000",
         "teamID": 1
@@ -31,9 +31,9 @@
         "riddlesSolved": [],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [],
+        "diaryExcerpts": [0,1,2,3,4,5,6],
         "userID": 2,
-        "password": "ehmmehm2",
+        "password": "1111",
         "teamID": 2
     },
     {

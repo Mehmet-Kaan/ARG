@@ -1,4 +1,5 @@
 "use strict";
+let inloggeduser;
 
 const pageInformation = {
     headlines: {
@@ -210,6 +211,7 @@ function pageTwo(info, button){
             //   saveToSession(data, "session");
                 console.log("OK")
                 console.log(data);
+
                 // FADE OUT 
                 const phaseTwo = document.querySelector("#secondPhase");
                 phaseTwo.style.animation =  "fadeOut 2s";
@@ -221,7 +223,7 @@ function pageTwo(info, button){
                     // Fade In
                     const phaseThree = document.querySelector("#thirdPhase");
                     phaseThree.style.animation =  "fadeIn 3s";
-                     
+                    inloggeduser = data;
                 }, 1700);
             })
             .catch((error) => {

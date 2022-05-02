@@ -102,7 +102,7 @@ const diary = [
             "start": "Idag var första gången jag mötte mina nya kollegor på kontoret, de var nervösa över sin första tjänst. Bethe, en av dem, verkade fascinerad och såg sig omkring på kontoret och log. Tellers intryck har jag tänkt på mycket under resten av dagen. Han hade en rädsla och ängslighet i blicken som jag aldrig tidigare skådat hos en kärnfysiker på så här hög nivå. Jag har bestämt mig för att övervaka hur han beter sig, och hur hans syn på projektet utvecklas.På lunchen berättade jag såklart om min favorittext just nu, The Bhagavad Gita, jag hoppas de tyckte om den. Jag läste delar ur den för dem. En sådan fantastisk filosofi. Jag läste ur sidan…",
             "end": ""
         },  
-        "img":"",
+        "img":"diary_icon",
         "locationID": 5
     },
     {

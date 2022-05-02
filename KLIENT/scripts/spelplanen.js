@@ -1,32 +1,25 @@
 "use strict";
 
-let latitude, longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser;
+let latitude, longitude, currentPositionOfPlayer, playerInCircle, riddles;
 
-let riddles;
 console.log(diary);
 console.log(locations);
 
 //To get inloggeduser
 // login("Niklas", "0000");
 
-
 //Fetches all riddles
-
-  fetch("http://localhost:9000/get.php",{
-    method: 'POST',
-    body: JSON.stringify({riddles:true}),
-    headers: {"Content-type": "application/json"},
-  })
-  .then(r => {
-    console.log(r);
-    r.json();
-  })
-  .then(data => {
-    console.log(data);
-    riddles = data;
-  });
-
-console.log(riddles);
+fetch("http://localhost:9000/get.php",{
+  method: 'POST',
+  body: JSON.stringify({riddles:true}),
+  headers: {"Content-type": "application/json"},
+})
+.then(r => 
+  r.json()
+)
+.then(data => {
+  riddles = data;
+});
 
 const successCallback = (position) => {
   latitude = position.coords.latitude;
@@ -252,118 +245,89 @@ function initMap() {
 }
 
 
-
 // //Dagboksutdrag
 // //Fetchs excerpts from diary.json
 // fetch("http://localhost:8000/json/diary.json").then(r => r.json()).then(data => {
 //   excerpts = data;
 // });
 
-// fetch("http://localhost:9000/get.php",{
-//   method: 'POST',
-//   body: JSON.stringify({"riddle":true}),
-//   headers: {"Content-type": "application/json; charset=UTF-8"},
-// }).then(r => r.json()).then(data => {
-//   riddles = data;
-//   console.log(data);
-// });
+document.getElementById("diary_icon").addEventListener("click", ()=>{
+  let diaryBox = document.createElement("div");
+  diaryBox.setAttribute("class", "diaryBox");
 
-// diaryIcon.addEventListener("click", ()=>{
-//   let diaryBox = document.createElement("div");
-//   // diaryBox.classList.add("diaryBox");
-//   diaryBox.setAttribute("class", "diaryBox");
+  diaryBox.innerHTML = `
+    <h1 style="text-align:center; margin-bottom:10px;">Diary Excerpts</h1>
+  `;
 
-//   setTimeout(() => {
-//     diaryBox.classList.add("up");
-//   }, 100);
+  setTimeout(() => {
+    diaryBox.classList.add("up");
+  }, 100);
 
-//   //För every excerpt
-//   excerpts.forEach(excerpt => {
-//     let excerptBox = document.createElement("div");
-//     excerptBox.classList.add("excerptBox");
+  //För every excerpt
+  diary.forEach(excerpt => {
 
-//     excerptBox.innerHTML = `
-//       <p style ="color:white;" class="date_time"> ${excerpt.date} - ${excerpt.time}</p>
-//     `;
-    
-//     // if(excerpt.img !== null && excerpt.img !== ""){
-//     //   excerptBox.innerHTML += `
-//     //   <img src="../images/${excerpt.img}.png" class="excerptImg">
-//     // `;
-//     // }
-    
-//     excerptBox.innerHTML +=`
-//       <p class="excerptText">${excerpt.text}</p>
-//       <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
-//     `;
-//     diaryBox.append(excerptBox);
-//   });
+    //Creates a excerpt box for every excerpts received for inlogged user
+    if(inloggeduser.diaryExcerpts.includes(excerpt.id)){
+      let excerptBox = document.createElement("div");
+      excerptBox.classList.add("excerptBox");
 
-//   let closeBtn = document.createElement("button");
-//   closeBtn.classList.add("closeBtn");
-
-//   setTimeout(() => {
-//     closeBtn.classList.add("opacity");
-//   }, 750);
-
-//   closeBtn.innerText = `→`;
-
-//   closeBtn.addEventListener("click", ()=>{
-
-//     diaryBox.classList.remove("up");
-//     closeBtn.remove();
-
-//     setTimeout(() => {
-//       diaryBox.remove();
-//     }, 750);
-//   })
-
-//   diaryBox.append(closeBtn);
-//   document.body.append(diaryBox);
-// })
-
-// riddlesIcon.addEventListener("click", ()=>{
-//   let riddlesBox = document.createElement("div");
-//   riddlesBox.setAttribute("class", "riddlesBox");
-
-//   setTimeout(() => {
-//     riddlesBox.classList.add("up");
-//   }, 100);
-
-//   riddlesBox.innerHTML = `
-//     <h2 style="text-align:center;">Riddles</h2>
-//   `;
+      //Date and Time
+      excerptBox.innerHTML = `
+        <p class="date_time"> ${excerpt.date} - ${excerpt.time}</p>
+      `;
+      
+      //Creates an img element If excerpt has one
+      if(excerpt.img !== null && excerpt.img !== ""){
+        excerptBox.innerHTML += `
+          <img src="../images/${excerpt.img}.png" class="excerptImg">
+      `;
+      }
+      
+      //Body text and page number
+      excerptBox.innerHTML +=`
+        <p class="excerptText">${excerpt.bodyText.start}</p>
+        <p class="excerptText">${excerpt.bodyText.end}</p>
+        <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
+      `;
+      diaryBox.append(excerptBox);
+    }
   
-//   //För every riddle
-//   riddles.forEach(riddle => {
-//     let riddleBox = document.createElement("div");
-//     riddleBox.classList.add("riddleBox");
+  });
 
-//     riddlesBox.append(riddleBox);
-//   });
+  //Creates a close button
+  createCloseButton(diaryBox);
+})
 
-//   let closeBtn = document.createElement("button");
-//   closeBtn.classList.add("closeBtn");
+document.getElementById("riddles_icon").addEventListener("click", ()=>{
+  let riddlesContainer = document.createElement("div");
+  riddlesContainer.setAttribute("class", "riddlesContainer");
 
-//   setTimeout(() => {
-//     closeBtn.classList.add("opacity");
-//   }, 750);
+  let riddlesBoxes = document.createElement("div");
+  riddlesBoxes.setAttribute("class", "riddlesBoxes");
 
-//   closeBtn.innerText = `→`;
+  let title = document.createElement("h1");
+  title.style.textAlign = "center";
+  title.style.marginBottom = "10px";
+  title.innerText = "Riddles";
 
-//   closeBtn.addEventListener("click", ()=>{
+  setTimeout(() => {
+    riddlesContainer.classList.add("up");
+  }, 100);
+  
+  //För every riddle
+  riddles.mainRiddles.forEach(riddle => {
+    let riddleBox = document.createElement("div");
+    riddleBox.classList.add("riddleBox");
 
-//     riddlesBox.classList.remove("up");
-//     closeBtn.remove();
+    riddlesBoxes.append(riddleBox);
+  });
 
-//     setTimeout(() => {
-//       riddlesBox.remove();
-//     }, 750);
-//   })
+  riddlesContainer.append(title,riddlesBoxes);
 
-//   riddlesBox.append(closeBtn);
-//   document.body.append(riddlesBox);
-// })
+  //Creates a close button
+  createCloseButton(riddlesContainer);
+  
+})
 
 
 // DAGBOKSINLÄGG I EN FUNKTION
