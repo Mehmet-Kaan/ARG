@@ -5,9 +5,8 @@ const locations = [
         "lat":"55.61173",
         "lng":"12.99411",
         "circleRadius": 50, 
-        "mainRiddleID":4, 
-        "code":1234, 
-        "diaryID": 2
+        "mainRiddleID":4,  
+        "diaryID": 2,
     },
     {
         "locationID":1,
@@ -16,7 +15,6 @@ const locations = [
         "lng":"12.98636",
         "circleRadius":100,
         "mainRiddleID":2,
-        "code":2022,
         "diaryID":6
     },
     {
@@ -24,9 +22,8 @@ const locations = [
         "title":"Skeppsbron",
         "lat":"55.61043",
         "lng":"12.99763",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID": 5
     },
     {
@@ -34,9 +31,8 @@ const locations = [
         "title":"Slagthuset",
         "lat":"55.61076",
         "lng":"13.00208",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":4
     },
     {
@@ -44,9 +40,8 @@ const locations = [
         "title":"Skyddstornet",
         "lat":"55.61202",
         "lng":"12.99067",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":8
     },
     {
@@ -54,9 +49,8 @@ const locations = [
         "title":"Orkanen",
         "lat":"55.61079",
         "lng":"12.99538",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":0
     },
     {
@@ -64,19 +58,17 @@ const locations = [
         "title":"Gäddan",
         "lat":"55.60753",
         "lng":"12.98978",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":1
     },
     {
         "locationID":7,
         "title":"Kanalen",
-        "lat":"55.60753",
-        "lng":"12.98978",
-        "circleRadius":120,
+        "lat":"",
+        "lng":"",
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":3
     }
     ,{
@@ -84,13 +76,11 @@ const locations = [
         "title":"Dödsbädden",
         "lat":"",
         "lng":"",
-        "circleRadius":120,
+        "circleRadius":100,
         "mainRiddleID":8,
-        "code":6587,
         "diaryID":7
     }
 ]
-
 const diary = [
     {
         "id":0,
@@ -208,5 +198,37 @@ const diary = [
         },  
         "img":"",
         "locationID": 4
+    }
+]
+const messages = [
+    {
+        "messageID":1,
+        "message":"now, keep an eye on your geiger meter. You just entered a designated area where you will have to be fast and nimble. Go check out what your leader sent you.",
+        "locationID":1
+    },
+    {
+        "messageID":2,
+        "message":"you’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter",
+        "locationID":4
+    }
+]
+const teams = [
+    {
+        "teamID": 1,
+        "name": "Teller",
+        "avatar":"",
+        "phaseOne": [6],
+        "phaseTwo": [7, 5, 0],
+        "phaseThree": [8, 2, 1, 3],
+        "phaseFour": [4]
+    },
+    {
+        "teamID": 2,
+        "name": "Bethe",
+        "avatar":"",
+        "phaseOne": [5],
+        "phaseTwo": [7, 6, 0],
+        "phaseThree": [8, 2, 1, 3],
+        "phaseFour": [4]
     }
 ]

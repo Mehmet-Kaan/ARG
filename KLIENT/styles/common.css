@@ -2,7 +2,7 @@
     /* FÄRGER */
     --mainColor: #ADFF02 ;
     --accentColor: #FFDD00 ;
-    --darkColor: #1C1018;
+    --darkColor: #000000;
     --lightColor: #F6F6F6;
 
     /* TYPSNITT */
@@ -87,6 +87,7 @@ button.button.callToAction:active {
     height: 100%;
 }
 
-.hide{
+.hide,
+#subContent.hide{
     display: none;
 }

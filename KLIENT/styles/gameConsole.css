@@ -1,3 +1,4 @@
+
 /* MAP */
 
 #map {
@@ -9,45 +10,84 @@ header {
 	position: absolute;
 	top: 0;
 	z-index: 1;
-	height: 6.2%;
+	height: 7.5%;
 	width: 100%;
-	background: black;
-	color: lightgreen;
+	background: var(--darkColor);
+	color: var(--mainColor);
 	font-weight: bolder;
 	font-size: larger;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 1px solid lightgreen;
 }
 
 /* Content icons */
 #subContent {
-	background-color: black;
+	display: grid;
+	grid-template-rows: 4fr 4fr 1fr;
+	grid-template-columns: 4fr 1fr;
+	background-color: var(--mainColor);
+	gap: 3px;
 	height: 22%;
 	width: 100%;
 	z-index: 1;
 	position: absolute;
 	bottom: 0;
-	border-top: 1px solid lightgreen;
 }
-img{
-	position: absolute;
+
+#hintWrapper{
+	grid-row: 3/4;
+	grid-column: 1/3;
+	height:100%;
+	width:100%;
+
+	display: flex;
+	align-items: center;	
 }
+
+#hintWrapper > p {
+	font-size: 1.3rem;
+	font-weight: 400;
+	color: var(--darkColor);
+	overflow: hidden;
+    height: 1.5rem;
+}
+
 #geigermeter{
-	width: 42%;
-	top: 1%;
-	left: 2%;
+	grid-row: 1/3;
+	grid-column: 1/2;
+	height:100%;
+	width:100%;
+	background-color: var(--darkColor);
 }
+
 #diary_icon {
-	width: 18.5%;
-	right: 5%;
-	top: 4%;
+	grid-row: 1/2;
+	grid-column: 2/3;
+	height:100%;
+	width:100%;
+	background-color: var(--darkColor);
+
+	display:flex;
+	justify-content: center;
+	align-items: center;
 }
+
 #riddles_icon {
-	width: 20%;
-	right: 4.4%;
-	bottom: 5.5%;
+	grid-row: 2/3;
+	grid-column: 2/3;
+	height:100%;
+	width:100%;
+	background-color: var(--darkColor);
+
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#diary_icon > img,
+#riddles_icon > img{
+	width:30%;
 }
 
 /* RIDDLES */
@@ -104,44 +144,80 @@ img{
 
 /* MESSAGES */
 .codeBox {
-	height: 25%;
-	width: 70%;
 	position: absolute;
-	top: 35%;
-	left: 15%;
+	top: 25%;
 	z-index: 10;
 	background: black;
-	border: 1px solid lightgreen;
 	overflow: scroll;
+	
+	display:flex;
+	flex-direction: column;
+	margin:var(--viewerMargin);
+	box-shadow: 0px 0px 10000px var(--mainColor)
+
+}
+
+.titleWrapper {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--viewerMargin);
 }
 
 .closeButton {
-	height: 10%;
-	width: 8%;
-	background-color: lightgreen;
-	color: black;
-	position: relative;
-	left: 87%;
-	top: 5%;
+	height: 20px;
+	width: 20px;
+	background-color: var(--mainColor);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: none;
-	border-radius: 25%;
-
+	padding: var(--buttonPadding);
 	cursor: pointer;
 }
 
-.codeText {
+.codeBox > .bodyText {
+	margin: 0px var(--viewerMargin);
+	margin-bottom: var(--viewerMargin);
+}
+
+/* .codeText {
 	color: lightgreen;
 	margin: 0;
 	padding: 11%;
 	text-align: justify;
+} */
+
+#answer {
+	margin: 0px var(--viewerMargin);
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(6, 1fr);
+    margin-bottom: var(--viewerMargin);
+	align-self: center
+}
+
+.number{
+	max-width: 40px;
+    height: 40px;
+	background-color: var(--mainColor);
+    border: none;
+    color: var(--darkColor);
+	font-weight: 400;
+	padding: 35%;
+}
+
+#answer > button {
+    grid-row: 2;
+    grid-column: 1 / 7;
+	padding: 8px;
+	margin-top: var(--viewerMargin);
 }
 
 .up{
     top: 6.3%;
 }
+
 .opacity {
 	opacity: 100%;
 }

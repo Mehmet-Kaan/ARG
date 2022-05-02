@@ -44,6 +44,7 @@ const buttons = {
     }
 };
 const wrapper = document.querySelector("#wrapper");
+let loggedInUser;
 
 // INIT
 // Fade in
@@ -192,7 +193,6 @@ function pageTwo(info, button){
 
         event.preventDefault();
         const formData = new FormData(form);
-        console.log(formData.entries());
 
         const req2 = new Request(`http://localhost:9000/login.php`, 
             postFormData(formData)
@@ -207,9 +207,9 @@ function pageTwo(info, button){
                 }
             })
             .then((data) => {
-            //   saveToSession(data, "session");
-                console.log("OK")
-                console.log(data);
+                // Save to session
+                saveToSession("user", data);
+
                 // FADE OUT 
                 const phaseTwo = document.querySelector("#secondPhase");
                 phaseTwo.style.animation =  "fadeOut 2s";

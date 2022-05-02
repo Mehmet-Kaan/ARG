@@ -1,57 +1,89 @@
 "use strict";
 
 let latitude, longitude, currentPositionOfPlayer, playerInCircle, inLoggedUser;
-
-let riddles;
-console.log(diary);
-console.log(locations);
-
-//To get inloggeduser
-// login("Niklas", "0000");
-
-
-//Fetches all riddles
-
-  fetch("http://localhost:9000/get.php",{
-    method: 'POST',
-    body: JSON.stringify({riddles:true}),
-    headers: {"Content-type": "application/json"},
-  })
-  .then(r => {
-    console.log(r);
-    r.json();
-  })
-  .then(data => {
-    console.log(data);
-    riddles = data;
-  });
-
-console.log(riddles);
-
-const successCallback = (position) => {
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
-
-  console.log(latitude);
-  console.log(longitude);
-}
-
-const errorCallback = (position) => {
-  console.log(position);
-}
-
-//Get position of player 
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-var map;
+let map;
 const MALMO_BOUNDS = {
   north: 55.639951,
   south: 55.500386,
   west: 12.8811839,
   east: 13.1507609,
 };
+let user = {
+  username: "Niklas",
+  email: "niklas.sta@hotmail.com",
+  riddlesSolved: [
+      5,
+      5,
+      5,
+      5,
+      5
+  ],
+  preRiddlesSolved: [
+      6,
+      6,
+      6,
+      6,
+      6
+  ],
+  locationAchieved: [
+      7,
+      5
+  ],
+  diaryExcerpts: [],
+  userID: 1,
+  password: "0000",
+  teamID: 1
+};
 
+// Get position of player 
+function getLocation() {
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+  } else {
+    // Deras telefon har inte möjlighet till att dela plats
+    // x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function successCallback(position) {
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+
+  console.log(latitude, longitude);
+}
+function errorCallback(error){
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      // Starta dela plats
+      // x.innerHTML = "User denied the request for Geolocation."
+      // break;
+    case error.POSITION_UNAVAILABLE:
+      // OPS
+      // x.innerHTML = "Location information is unavailable."
+      // break;
+    case error.TIMEOUT:
+      // x.innerHTML = "The request to get user location timed out."
+      // break;
+    case error.UNKNOWN_ERROR:
+      // x.innerHTML = "An unknown error occurred."
+      // break;
+  }
+}
+function playerLocation(){
+  getLocation();
+  let playerLocation = new google.maps.LatLng(latitude, longitude);
+  return playerLocation;
+}
+
+// Updating the latitude and longitude every 20sec
+setInterval(()=> {
+  getLocation();
+},20000);
+
+// Creates the map
 function initMap() {
+
+  // The map
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 55.604980, lng: 13.003822 },
     restriction: {
@@ -61,74 +93,121 @@ function initMap() {
     zoom: 13,
     mapId: "1e40c73b7572b645"
   });
+  
 
-  const spotOne = new google.maps.LatLng(55.604958, 13.003125);
-  const spotTwo = new google.maps.LatLng(55.602412, 12.995289);
-  const spotThree = new google.maps.LatLng(55.591704, 13.014402);
-  const spotFour = new google.maps.LatLng(55.589861, 12.988219);
+  // How to release the spots
+  let spotsFirst = teams.find(team => team.teamID = user.teamID).phaseOne;
+  let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
+  let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
+  let spotsFourth = teams.find(team => team.teamID = user.teamID).phaseFour;
+  
+  publishSpots(spotsFirst);
 
-  const circleRadiusS = 100;
-  const circleRadiusM = 200;
-  const circleRadiusL = 300;
+  setTimeout(() => {
+    publishSpots(spotsSecond);
+  }, 10000)
+  setTimeout(() => {
+    publishSpots(spotsThird);
+  }, 20000)
+  setTimeout(() => {
+    publishSpots(spotsFourth);
+  }, 30000);
 
-  const circleOne = new google.maps.Circle({
+  // //Updates the position of player
+  // setInterval(() => {
+  //   //Deletes the latest position marker from map
+  //   locPlayer.setMap(null);
+
+  //   //Gets new location
+  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+  //   //Updates the lat and lang
+  //   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
+
+  //   //Creates new marker for the current position
+  //   locPlayer = new google.maps.Marker({
+  //     position: currentPositionOfPlayer,
+  //     map: map,
+  //   });
+
+  //   //Controls if player in the circle
+  //   playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
+  //   console.log(locPlayer.getPosition());
+
+  // }, 20000);
+
+
+  // // Check if in spot
+  // console.log(circleFour.getBounds().contains(locfour.getPosition()));
+  // console.log(circleFour.getBounds().contains(locfive.getPosition()));
+
+}
+// Creates the circles and markers / Argument that is sent to the parameter is the locationID
+function createSpot(spot){
+
+  // Marker Icon
+  const svgMarker = {
+    path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
+    fillColor: "#00FF01",
+          fillColor: "#00FF01",                
+    fillColor: "#00FF01",
+    fillOpacity: 0.6,
+    anchor: new google.maps.Point(16, 30),
+  };
+
+  // Position for each position
+  let loc = new google.maps.LatLng(spot.lat, spot.lng);
+
+  // Marker for each position
+  const marker = new google.maps.Marker({
+    position: loc,
+    icon: svgMarker,
+    map: map
+  });
+
+  // Circle for each position
+  let circle = new google.maps.Circle({
     strokeColor: "#00FF01",
     strokeOpacity: 0.8,
     strokeWeight: 2,
     fillColor: "#00FF01",
     fillOpacity: 0.19,
     map: map,
-    center: spotOne,
-    radius: circleRadiusS,
-    clickable: false
+    center: loc,
+    radius: spot.circleRadius
   });
-
-  const circleTwo = new google.maps.Circle({
-    strokeColor: "#00FF01",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#00FF01",
-    fillOpacity: 0.19,
-    map: map,
-    center: spotTwo,
-    radius: circleRadiusM,
-    clickable: false
-  });
-
-  const circleThree = new google.maps.Circle({
-    strokeColor: "#00FF01",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#00FF01",
-    fillOpacity: 0.19,
-    map: map,
-    center: spotThree,
-    radius: circleRadiusL,
-    clickable: false
-  });
-
-  const circleFour = new google.maps.Circle({
-    strokeColor: "#00FF01",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#00FF01",
-    fillOpacity: 0.19,
-    map: map,
-    center: spotFour,
-    radius: circleRadiusL,
-    clickable: false
-  });
-
-  // Remove circle
-  // circle.setMap(null);
 
   // Pulse effect
-  nextAssignment(circleFour, circleRadiusL);
-  setTimeout(() => {
-    nextAssignment(circleThree, circleRadiusL);
-  }, 5000);
+  nextAssignment(circle, spot.circleRadius);
 
-  function nextAssignment(circle, radiusBase) {
+  // Click Event
+  google.maps.event.addListener(marker,'click',function() {
+    let message;
+    let booleanValue = checkIfInZone(circle);
+
+    if(booleanValue){
+      message = "Now, keep an eye on your geiger meter. You just entered a designated area where you will have to be fast and nimble. Go check out what your leader sent you.";
+    } else {
+      message = "You’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter";
+    }
+    
+    createMessageBox(message, booleanValue, spot);
+  });
+}
+// Publishing the spots / Array with locationIDs
+function publishSpots(spotsArray){
+    spotsArray.forEach(spot => {
+      locations.forEach(loc => {
+        if(spot === loc.locationID){
+          console.log(spot)
+          console.log(loc.locationID)
+          createSpot(loc);
+        }
+      })
+    })
+}
+// Pulse effect - next assignment / circle and radius 
+function nextAssignment(circle, radiusBase) {
     let currentRadius = radiusBase;
     let rMin = currentRadius * 3 / 4;
     let rMax = currentRadius;
@@ -141,9 +220,9 @@ function initMap() {
         direction *= -1;
       }
 
-      circle.radius = radius + direction * 10;
+      circle.radius = radius + direction * 2;
       circle.setOptions(circle);
-    }, 50)
+    }, 100)
 
     setTimeout(() => {
       myStopFunction(circleInterval);
@@ -152,106 +231,107 @@ function initMap() {
     function myStopFunction(interval) {
       clearInterval(interval);
     }
+}
+// Returns true/false if player in bad zone
+function checkIfInZone(circle){
+  // Get players location
+  // let playerLoc = playerLocation();
+  let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
+
+  return circle.getBounds().contains(playerLoc);
+}
+// Creates a message box that appears when marker is being clicked
+async function createMessageBox(message, booleanValue, spot){
+  // Create Message box
+  let codeBox = document.createElement("div");
+  codeBox.classList.add("codeBox");
+
+  let titleWrapper = document.createElement("div");
+  titleWrapper.className = "titleWrapper";
+
+  let title = document.createElement("h1");
+  title.className = "title";
+  title.innerHTML = spot.title;
+
+  let bodyText = document.createElement("p");
+  bodyText.className = "bodyText";
+  bodyText.innerHTML = message;
+
+
+  let closeButton = document.createElement("button");
+  closeButton.className = "closeButton";
+  closeButton.innerHTML = `<img src="../icons/x.png">`;
+  
+  closeButton.addEventListener("click", () => {
+    codeBox.remove();
+  });
+
+  let riddles = await getRiddles();
+  console.log(riddles);
+
+  let riddle = riddles.mainRiddles.find((riddle) => riddle.locationID == spot.locationID);
+
+  console.log(riddle);
+  // Fixa sifferkodsinmatning och vad som sker när det är rätt
+  if(booleanValue){
+    let form = document.createElement("form");
+    form.setAttribute("id", "answer");
+    form.setAttribute("method", "POST");
+    for (let i = 0; i < riddle.correctAnswer.toString().length; i++) {
+      let input = document.createElement("input");
+      input.setAttribute("type", "number");
+      input.setAttribute("name", `${i}`);
+      input.setAttribute("id", `number${i}`);
+      input.className = "number bodyText";
+      form.append(input);
+    }
+    let button = document.createElement("button");
+    button.className = "button callToAction bodyText";
+    button.innerHTML = "skicka"
+    form.append(button);
+    codeBox.append(form);
+
+    // Submit Answer        
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let answer;
+      
+      for (let i = 0; i < riddle.correctAnswer.toString().length; i++) {
+
+        const number = riddle.correctAnswer.toString()[i];
+        if(number != document.querySelector(`#number${i}`).value){
+          answer = false;
+          break;
+        } else {
+          answer = true;
+        }
+      }
+
+      if(answer){
+        // When you enter the right code
+        // Make the spot unavaible and grey
+        // Send them part 2 of the diarypost
+        window.alert("Yäääy rätt svar")
+      } else {
+        // When you enter the wrong code
+        // Message "try again, so close or not"
+        window.alert("FEEEEEEEEEEEEL")
+      }
+
+    });
+      // let answear = 
+      // const formData = new FormData(form);
+
+      // const req2 = new Request(`http://localhost:9000/login.php`, 
+      //     postFormData(formData)
+      // );
   }
 
 
-  // Marker icon
-  const svgMarker = {
-    path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
-    fillColor: "#00FF01",
-          fillColor: "#00FF01",                
-    fillColor: "#00FF01",
-    fillOpacity: 0.6,
-    anchor: new google.maps.Point(16, 30),
-  };
-
-
-  const locthree = new google.maps.Marker({
-    position: spotThree,
-    icon: svgMarker,
-    map: map,
-  });
-
-  const locfour = new google.maps.Marker({
-    position: spotFour,
-    icon: svgMarker,
-    map: map,
-  });
-
-  const spotFive = new google.maps.LatLng(55.58716605414764, 12.982450138149538);
-  const locfive = new google.maps.Marker({
-    position: spotFive,
-    icon: svgMarker,
-    map: map,
-  });
-
-
-  //Onclick
-  locfive.addListener("click", () => {
-    let codeBox = document.createElement("div");
-    codeBox.classList.add("codeBox");
-
-    let closeButton = document.createElement("button");
-    closeButton.classList.add("closeButton");
-    closeButton.innerText = "X";
-
-    playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
-
-    if (!playerInCircle) {
-      codeBox.innerHTML = `
-                <p class="codeText"> you’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter</p>
-              `;
-    }
-
-    closeButton.addEventListener("click", () => {
-      codeBox.remove();
-    });
-
-    codeBox.prepend(closeButton);
-    document.body.append(codeBox);
-  });
-
-  //Players location image
-  // const image = "../images/navIcon.png";
-
-  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
-  let locPlayer = new google.maps.Marker({
-    position: currentPositionOfPlayer,
-    map: map,
-  });
-
-  //Updates the position of player
-  setInterval(() => {
-    //Deletes the latest position marker from map
-    locPlayer.setMap(null);
-
-    //Gets new location
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-    //Updates the lat and lang
-    currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
-
-    //Creates new marker for the current position
-    locPlayer = new google.maps.Marker({
-      position: currentPositionOfPlayer,
-      map: map,
-    });
-
-    //Controls if player in the circle
-    playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
-    console.log(locPlayer.getPosition());
-
-  }, 20000);
-
-
-  // // Check if in spot
-  // console.log(circleFour.getBounds().contains(locfour.getPosition()));
-  // console.log(circleFour.getBounds().contains(locfive.getPosition()));
-
+  titleWrapper.append(title, closeButton);
+  codeBox.prepend(titleWrapper, bodyText);
+  document.body.append(codeBox);
 }
-
-
 
 // //Dagboksutdrag
 // //Fetchs excerpts from diary.json
@@ -369,6 +449,5 @@ function initMap() {
 // DAGBOKSINLÄGG I EN FUNKTION
 
 // RIDDLES I EN FUNKTION 
-
 
 // EVENTLISTENER PÅ IKONERNA SOM FINNS SOM STATISKA ELEMENT I PHP FILEN

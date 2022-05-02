@@ -64,3 +64,24 @@ function postFormData(formData) {
     };
     return settings;
 }
+
+// Save to session
+function saveToSession(key, data){
+    sessionStorage.setItem(key, JSON.stringify(data));
+}
+
+// Get from session
+function getFromSession(key){
+    return JSON.parse(sessionStorage.getItem(key));
+}
+
+// Fetches all riddles
+async function getRiddles() {
+    let response = await fetch("http://localhost:9000/get.php",{
+      method: 'POST',
+      body: JSON.stringify({riddles:true}),
+      headers: {"Content-type": "application/json"},
+    });
+    let data = await response.json();
+    return data;
+  }
