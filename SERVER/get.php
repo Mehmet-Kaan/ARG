@@ -25,6 +25,13 @@ if(isset($requestData["riddles"])){
     $riddles = openJSON("database/riddles.json");
     sendJSON($riddles, 200);
 }
-
+if(isset($requestData["teams"])){
+    $teams = openJSON("database/teams.json");
+    sendJSON($teams, 200);
+}
+if(isset($requestData["users"])){
+    $users = openJSON("database/users.json");
+    sendJSON($users, 200);
+}
 
 exit();

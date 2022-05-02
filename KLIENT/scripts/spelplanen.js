@@ -234,17 +234,17 @@ function initMap() {
 
 //Dagboksutdrag
 //Fetchs excerpts from diary.json
-fetch("http://localhost:8000/json/diary.json").then(r => r.json()).then(data => {
+fetch("json/diary.json").then(r => r.json()).then(data => {
   excerpts = data;
 });
 
+//Fetches all riddles
 fetch("http://localhost:9000/get.php",{
   method: 'POST',
-  body: JSON.stringify({"riddle":true}),
-  headers: {"Content-type": "application/json; charset=UTF-8"},
+  body: JSON.stringify({riddles:true}),
+  headers: {"Content-type": "application/json"},
 }).then(r => r.json()).then(data => {
   riddles = data;
-  console.log(data);
 });
 
 diaryIcon.addEventListener("click", ()=>{
