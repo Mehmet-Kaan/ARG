@@ -20,8 +20,9 @@
     <script src="../scripts/functions.js"></script>
     <script src="../scripts/logIn.js"></script>
     <script src="../scripts/spelplanen.js"></script>
+    
     <?php
-        require_once "../../api-key.php";
+        require_once "/api-key.php";                            
     ?>
 </body>
 </html>

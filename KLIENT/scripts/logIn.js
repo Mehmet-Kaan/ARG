@@ -273,7 +273,6 @@ function pageThree(info, button, user){
                 document.getElementById("map").classList.remove("hide");
                 document.getElementById("titleO").classList.remove("hide");
                 document.getElementById("subContent").classList.remove("hide");
-       
                 // document.body.innerHTML += `
                 //      <?php
                 //          require_once "/api-key.php";                            
