@@ -22,7 +22,7 @@
         <img src="../icons/riddle_icon.svg" alt="*riddles">
       </div>
       <div id="hintWrapper">
-        <p class="bodyText">THIS IS NOT A GAME! THIS IS NOT A GAME! THIS IS NOT A GAME!</p>
+        <p class="bodyText">IS NOT A GAME! THIS IS NOT A GAME! THIS IS NOT A GAME!</p>
       </div>
     </div>
 
