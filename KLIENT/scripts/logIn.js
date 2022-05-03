@@ -209,7 +209,7 @@ function pageTwo(info, button){
             .then((data) => {
                 // Save to session
                 saveToSession("user", data);
-                
+
                 // FADE OUT 
                 const phaseTwo = document.querySelector("#secondPhase");
                 phaseTwo.style.animation =  "fadeOut 2s";

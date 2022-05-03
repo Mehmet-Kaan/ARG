@@ -2,14 +2,12 @@
     {
         "teamID": 1,
         "name": "Teller",
-        "avatar":"",
-        "phaseOne": [6]
+        "avatar":""
 
     },
     {
         "teamID": 2,
         "name": "Bethe",
-        "avatar":"",
-        "phaseOne": [5]
+        "avatar":""
     }
 ]
