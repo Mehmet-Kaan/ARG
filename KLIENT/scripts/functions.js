@@ -65,6 +65,23 @@ function postFormData(formData) {
     return settings;
 }
 
+function createContainerBox(theBoxName, titleOfBox){
+  let className = theBoxName.toString();
+  theBoxName = document.createElement("div");
+  theBoxName.classList.add(className);
+
+  if(titleOfBox !== undefined){
+    theBoxName.innerHTML = `
+    <h1 style="text-align:center; margin-bottom:10px;">${titleOfBox}</h1>
+  `;
+
+    setTimeout(() => {
+        theBoxName.classList.add("up");
+    }, 100);
+  }
+  return theBoxName;
+}
+
 function createCloseButton(contianerBox) {
     let closeBtn = document.createElement("button");
     closeBtn.classList.add("closeBtn");

@@ -252,24 +252,18 @@ function initMap() {
 // });
 
 document.getElementById("diary_icon").addEventListener("click", ()=>{
-  let diaryBox = document.createElement("div");
-  diaryBox.setAttribute("class", "diaryBox");
-
-  diaryBox.innerHTML = `
-    <h1 style="text-align:center; margin-bottom:10px;">Diary Excerpts</h1>
-  `;
-
-  setTimeout(() => {
-    diaryBox.classList.add("up");
-  }, 100);
-
+  
+  //Creates div element for the Diary Excerpts
+  let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
+  
   //För every excerpt
   diary.forEach(excerpt => {
-
+  
     //Creates a excerpt box for every excerpts received for inlogged user
     if(inloggeduser.diaryExcerpts.includes(excerpt.id)){
-      let excerptBox = document.createElement("div");
-      excerptBox.classList.add("excerptBox");
+     
+      //Creates the excerpt container
+      let excerptBox = createContainerBox("excerptBox");
 
       //Date and Time
       excerptBox.innerHTML = `
@@ -299,34 +293,58 @@ document.getElementById("diary_icon").addEventListener("click", ()=>{
 })
 
 document.getElementById("riddles_icon").addEventListener("click", ()=>{
-  let riddlesContainer = document.createElement("div");
-  riddlesContainer.setAttribute("class", "riddlesContainer");
+  //Creates the main riddles container
+  let riddlesContainer = createContainerBox("riddlesContainer", "Riddles");
 
-  let riddlesBoxes = document.createElement("div");
-  riddlesBoxes.setAttribute("class", "riddlesBoxes");
-
-  let title = document.createElement("h1");
-  title.style.textAlign = "center";
-  title.style.marginBottom = "10px";
-  title.innerText = "Riddles";
-
-  setTimeout(() => {
-    riddlesContainer.classList.add("up");
-  }, 100);
+  //Creates the container for riddleboxes
+  let riddlesBoxes = createContainerBox("riddlesBoxes");
   
-  //För every riddle
+  //For every riddle 
   riddles.mainRiddles.forEach(riddle => {
-    let riddleBox = document.createElement("div");
-    riddleBox.classList.add("riddleBox");
+    //Creates a box
+    let riddleBox = createContainerBox("riddleBox");
 
+    //Checks if the inlogged user has unlocked the riddle
+    if(inloggeduser.riddlesSolved.contains(riddle.id)){
+      riddleBox.innerHTML = ` 
+        <img src="../images/unlocked.png" class="riddleBoxImg"> 
+      `;
+      riddleBox.classList.add("unlocked");
+    }else{
+      riddleBox.innerHTML = ` 
+        <img src="../images/locked.png" class="riddleBoxImg"> 
+      `;
+      riddleBox.classList.add("locked");
+    }
+
+    if(riddleBox.classList.contains("unlocked")){
+      riddleBox.addEventListener("click", ()=>{
+        let unlockedRiddleBox = createContainerBox("unlockedRiddleBox");
+        unlockedRiddleBox.innerHTML = `
+          <h2>${riddle.title}</h2>
+        `;
+        if(riddle.img !== "" || riddle.img !== null){
+          unlockedRiddleBox.innerHTML += `
+          <img src="${riddle.img}" class="riddleImg">
+        `;
+        
+        let codeInput = document.createElement("input");
+        unlockedRiddleBox.append(codeInput);
+          
+        }
+        riddleBox.append(unlockedRiddleBox);
+      })
+    }
+
+    //Appends the box inte riddlesboxes container
     riddlesBoxes.append(riddleBox);
   });
 
-  riddlesContainer.append(title,riddlesBoxes);
+  //Appends the riddlesboxes in the main riddles container  for all riddles
+  riddlesContainer.append(riddlesBoxes);
 
   //Creates a close button
   createCloseButton(riddlesContainer);
-  
 })
 
 
