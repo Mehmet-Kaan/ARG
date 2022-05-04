@@ -305,7 +305,7 @@ document.getElementById("riddles_icon").addEventListener("click", ()=>{
     let riddleBox = createContainerBox("riddleBox");
 
     //Checks if the inlogged user has unlocked the riddle
-    if(inloggeduser.riddlesSolved.contains(riddle.id)){
+    if(inloggeduser.riddlesSolved.includes(riddle.riddleID)){
       riddleBox.innerHTML = ` 
         <img src="../images/unlocked.png" class="riddleBoxImg"> 
       `;
@@ -319,20 +319,25 @@ document.getElementById("riddles_icon").addEventListener("click", ()=>{
 
     if(riddleBox.classList.contains("unlocked")){
       riddleBox.addEventListener("click", ()=>{
+        //Hides riddlesBoxes
+        document.querySelector(".riddlesContainer > h1").style.display = "none";
+        document.querySelector(".riddlesBoxes").style.display = "none";
+
         let unlockedRiddleBox = createContainerBox("unlockedRiddleBox");
-        unlockedRiddleBox.innerHTML = `
-          <h2>${riddle.title}</h2>
-        `;
+
         if(riddle.img !== "" || riddle.img !== null){
           unlockedRiddleBox.innerHTML += `
-          <img src="${riddle.img}" class="riddleImg">
+          <img src="../images/${riddle.img}" class="riddleImg">
         `;
+
+        unlockedRiddleBox.innerHTML += `
+          <h2>${riddle.riddle}</h2>
+        `;
+
         
-        let codeInput = document.createElement("input");
-        unlockedRiddleBox.append(codeInput);
-          
+
         }
-        riddleBox.append(unlockedRiddleBox);
+        riddlesContainer.append(unlockedRiddleBox);
       })
     }
 

@@ -74,26 +74,32 @@ img{
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 	overflow: scroll;
 }
-.riddleBox{
+.riddleBox {
 	height: 80%;
-	background-color: white;
+	background-color: var(--lightColor);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.riddleBoxImg{
+	width: 15%;
+}
+.unlockedRiddleBox {
+	display: flex;
+	flex-direction: column;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	gap: var(--viewerMargin);
+}
+.riddleImg{
+	width: 50%;
+	position: unset;
 }
 
 /* COMMAND INTERPRETER */
 
-/* .diaryBox {
-	height: 100%;
-	width: 100%;
-	z-index: 2;
-	position: absolute;
-	top: 100%;
-	background:  var(--darkColor);
-	color: var(--mainColor);
-	padding: 5%;
-	overflow: scroll;
-
-	transition: all ease .5s;
-} */
 .excerptBox{
 	margin-bottom: 10%;
 	font-size: var(--bodyFontSz);
@@ -116,7 +122,6 @@ img.excerptImg{
 	color: white;
 	text-align: right;
 }
-
 .closeBtn {
 	transform: rotate(90deg);
 	position: fixed;

@@ -3,7 +3,7 @@
         {
             "riddleID":0,
             "riddle":"First four in...",
-            "img":"",
+            "img":"diary_icon.png",
             "correctAnswer":9780, 
             "locationID":5,
             "diaryid": 0,

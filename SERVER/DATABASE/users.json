@@ -28,7 +28,7 @@
     {
         "username": "Mehmet",
         "email": "mehmet@hotmail.com",
-        "riddlesSolved": [0,1,2],
+        "riddlesSolved": [0,1],
         "preRiddlesSolved": [],
         "locationAchieved": [],
         "diaryExcerpts": [0,1,2,3,4,5,6],
