@@ -257,37 +257,8 @@ document.getElementById("diary_icon").addEventListener("click", ()=>{
   let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
   
   //För every excerpt
-  diary.forEach(excerpt => {
+  forEachDiary(diaryBox);
   
-    //Creates a excerpt box for every excerpts received for inlogged user
-    if(inloggeduser.diaryExcerpts.includes(excerpt.id)){
-     
-      //Creates the excerpt container
-      let excerptBox = createContainerBox("excerptBox");
-
-      //Date and Time
-      excerptBox.innerHTML = `
-        <p class="date_time"> ${excerpt.date} - ${excerpt.time}</p>
-      `;
-      
-      //Creates an img element If excerpt has one
-      if(excerpt.img !== null && excerpt.img !== ""){
-        excerptBox.innerHTML += `
-          <img src="../images/${excerpt.img}.png" class="excerptImg">
-      `;
-      }
-      
-      //Body text and page number
-      excerptBox.innerHTML +=`
-        <p class="excerptText">${excerpt.bodyText.start}</p>
-        <p class="excerptText">${excerpt.bodyText.end}</p>
-        <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
-      `;
-      diaryBox.append(excerptBox);
-    }
-  
-  });
-
   //Creates a close button
   createCloseButton(diaryBox);
 })
@@ -300,50 +271,7 @@ document.getElementById("riddles_icon").addEventListener("click", ()=>{
   let riddlesBoxes = createContainerBox("riddlesBoxes");
   
   //For every riddle 
-  riddles.mainRiddles.forEach(riddle => {
-    //Creates a box
-    let riddleBox = createContainerBox("riddleBox");
-
-    //Checks if the inlogged user has unlocked the riddle
-    if(inloggeduser.riddlesSolved.includes(riddle.riddleID)){
-      riddleBox.innerHTML = ` 
-        <img src="../images/unlocked.png" class="riddleBoxImg"> 
-      `;
-      riddleBox.classList.add("unlocked");
-    }else{
-      riddleBox.innerHTML = ` 
-        <img src="../images/locked.png" class="riddleBoxImg"> 
-      `;
-      riddleBox.classList.add("locked");
-    }
-
-    if(riddleBox.classList.contains("unlocked")){
-      riddleBox.addEventListener("click", ()=>{
-        //Hides riddlesBoxes
-        document.querySelector(".riddlesContainer > h1").style.display = "none";
-        document.querySelector(".riddlesBoxes").style.display = "none";
-
-        let unlockedRiddleBox = createContainerBox("unlockedRiddleBox");
-
-        if(riddle.img !== "" || riddle.img !== null){
-          unlockedRiddleBox.innerHTML += `
-          <img src="../images/${riddle.img}" class="riddleImg">
-        `;
-
-        unlockedRiddleBox.innerHTML += `
-          <h2>${riddle.riddle}</h2>
-        `;
-
-        
-
-        }
-        riddlesContainer.append(unlockedRiddleBox);
-      })
-    }
-
-    //Appends the box inte riddlesboxes container
-    riddlesBoxes.append(riddleBox);
-  });
+  forEachRiddle(riddlesContainer, riddlesBoxes);
 
   //Appends the riddlesboxes in the main riddles container  for all riddles
   riddlesContainer.append(riddlesBoxes);
@@ -352,10 +280,8 @@ document.getElementById("riddles_icon").addEventListener("click", ()=>{
   createCloseButton(riddlesContainer);
 })
 
-
 // DAGBOKSINLÄGG I EN FUNKTION
 
 // RIDDLES I EN FUNKTION 
-
 
 // EVENTLISTENER PÅ IKONERNA SOM FINNS SOM STATISKA ELEMENT I PHP FILEN
