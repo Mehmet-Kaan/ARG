@@ -96,6 +96,12 @@ img{
 
 	transition: all .5s ease;
 }
+.unlocked{
+	border: 2px solid var(--mainColor);
+}
+.locked{
+	border: 2px solid red;
+}
 .closeBtnUnlockedRiddle {
 	font-size: 20px;
 	border-radius: 100%;

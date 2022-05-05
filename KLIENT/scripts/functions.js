@@ -65,6 +65,39 @@ function postFormData(formData) {
     return settings;
 }
 
+//FUNCTIONS - DIARY and RIDDLES
+//MAIN FUNCTIONS (DIARY and RIDDLES)
+//Creates Diaries view
+function createDiaryView() {
+      
+  //Creates div element for the Diary Excerpts
+  let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
+  
+  //För every excerpt
+  forEachDiary(diaryBox);
+  
+  //Creates a close button
+  createCloseButton(diaryBox);
+}
+//Creates Riddles view
+function createRiddlesView() {
+      //Creates the main riddles container
+  let riddlesContainer = createContainerBox("riddlesContainer", "Riddles");
+
+  //Creates the container for riddleboxes
+  let riddlesBoxes = createContainerBox("riddlesBoxes");
+  
+  //For every riddle 
+  forEachRiddle(riddlesContainer, riddlesBoxes);
+
+  //Appends the riddlesboxes in the main riddles container  for all riddles
+  riddlesContainer.append(riddlesBoxes);
+
+  //Creates a close button
+  createCloseButton(riddlesContainer);
+}
+
+//INNER FUNCTIONS FOR DIARY AND RIDDLES VIEWS
 //Creates and returns a div element (and a title if argument sended)
 function createContainerBox(theBoxName, titleOfBox){
   let className = theBoxName.toString();
@@ -162,7 +195,7 @@ function forEachRiddle(containerBox, innerContainerBox){
           
             setTimeout(() => {
               closeBtnUnlockedRiddle.classList.add("opacity");
-            }, 750);
+            }, 1000);
           
             closeBtnUnlockedRiddle.innerText = `X`;
           
@@ -214,10 +247,3 @@ function createCloseButton(contianerBox) {
     document.body.append(contianerBox);
 }
 
-function createDiaryView() {
-    
-}
-
-function createRiddlesView() {
-
-}

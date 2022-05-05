@@ -251,37 +251,14 @@ function initMap() {
 //   excerpts = data;
 // });
 
-document.getElementById("diary_icon").addEventListener("click", ()=>{
-  
-  //Creates div element for the Diary Excerpts
-  let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
-  
-  //För every excerpt
-  forEachDiary(diaryBox);
-  
-  //Creates a close button
-  createCloseButton(diaryBox);
-})
-
-document.getElementById("riddles_icon").addEventListener("click", ()=>{
-  //Creates the main riddles container
-  let riddlesContainer = createContainerBox("riddlesContainer", "Riddles");
-
-  //Creates the container for riddleboxes
-  let riddlesBoxes = createContainerBox("riddlesBoxes");
-  
-  //For every riddle 
-  forEachRiddle(riddlesContainer, riddlesBoxes);
-
-  //Appends the riddlesboxes in the main riddles container  for all riddles
-  riddlesContainer.append(riddlesBoxes);
-
-  //Creates a close button
-  createCloseButton(riddlesContainer);
-})
-
 // DAGBOKSINLÄGG I EN FUNKTION
 
+//Creates Diaries view on click
+document.getElementById("diary_icon").addEventListener("click", createDiaryView);
+
 // RIDDLES I EN FUNKTION 
+
+//Creates Riddles view on click
+document.getElementById("riddles_icon").addEventListener("click", createRiddlesView);
 
 // EVENTLISTENER PÅ IKONERNA SOM FINNS SOM STATISKA ELEMENT I PHP FILEN
