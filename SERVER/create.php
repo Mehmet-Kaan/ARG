@@ -1,5 +1,6 @@
 <?php
 //Inkluderar funktioner 
+require_once "access-control.php";
 require_once "functions.php";
 
 // Kontrollera att rätt content-type skickades med

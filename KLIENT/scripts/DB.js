@@ -80,7 +80,8 @@ const locations = [
         "mainRiddleID":8,
         "diaryID":7
     }
-]
+];
+// Ändra ID till diaryID
 const diary = [
     {
         "id":0,
@@ -199,7 +200,7 @@ const diary = [
         "img":"",
         "locationID": 4
     }
-]
+];
 const messages = [
     {
         "messageID":1,
@@ -211,7 +212,7 @@ const messages = [
         "message":"you’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter",
         "locationID":4
     }
-]
+];
 const teams = [
     {
         "teamID": 1,
@@ -231,4 +232,47 @@ const teams = [
         "phaseThree": [8, 2, 1, 3],
         "phaseFour": [4]
     }
-]
+];
+const pageInformation = {
+    headlines: {
+        pageOne: {
+            title: "The Malmö Project", 
+            bodyText: "The Malmö Project grundades av Oppenheimer som tillsammans med två assistenter lyckades skapa, något som idag, betraktas som världens farligaste vapen. Vi vet fortfarande inte om receptet för vapnet finns, eller om den sen länge har förstörts. Men vi vet att personen som innehar informationen kan förstöra allt eller rädda alla."
+        },
+        pageTwo: {
+            title: "Vem är du?", 
+            bodyText: "Använd ditt alias och kod för att få tillgång till konsolen. Vi behöver identifiera vem du är. Vi ses på andra sidan."
+        },
+        pageThree: {
+            title: "Välkommen ", // put variable here from the one that logged in 
+            bodyText: "Spelare XXX, du är utvald av en anledning. Din träning är över och du är nu en medlem av den särskilda operationsteamet “Shiva”. Uppdraget är hemlighetsstämplat av en anledning, men jag vet att ni inte kommer säga något om vart ni tillhör, det har vi tränat er för. Ligg lågt och använd det här emblemet för att hitta dina kamrater. Ta dig vidare in och låt oss börja. Tiden är knapp och liv kan vara i fara. </br> - Bethe"
+        },
+        information: {
+            title: "Viktig information", 
+            bodyText: "Öppna sidan i din mobil. </br> Tillåt platstjänster på din mobil. </br> Undvik att spendera för mycket tid inom radioaktiva områden.</br> Gåtorna kommer utspelas både fysiskt och på mobilen.",
+        }
+    },
+    classes: {
+        title: "title",
+        middleTitle: "middleTitle",
+        bodyText: "bodyText",
+    }
+};
+const buttons = {
+    yes: {
+        innerText: "Ja",
+        class: "button callToAction bodyText"
+    },
+    no: {
+        innerText: "Nej",
+        class: "button bodyText"
+    },
+    verify: {
+        innerText: "Verfiera",
+        class: "button callToAction bodyText"
+    },
+    letsBegin: {
+        innerText: "Låt oss börja",
+        class: "button callToAction bodyText"
+    }
+};

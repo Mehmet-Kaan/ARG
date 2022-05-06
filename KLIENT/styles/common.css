@@ -62,6 +62,7 @@ body {
     color: var(--mainColor);
     font-weight: 300;
 }
+
 .button.bodyText{
     font-weight: 400;
 }

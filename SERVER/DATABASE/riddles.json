@@ -8,37 +8,49 @@
             "locationID":5,
             "diaryid": 0,
             "relatedPreRiddles": [],
-            "relatedClues":[]
+            "relatedClues":[],
+            "response": {
+                "bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
+                "teller": ""
+            }
         },
         {
             "riddleID":1,
             "riddle":"Minns ni vad vi exprimenterade med i labbet?",
             "img":"",
-            "correctAnswer":940,
+            "correctAnswer":94,
             "locationID":6,
             "diaryid": 1,
             "relatedPreRiddles": [],
-            "relatedClues":[]
+            "relatedClues":[],
+            "response": {
+                "bethe": ".",
+                "teller": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er"
+            }
         },
         {
             "riddleID":2,
-            "riddle":"Klyv atomerna",
+            "riddle":"Låt oss mäta dina färdigheter...",
             "img":"",
-            "correctAnswer":94,
+            "correctAnswer":17,
             "locationID":0,
             "diaryid": 2,
             "relatedPreRiddles": [0],
-            "relatedClues":[]
+            "relatedClues":[],
+            "response": {
+                "bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
+                "teller": ""
+            }
         }
     ],
     "preRiddles":[
         {
             "riddleID":0,
-            "riddle":"Klyv atomerna",
+            "riddle":"Fisson skapar energi",
             "img":"",
             "correctAnswer":97432,
-            "locationID":1,
-            "relatedMainRiddle":1
+            "locationID":0,
+            "relatedMainRiddle":2
         }
     ],
     "clues":[

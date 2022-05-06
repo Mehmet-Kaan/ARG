@@ -9,7 +9,7 @@
 header {
 	position: absolute;
 	top: 0;
-	z-index: 1;
+	z-index: 200;
 	height: 7.5%;
 	width: 100%;
 	background: var(--darkColor);
@@ -21,6 +21,51 @@ header {
 	align-items: center;
 }
 
+header > .title {
+    position: relative;
+    color: var(--mainColor);
+    letter-spacing: 0.1em;
+    /* Animation provies a slight random skew. Check bottom of doc
+    for more information on how to random skew. */
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+header > .title::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    /* Creates an initial clip for our glitch. This works in
+    a typical top,right,bottom,left fashion and creates a mask
+    to only show a certain part of the glitch at a time. */
+    clip: rect(44px, 450px, 56px, 0);
+    /* Runs our glitch-anim defined below to run in a 5s loop, infinitely,
+    with an alternating animation to keep things fresh. */
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+header > .title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    left: -2px;
+    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
 /* Content icons */
 #subContent {
 	display: grid;
@@ -30,7 +75,7 @@ header {
 	gap: 3px;
 	height: 22%;
 	width: 100%;
-	z-index: 1;
+	z-index: 200;
 	position: absolute;
 	bottom: 0;
 }
@@ -91,39 +136,108 @@ header {
 }
 
 /* RIDDLES */
-.riddlesBox {
+.riddlesContainer, .diaryBox{
 	height: 100%;
-	z-index: 2;
-	position: absolute;
-	background: black;
-	color: lightgreen;
-	overflow: scroll;
 	width: 100%;
+	z-index: 200;
+	position: absolute;
+	background:  var(--darkColor);
+	color: var(--mainColor);
+	overflow: scroll;
 	transition: all ease .5s;
+	padding: 5%;
+	top: 100%;
 }
 
-.riddleBox{
-	height: 15%;
-	width: 30%;
-	background-color: white;
+.riddlesBoxes {
+	width: 100%;
+	height: 90%;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	overflow: scroll;
+}
+
+.riddleBox {
+	height: 80%;
+	background-color: var(--lightColor);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.riddleBoxImg{
+	width: 15%;
+}
+
+.unlockedRiddleBox {
+	display: flex;
+	flex-direction: column;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	gap: var(--viewerMargin);
+	opacity: 0%;
+
+	transition: all .5s ease;
+}
+
+.unlocked{
+	border: 2px solid var(--mainColor);
+}
+
+.locked{
+	border: 2px solid red;
+}
+
+.closeBtnUnlockedRiddle {
+	font-size: 20px;
+	border-radius: 100%;
+	border: 1px solid var(--mainColor);
+	color: var(--mainColor);
+	background: var(--darkColor);
+	width: 40px;
+	height: 40px;
+	box-shadow: -1px 0.75px 4px 0px white;
+	opacity: 0%;
+	transition: all .5s ease;
+}
+
+.riddleImg{
+	width: 50%;
+	position: unset;
 }
 
 /* COMMAND INTERPRETER */
-.diaryBox {
-	height: 100%;
-	z-index: 2;
-	position: absolute;
-	top: 100%;
-	background: black;
-	color: lightgreen;
-	padding: 5%;
-	overflow: scroll;
-
-	transition: all ease .5s;
-}
 .excerptBox{
 	margin-bottom: 10%;
+	font-size: var(--bodyFontSz);
+	font-family: var(--bodyTextFont);
 }
+
+.date_time{
+	margin-bottom: 10px;
+	color: white;
+}
+
+img.excerptImg{
+	position: relative;
+	width: 50%;
+	left: 25%;
+}
+
+.excerptText {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.excerptPage{
+	color: white;
+	text-align: right;
+}
+
 .closeBtn {
 	transform: rotate(90deg);
 	position: fixed;
@@ -131,9 +245,9 @@ header {
 	bottom: 5%;
 	font-size: 20px;
 	border-radius: 100%;
-	border: 1px solid lightgreen;
-	color: lightgreen;
-	background: black;
+	border: 1px solid var(--mainColor);
+	color: var(--mainColor);
+	background:  var(--darkColor);
 	width: 40px;
 	height: 40px;
 	box-shadow: -1px 0.75px 4px 0px white;
@@ -145,7 +259,7 @@ header {
 /* MESSAGES */
 .codeBox {
 	position: absolute;
-	top: 25%;
+	top: 20%;
 	z-index: 10;
 	background: black;
 	overflow: scroll;
@@ -153,9 +267,43 @@ header {
 	display:flex;
 	flex-direction: column;
 	margin:var(--viewerMargin);
-	box-shadow: 0px 0px 10000px var(--mainColor)
-
+	/* box-shadow: 0px 0px 10000px var(--mainColor); */
+	animation: pulse 3s infinite;
 }
+
+@keyframes shake {
+	10%, 90% {
+	  transform: translate3d(-1px, 0, 0);
+	}
+	
+	20%, 80% {
+	  transform: translate3d(2px, 0, 0);
+	}
+  
+	30%, 50%, 70% {
+	  transform: translate3d(-4px, 0, 0);
+	}
+  
+	40%, 60% {
+	  transform: translate3d(4px, 0, 0);
+	}
+}
+
+@keyframes pulse {
+	0% {
+	  -moz-box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0.3);
+	  box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0.3);
+	}
+	70% {
+		-moz-box-shadow: 0 0 100px 500px rgba(173, 255, 2, 0);
+		box-shadow: 0 0 100px 500px rgba(173, 255, 2, 0);
+	}
+	100% {
+		-moz-box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
+		box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
+	}
+  }
+
 
 .titleWrapper {
 	display: flex;
@@ -176,17 +324,14 @@ header {
 	cursor: pointer;
 }
 
+.closeButton > img{
+	height: 15px;
+}
+
 .codeBox > .bodyText {
 	margin: 0px var(--viewerMargin);
 	margin-bottom: var(--viewerMargin);
 }
-
-/* .codeText {
-	color: lightgreen;
-	margin: 0;
-	padding: 11%;
-	text-align: justify;
-} */
 
 #answer {
 	margin: 0px var(--viewerMargin);
@@ -194,7 +339,6 @@ header {
     gap: 5px;
     grid-template-columns: repeat(6, 1fr);
     margin-bottom: var(--viewerMargin);
-	align-self: center
 }
 
 .number{
@@ -204,7 +348,7 @@ header {
     border: none;
     color: var(--darkColor);
 	font-weight: 400;
-	padding: 35%;
+	padding: 30%;
 }
 
 #answer > button {
@@ -215,9 +359,10 @@ header {
 }
 
 .up{
-    top: 6.3%;
+    top: 6.2%;
 }
 
 .opacity {
-	opacity: 100%;
+	opacity: 1;
 }
+

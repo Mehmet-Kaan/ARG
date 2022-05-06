@@ -1,5 +1,6 @@
 <?php
 
+require_once "access-control.php";
 //Inkluderar funktioner 
 require_once "functions.php";
 
@@ -7,10 +8,10 @@ require_once "functions.php";
 checkContentType();
 
 // Kontrollera att rätt metod skickades med
-requestMethod("POST");
+requestMethod("PATCH");
 
 // Hämtar users
-$users = openJSON("database/users.json");
+$users = openJSON("DATABASE/users.json");
 
 // Hämtar data som skickats med requesten
 $data = file_get_contents("php://input");
@@ -55,7 +56,7 @@ if($found === false) {
     exit();
 }
         
-saveToJSON("databas/users.json", $users);
+saveToJSON("DATABASE/users.json", $users);
 sendJSON(["message" => "Changes saved"]);
 
 ?>

@@ -2,12 +2,19 @@
     {
         "teamID": 1,
         "name": "Teller",
-        "avatar":""
-
+        "avatar":"",
+        "phaseOne": [6],
+        "phaseTwo": [7, 5, 0],
+        "phaseThree": [2, 8, 1, 3],
+        "phaseFour": [4]
     },
     {
         "teamID": 2,
         "name": "Bethe",
-        "avatar":""
+        "avatar":"",
+        "phaseOne": [5],
+        "phaseTwo": [7, 0, 6],
+        "phaseThree": [2, 8, 1, 3],
+        "phaseFour": [4]
     }
 ]
