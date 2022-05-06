@@ -20,13 +20,14 @@ async function login(username, password) {
     inLoggedUser = await response.json();
 }
 
-async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved) {
+async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved, diaryExcerpts) {
     
     let update = {
         "userID": userID,
         "riddlesSolved": riddlesSolved,
         "preRiddlesSolved": preRiddlesSolved,
-        "locationAchieved": locationAchieved
+        "locationAchieved": locationAchieved,
+        "diaryExcerpts": diaryExcerpts
     };
 
     // let rqst = new Request("https://localhost:9000/update.php");

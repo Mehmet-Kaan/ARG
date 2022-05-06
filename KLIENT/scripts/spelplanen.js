@@ -276,7 +276,6 @@ function publishSpots(spotsArray) {
   spotsArray.forEach(spot => {
     locations.forEach(loc => {
       if (spot === loc.locationID) {
-        
         createSpot(loc);
         console.log(loc);
       }
@@ -362,7 +361,7 @@ async function createMessageBox(message, booleanValue, spot, zoneCleared = true)
       setTimeout(() => {
         riddleNotification(true);
         diaryNotification(true);
-      }, 2000);
+      }, 1500);
     }
 
     //if riddlesSolved does not already includes riddle id 
@@ -421,12 +420,15 @@ async function createMessageBox(message, booleanValue, spot, zoneCleared = true)
         // Notification Send them part 2 of the diarypost
         diaryNotification(true);
 
-        bodyText.innerHTML = "";
-        bodyText.innerHTML = "Bra, keep going!";
+        form.remove();
+        bodyText.innerHTML = "Well done, keep going!";
         setTimeout(() => {
           codeBox.remove();
-        }, 3000);
+        }, 2000);
 
+        console.log(spot);
+        // spot.setMap(null);
+        
         // Save the process in persons object
         let preRiddle = [];
 
@@ -442,7 +444,7 @@ async function createMessageBox(message, booleanValue, spot, zoneCleared = true)
         }
         user["preRiddlesSolved"] = preRiddle;
         user["locationAchieved"].push(spot.locationID);
-        update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"],user["locationAchieved"]);
+        update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"],user["locationAchieved"], user["diaryExcerpts"]);
 
         // updateUserProcess(riddle);
 
