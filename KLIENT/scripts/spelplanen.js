@@ -41,20 +41,6 @@ if (getFromSession("user") === null) {
   window.location.replace("http://localhost:8000/php/index.php");
 };
 
-// Checks if the user already entered the map view, to not give them permission to go backwards. 
-if (getFromSession("entered") != true) {
-  pageThree(pageInformation, buttons, user);
-  // Fade In
-  const phaseThree = document.querySelector("#thirdPhase");
-  phaseThree.style.animation = "fadeIn 3s";
-} else {
-  loadingPage();
-  setTimeout(() => {
-    displayMap();
-  }, 2000)
-
-}
-
 // PAge three, also sets the user to user.
 function pageThree(info, button, user) {
 
