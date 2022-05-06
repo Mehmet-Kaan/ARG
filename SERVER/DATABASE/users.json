@@ -2,10 +2,23 @@
     {
         "username": "Niklas",
         "email": "niklas.sta@hotmail.com",
-        "riddlesSolved": [1,0],
+        "riddlesSolved": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [0,1,2,3],
+        "diaryExcerpts": [
+            0
+        ],
         "userID": 1,
         "password": "0000",
         "teamID": 1
@@ -16,7 +29,9 @@
         "riddlesSolved": [],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [],
+        "diaryExcerpts": [
+            0
+        ],
         "userID": 2,
         "password": "0000",
         "teamID": 2

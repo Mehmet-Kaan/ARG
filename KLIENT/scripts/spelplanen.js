@@ -35,12 +35,10 @@ async function setUserVariable(){
 
 setUserVariable();
 
-
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
   window.location.replace("http://localhost:8000/php/index.php");
 };
-
 
 
 // PAge three, also sets the user to user.
@@ -343,12 +341,18 @@ async function createMessageBox(message, booleanValue, spot) {
 
   console.log(riddle);
 
+
   // Fixa sifferkodsinmatning och vad som sker när det är rätt
   if (booleanValue) {
 
     // FIXA EN IF SATS FÖR ATT ENBART SKE NÄR DU TRYCKER FÖRSTA GÅNGEN!
     if (getFromSession(`location${riddle.locationID}OnGoing`) === null) {
       saveToSession(`location${riddle.locationID}OnGoing`, "true");
+
+      //Updates the user riddlesSolved 
+      user["riddlesSolved"].push(riddle.riddleID);
+      console.log(update(user["userID"],user["riddlesSolved"]));
+      update(user["userID"],user["riddlesSolved"]);
 
       setTimeout(() => {
         riddleNotification(true);
@@ -464,12 +468,15 @@ document.getElementById("diary_icon").addEventListener("click", createDiaryView)
 // Creates Riddles view on click
 document.getElementById("riddles_icon").addEventListener("click", createRiddlesView);
 
-
 //FUNCTIONS - DIARY and RIDDLES
 //MAIN FUNCTIONS (DIARY and RIDDLES)
 //Creates Diaries view
 function createDiaryView() {
-
+  setTimeout(() => {
+    if(document.getElementById("diaryIMG").src == "http://localhost:8000/icons/diary_icon_notification.svg"){
+      document.getElementById("diaryIMG").src = "http://localhost:8000/icons/diary_icon.svg";
+    }
+  }, 2000);
   //Creates div element for the Diary Excerpts
   let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
 
@@ -481,6 +488,9 @@ function createDiaryView() {
 }
 //Creates Riddles view
 function createRiddlesView() {
+  if(document.getElementById("riddlesIMG").src == "http://localhost:8000/icons/riddle_icon_notification.svg"){
+      document.getElementById("riddlesIMG").src = "http://localhost:8000/icons/riddle_icon.svg";
+    }
   //Creates the main riddles container
   let riddlesContainer = createContainerBox("riddlesContainer", "Riddles");
 

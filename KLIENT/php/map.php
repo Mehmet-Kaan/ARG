@@ -16,10 +16,10 @@
         
       </div>
       <div id="diary_icon" >
-        <img src="../icons/diary_icon.svg" alt="*messages">
+        <img id="diaryIMG" src="../icons/diary_icon.svg" alt="*messages">
       </div>
       <div id="riddles_icon" >
-        <img src="../icons/riddle_icon.svg" alt="*riddles">
+        <img id="riddlesIMG" src="../icons/riddle_icon.svg" alt="*riddles">
       </div>
       <div id="hintWrapper">
         <p class="bodyText">THIS IS NOT A GAME! THIS IS NOT A GAME! THIS IS NOT A GAME!</p>
