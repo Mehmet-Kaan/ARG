@@ -261,9 +261,9 @@ function publishSpots(spotsArray) {
   spotsArray.forEach(spot => {
     locations.forEach(loc => {
       if (spot === loc.locationID) {
-        console.log(spot)
-        console.log(loc.locationID)
+        
         createSpot(loc);
+        console.log(loc);
       }
     })
   })
@@ -389,7 +389,9 @@ async function createMessageBox(message, booleanValue, spot) {
 
       if (answer) {
         // When you enter the right code
-        // Make the spot unavaible and grey
+        // Make the spot unavaible and grey - USE SPOT
+
+
         // Notification Send them part 2 of the diarypost
         diaryNotification();
 
