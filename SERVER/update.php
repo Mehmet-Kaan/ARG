@@ -44,6 +44,9 @@ foreach($users as $index => $user) {
         if(!empty($requestData["locationAchieved"])) {
             $user["locationAchieved"] = $requestData["locationAchieved"];
         }
+        if(!empty($requestData["diaryExcerpts"])) {
+            $user["diaryExcerpts"] = $requestData["diaryExcerpts"];
+        }
         $users[$index] = $user;
     }
 }

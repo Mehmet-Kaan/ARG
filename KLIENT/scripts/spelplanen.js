@@ -244,19 +244,31 @@ function createSpot(spot) {
 
   // Pulse effect
   nextAssignment(circle, spot.circleRadius);
+  let booleanValue;
+
+  // booleanValue = true;
+  // setTimeout(() => {
+  //   booleanValue = false;
+  // }, 10000);
 
   // Click Event
   google.maps.event.addListener(marker, 'click', function () {
     let message;
-    let booleanValue = checkIfInZone(circle);
+    booleanValue = checkIfInZone(circle);
+    let zoneCleared = user["locationAchieved"].includes(spot.locationID);
 
-    if (booleanValue) {
-      message = "Now, keep an eye on your geiger meter. You just entered a designated area where you will have to be fast and nimble. Go check out what your leader sent you.";
-    } else {
-      message = "You’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter";
+    if(zoneCleared == false){
+      if (booleanValue) {
+        message = "Now, keep an eye on your geiger meter. You just entered a designated area where you will have to be fast and nimble. Go check out what your leader sent you.";
+      } else {
+        message = "You’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter";
+      }
+      createMessageBox(message, booleanValue, spot);
+    }else{
+      message = "You have already cleared the area!";
+      booleanValue = false;
+      createMessageBox(message, booleanValue, spot, zoneCleared);
     }
-
-    createMessageBox(message, booleanValue, spot);
   });
 }
 // Publishing the spots / Array with locationIDs
@@ -306,7 +318,7 @@ function checkIfInZone(circle) {
   return circle.getBounds().contains(playerLoc);
 }
 // Creates a message box that appears when marker is being clicked
-async function createMessageBox(message, booleanValue, spot) {
+async function createMessageBox(message, booleanValue, spot, zoneCleared = true) {
   // Create Message box
   let codeBox = document.createElement("div");
   codeBox.classList.add("codeBox");
@@ -322,7 +334,6 @@ async function createMessageBox(message, booleanValue, spot) {
   bodyText.className = "bodyText";
   bodyText.innerHTML = message;
 
-
   let closeButton = document.createElement("button");
   closeButton.className = "closeButton";
   closeButton.innerHTML = `<img src="../icons/x.png">`;
@@ -331,8 +342,8 @@ async function createMessageBox(message, booleanValue, spot) {
     codeBox.remove();
 
     // ENBART HÄR FÖR TEST
-    riddleNotification(false);
-    diaryNotification(false);
+    // riddleNotification(false);
+    // diaryNotification(false);
   });
 
   let riddles = await getRiddles();
@@ -341,7 +352,6 @@ async function createMessageBox(message, booleanValue, spot) {
 
   console.log(riddle);
 
-
   // Fixa sifferkodsinmatning och vad som sker när det är rätt
   if (booleanValue) {
 
@@ -349,17 +359,25 @@ async function createMessageBox(message, booleanValue, spot) {
     if (getFromSession(`location${riddle.locationID}OnGoing`) === null) {
       saveToSession(`location${riddle.locationID}OnGoing`, "true");
 
-      //Updates the user riddlesSolved 
-      user["riddlesSolved"].push(riddle.riddleID);
-      console.log(update(user["userID"],user["riddlesSolved"]));
-      update(user["userID"],user["riddlesSolved"]);
-
       setTimeout(() => {
         riddleNotification(true);
         diaryNotification(true);
       }, 2000);
     }
 
+    //if riddlesSolved does not already includes riddle id 
+    if(!user["riddlesSolved"].includes(riddle.riddleID)){
+      //Updates the user riddlesSolved 
+      user["riddlesSolved"].push(riddle.riddleID);
+      update(user["userID"],user["riddlesSolved"]);
+    }
+    
+    //if diaryExcerpts does not already includes diary id 
+    if(!user["diaryExcerpts"].includes(riddle.diaryid)){
+      //Updates the user riddlesSolved 
+      user["diaryExcerpts"].push(riddle.diaryid);
+      update(user["userID"],user["diaryExcerpts"]);
+    }
 
     let form = document.createElement("form");
     form.setAttribute("id", "answer");
@@ -376,7 +394,7 @@ async function createMessageBox(message, booleanValue, spot) {
 
     let button = document.createElement("button");
     button.className = "button callToAction bodyText";
-    button.innerHTML = "skicka"
+    button.innerHTML = "Enter";
     form.append(button);
     codeBox.append(form);
 
@@ -400,31 +418,46 @@ async function createMessageBox(message, booleanValue, spot) {
         // When you enter the right code
         // Make the spot unavaible and grey - USE SPOT
 
-
         // Notification Send them part 2 of the diarypost
-        diaryNotification();
+        diaryNotification(true);
+
+        bodyText.innerHTML = "";
+        bodyText.innerHTML = "Bra, keep going!";
+        setTimeout(() => {
+          codeBox.remove();
+        }, 3000);
 
         // Save the process in persons object
-        let preRiddle = null;
+        let preRiddle = [];
 
         if (riddle.relatedPreRiddles.length != 0) {
           preRiddle = riddle.relatedPreRiddles[0];
         }
 
-        updateUserProcess(riddle);
-
-        async function updateUserProcess(riddle) {
-          let users = await getUsers();
-
-          let userFromServer = users.find((u) => u.userID == user.userID);
-
-
-          let uppdatedRiddle = userFromServer.riddlesSolved.push(`${riddle.riddleID}`);
-          let updatedPreRiddle = userFromServer.preRiddlesSolved.push(`${preRiddle}`);
-          let updatedLocation = userFromServer.locationAchieved.push(`${riddle.locationID}`);
-          console.log(updatedLocation, updatedPreRiddle, uppdatedRiddle);
-          update(userFromServer.userID, uppdatedRiddle, updatedPreRiddle, updatedLocation);
+        //Pushes and Updates the users riddlesSolved, preRiddlesSolved and locationsAchieved 
+        //if riddlesSolved does not already includes riddle id 
+        if(!user["riddlesSolved"].includes(riddle.riddleID)){
+          //Updates the user riddlesSolved 
+          user["riddlesSolved"].push(riddle.riddleID);
         }
+        user["preRiddlesSolved"] = preRiddle;
+        user["locationAchieved"].push(spot.locationID);
+        update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"],user["locationAchieved"]);
+
+        // updateUserProcess(riddle);
+
+        // async function updateUserProcess(riddle) {
+        //   let users = await getUsers();
+
+        //   let userFromServer = users.find((u) => u.userID == user.userID);
+
+
+        //   let uppdatedRiddle = userFromServer.riddlesSolved.push(`${riddle.riddleID}`);
+        //   let updatedPreRiddle = userFromServer.preRiddlesSolved.push(`${preRiddle}`);
+        //   let updatedLocation = userFromServer.locationAchieved.push(`${riddle.locationID}`);
+        //   console.log(updatedLocation, updatedPreRiddle, uppdatedRiddle);
+        //   update(userFromServer.userID, uppdatedRiddle, updatedPreRiddle, updatedLocation);
+        // }
 
       } else {
         // When you enter the wrong code - it gives out a shake
@@ -435,8 +468,24 @@ async function createMessageBox(message, booleanValue, spot) {
       }
 
     });
-  }
 
+  }else{
+    if(zoneCleared == false){
+      // Updates the user riddlesSolved 
+      user["riddlesSolved"].forEach(riddleId => {
+        locations.forEach(location => {
+          if(location.locationID == spot.locationID){
+            if ( riddleId == location.diaryID) { 
+              let index = user["riddlesSolved"].indexOf(riddleId);
+              user["riddlesSolved"].splice(index, 1);
+            }
+          }
+        })
+      });
+      console.log(update(user["userID"],user["riddlesSolved"]));
+      update(user["userID"],user["riddlesSolved"]);
+    }
+  }
 
   titleWrapper.append(title, closeButton);
   codeBox.prepend(titleWrapper, bodyText);
@@ -488,9 +537,12 @@ function createDiaryView() {
 }
 //Creates Riddles view
 function createRiddlesView() {
-  if(document.getElementById("riddlesIMG").src == "http://localhost:8000/icons/riddle_icon_notification.svg"){
+  setTimeout(() => {
+    if(document.getElementById("riddlesIMG").src == "http://localhost:8000/icons/riddle_icon_notification.svg"){
       document.getElementById("riddlesIMG").src = "http://localhost:8000/icons/riddle_icon.svg";
     }
+  }, 2000);
+ 
   //Creates the main riddles container
   let riddlesContainer = createContainerBox("riddlesContainer", "Riddles");
 
@@ -529,7 +581,7 @@ function forEachDiary(containerBox) {
   diary.forEach(excerpt => {
 
     //Creates a excerpt box for every excerpts received for inlogged user
-    if (user.diaryExcerpts.includes(excerpt.id)) {
+    if (user.diaryExcerpts.includes(excerpt.id) == true) {
 
       //Creates the excerpt container
       let excerptBox = createContainerBox("excerptBox");
@@ -547,11 +599,19 @@ function forEachDiary(containerBox) {
       }
 
       //Body text and page number
+      if(!user["locationAchieved"].includes(excerpt.locationID)){
+        excerptBox.innerHTML += `
+          <p class="excerptText">${excerpt.bodyText.start}</p>
+        `;
+      }else{
+        excerptBox.innerHTML += `
+          <p class="excerptText">${excerpt.bodyText.end}</p>
+        `;
+      }
       excerptBox.innerHTML += `
-            <p class="excerptText">${excerpt.bodyText.start}</p>
-            <p class="excerptText">${excerpt.bodyText.end}</p>
-            <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
-          `;
+        <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
+      `;
+
       containerBox.append(excerptBox);
     }
 

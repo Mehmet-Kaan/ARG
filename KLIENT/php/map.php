@@ -32,7 +32,7 @@
     <?php
     // FETCH API KEY FROM SERVER
     // SÄTT VARIABEL TILL APIKEY
-        require_once "head.php";
+      
     ?>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94Qi9OPA7V43ooB5f0gqSv8lmYm730RE" async defer></script>
     

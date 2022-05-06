@@ -2,18 +2,7 @@
     {
         "username": "Niklas",
         "email": "niklas.sta@hotmail.com",
-        "riddlesSolved": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-        ],
+        "riddlesSolved": [],
         "preRiddlesSolved": [],
         "locationAchieved": [],
         "diaryExcerpts": [
@@ -26,9 +15,13 @@
     {
         "username": "Mehmet",
         "email": "mehmet@hotmail.com",
-        "riddlesSolved": [],
+        "riddlesSolved": [
+            1
+        ],
         "preRiddlesSolved": [],
-        "locationAchieved": [],
+        "locationAchieved": [
+            6
+        ],
         "diaryExcerpts": [
             0
         ],
