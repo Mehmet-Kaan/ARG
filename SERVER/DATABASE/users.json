@@ -16,13 +16,15 @@
         "username": "Mehmet",
         "email": "mehmet@hotmail.com",
         "riddlesSolved": [
-            0,
             1
         ],
         "preRiddlesSolved": [],
-        "locationAchieved": [],
+        "locationAchieved": [
+            6
+        ],
         "diaryExcerpts": [
-            0
+            0,
+            1
         ],
         "userID": 2,
         "password": "0000",

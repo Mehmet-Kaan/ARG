@@ -2,12 +2,19 @@
 
 let latitude, longitude, currentPositionOfPlayer, playerInCircle, user;
 let map;
-const MALMO_BOUNDS = {
-  north: 55.639951,
-  south: 55.500386,
-  west: 12.8811839,
-  east: 13.1507609,
+const GAME_BOUNDS = {
+  north: 55.61535512261388,
+  south: 55.605431830636334,
+  west: 12.98488243064912,
+  east: 13.003699854890414,
 };
+// const MALMO_BOUNDS = {
+//   north: 55.639951,
+//   south: 55.500386,
+//   west: 12.8811839,
+//   east: 13.1507609,
+// };
+
 
 // set the logged in user in a key
 async function setUserVariable(){
@@ -150,12 +157,12 @@ function initMap() {
 
   // The map
   map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 55.604980, lng: 13.003822 },
+    center: { lat: 55.61045267448197, lng: 12.994294825044932 },
     restriction: {
-      latLngBounds: MALMO_BOUNDS,
+      latLngBounds: GAME_BOUNDS,
       strictBounds: false,
     },
-    zoom: 13,
+    zoom: 14.75,
     mapId: "1e40c73b7572b645"
   });
 
@@ -210,15 +217,29 @@ function initMap() {
 // Creates the circles and markers / Argument that is sent to the parameter is the locationID
 function createSpot(spot) {
 
-  // Marker Icon
-  const svgMarker = {
-    path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
-    fillColor: "#00FF01",
-    fillColor: "#00FF01",
-    fillColor: "#00FF01",
-    fillOpacity: 0.6,
-    anchor: new google.maps.Point(16, 30),
-  };
+  let svgMarker;
+
+  if(user["locationAchieved"].includes(spot.locationID)){
+    // Marker Icon
+    svgMarker = {
+      path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
+      fillColor: "#404040",
+      fillColor: "#404040",
+      fillColor: "#404040",
+      fillOpacity: 0.6,
+      anchor: new google.maps.Point(16, 30),
+    };
+  }else{
+    // Marker Icon
+    svgMarker = {
+      path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
+      fillColor: "#00FF01",
+      fillColor: "#00FF01",
+      fillColor: "#00FF01",
+      fillOpacity: 0.6,
+      anchor: new google.maps.Point(16, 30),
+    };
+  }
 
   // Position for each position
   let loc = new google.maps.LatLng(spot.lat, spot.lng);
@@ -230,17 +251,32 @@ function createSpot(spot) {
     map: map
   });
 
-  // Circle for each position
-  let circle = new google.maps.Circle({
-    strokeColor: "#00FF01",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#00FF01",
-    fillOpacity: 0.19,
-    map: map,
-    center: loc,
-    radius: spot.circleRadius
-  });
+  let circle;
+  if(user["locationAchieved"].includes(spot.locationID)){
+    // Circle for each position
+      circle = new google.maps.Circle({
+      strokeColor: "#404040",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#404040",
+      fillOpacity: 0.19,
+      map: map,
+      center: loc,
+      radius: spot.circleRadius
+    });
+  }else{
+    // Circle for each position
+      circle = new google.maps.Circle({
+      strokeColor: "#00FF01",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#00FF01",
+      fillOpacity: 0.19,
+      map: map,
+      center: loc,
+      radius: spot.circleRadius
+    });
+  }
 
   // Pulse effect
   nextAssignment(circle, spot.circleRadius);
@@ -263,11 +299,11 @@ function createSpot(spot) {
       } else {
         message = "You’re not in the area of this task, therefore its prohibited to enter a code for completing the task, be aware of the geiger counter";
       }
-      createMessageBox(message, booleanValue, spot);
+      createMessageBox(message, booleanValue, spot, marker, circle, zoneCleared);
     }else{
       message = "You have already cleared the area!";
       booleanValue = false;
-      createMessageBox(message, booleanValue, spot, zoneCleared);
+      createMessageBox(message, booleanValue, spot, marker, circle, zoneCleared);
     }
   });
 }
@@ -277,7 +313,6 @@ function publishSpots(spotsArray) {
     locations.forEach(loc => {
       if (spot === loc.locationID) {
         createSpot(loc);
-        console.log(loc);
       }
     })
   })
@@ -317,7 +352,8 @@ function checkIfInZone(circle) {
   return circle.getBounds().contains(playerLoc);
 }
 // Creates a message box that appears when marker is being clicked
-async function createMessageBox(message, booleanValue, spot, zoneCleared = true) {
+async function createMessageBox(message, booleanValue, spot, marker, circle, zoneCleared = true) {
+
   // Create Message box
   let codeBox = document.createElement("div");
   codeBox.classList.add("codeBox");
@@ -426,9 +462,52 @@ async function createMessageBox(message, booleanValue, spot, zoneCleared = true)
           codeBox.remove();
         }, 2000);
 
-        console.log(spot);
-        // spot.setMap(null);
-        
+        //Deletes the old marker to create a new one with gray color
+        function reCreateMarker() {
+            //Gets positions of the marker inside the clicked area
+          let clickedMarkerLat = marker.position.lat();
+          let clickedMarkerLng = marker.position.lng();
+
+          //Deletes the marker
+          marker.setMap(null);
+
+          //New svg marker for cleared area - solved riddle
+          const clearedSvgMarker = {
+            path: "M25.2,8.4c0-0.4,0-0.8,0-1.2c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1-0.1-0.3-0.1-0.4C25,6.3,25,6.2,24.9,6c-0.1-0.4-0.2-0.9-0.4-1.3l0,0c-0.3-0.4-0.7-0.5-0.9-0.9c-0.1-0.2-0.1-0.4-0.2-0.6C23.3,3,23,2.9,22.8,2.8c-1.4-0.4-3-0.1-4,0.9c-0.2,0.2-0.5,0.5-0.8,0.6c-0.5,0.2-1.1,0-1.5-0.4c-0.4-0.4-0.6-0.9-0.9-1.4c-0.3-0.5-0.7-0.9-1.2-1.1c-0.7-0.2-1.5,0.2-1.8,0.9c-0.2,0.6,0.1,1.3,0.3,1.8c0.2,0.6,0.4,1.3,0.1,1.8c-0.2,0.4-0.7,0.7-1.2,0.7c-0.5,0.1-1,0-1.5-0.1c-0.2,0-0.4-0.1-0.5-0.2C9.6,6.2,9.5,6,9.5,5.7c0-0.3,0.1-0.5,0.1-0.8C9.6,4.4,9.4,4,9,3.6C8.5,3.5,8,3.8,7.7,4.2c0,0,0,0,0,0.1C7.2,5.2,7,6.1,6.9,7.1c0,0,0,0.1,0,0.1c0,0.4,0,0.8,0,1.2v0.2c0,0.1,0,0.3,0,0.4c0,5,7.8,9.4,7.8,20.2v0c0,0.1,0,0.2,0,0.3c0,0.1,0,0.2,0.1,0.3c0.1,0.2,0.2,0.3,0.3,0.5c0.2,0.2,0.6,0.4,1,0.4s0.7-0.2,1-0.4c0.1-0.1,0.2-0.3,0.3-0.5c0-0.1,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3v0c0-9.6,6.1-14.1,7.5-18.5c0.2-0.5,0.3-1.1,0.3-1.7C25.2,8.9,25.2,8.6,25.2,8.4z M16,13.4c-1.3,0-2.4-1.1-2.4-2.4c0-1.3,1.1-2.4,2.4-2.4s2.4,1.1,2.4,2.4C18.4,12.3,17.3,13.4,16,13.4z",
+            fillColor: "#404040",
+            fillColor: "#404040",
+            fillColor: "#404040",
+            fillOpacity: 1,
+            anchor: new google.maps.Point(16, 30),
+          };
+
+          //Creates a new marker
+          const newMarker = new google.maps.Marker({
+            position: {lat:clickedMarkerLat, lng:clickedMarkerLng},
+            icon: clearedSvgMarker,
+            map: map
+          });
+
+          // Adds new click event
+          google.maps.event.addListener(newMarker, 'click', function () {
+            let message = "You have already cleared the area!";
+            booleanValue = false;
+            createMessageBox(message, booleanValue, spot);
+          });
+        }
+        reCreateMarker();
+
+        //Updates the circle
+        //Changes the color of circle to dark gray (#404040)
+        function updateCirle() {
+          const circleOptions = {
+            strokeColor: "#404040",
+            fillColor: "#404040"
+          }
+          circle.setOptions(circleOptions);
+        }
+        updateCirle();
+
         // Save the process in persons object
         let preRiddle = [];
 
@@ -462,6 +541,7 @@ async function createMessageBox(message, booleanValue, spot, zoneCleared = true)
         // }
 
       } else {
+
         // When you enter the wrong code - it gives out a shake
         codeBox.style.animation = "shake 0.82s cubic-bezier(.36,.07,.19,.97) both";
         setTimeout(() => {
