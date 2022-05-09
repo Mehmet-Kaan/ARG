@@ -23,8 +23,7 @@
           <div class="numbersTop">
             123456789 <span class="ten">10</span>
           </div>
-          <div class="line"></div>
-          <div class="meter low"></div>
+          <div class="line"><div class="meter low"></div></div>
           <div class="numbersBottom">
             <span>100</span>
             <span>200</span>
