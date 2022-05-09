@@ -2,10 +2,10 @@
     {
         "username": "Niklas",
         "email": "niklas.sta@hotmail.com",
-        "riddlesSolved": [1,0],
+        "riddlesSolved": [],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [0,1,2,3],
+        "diaryExcerpts": [],
         "userID": 1,
         "password": "0000",
         "teamID": 1

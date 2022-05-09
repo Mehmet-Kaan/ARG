@@ -13,7 +13,26 @@
         
     <div class="hide" id="subContent">
       <div id="geigermeter" >
-        
+      <div class="numbersBox">
+            <div class="MaxP">Max</div>
+            <div class="exposedP">Exposed</div>
+            <div class="maximum">10.000</div>
+            <div class="exposed">25</div>
+          </div>
+
+          <div class="numbersTop">
+            123456789 <span class="ten">10</span>
+          </div>
+          <div class="line"></div>
+          <div class="meter low"></div>
+          <div class="numbersBottom">
+            <span>100</span>
+            <span>200</span>
+            <span>300</span>
+            <span>400</span>
+            <span>500</span>
+            <span>600</span>
+          </div>
       </div>
       <div id="diary_icon" >
         <img src="../icons/diary_icon.svg" alt="*messages">
@@ -29,11 +48,6 @@
     <script src="../scripts/DB.js"></script>
     <script src="../scripts/functions.js"></script>
     <script src="../scripts/spelplanen.js"></script>
-    <?php
-    // FETCH API KEY FROM SERVER
-    // SÄTT VARIABEL TILL APIKEY
-        require_once "head.php";
-    ?>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94Qi9OPA7V43ooB5f0gqSv8lmYm730RE" async defer></script>
     
 </body>
