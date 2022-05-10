@@ -1,8 +1,7 @@
 <?php
 
 require_once "access-control.php";
-//Gets functions.php
-require_once("functions.php");
+require_once "functions.php";
 
 $dataPHP = file_get_contents("php://input");
 $requestData = json_decode($dataPHP, true);

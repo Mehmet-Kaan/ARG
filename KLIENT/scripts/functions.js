@@ -28,6 +28,7 @@ async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved)
         "preRiddlesSolved": preRiddlesSolved,
         "locationAchieved": locationAchieved
     };
+    console.log(update);
 
     // let rqst = new Request("https://localhost:9000/update.php");
     let rqst = new Request("http://localhost:9000/update.php", {

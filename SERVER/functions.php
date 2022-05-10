@@ -1,11 +1,5 @@
 <?php
-//Error reports på = -1, av = 0
 error_reporting(-1);
-
-//Variable med server request
-//$rqstMethod = $_SERVER["REQUEST_METHOD"];
-//$contentType = "application/json";
-
 //Checks if contenttype is set to application/json
 function checkContentType() {
     $contentType = $_SERVER["CONTENT_TYPE"];
@@ -55,5 +49,4 @@ function sendJSON($message, $statusCode = 200) {
     echo $json;
     exit();
 }
-
 ?>

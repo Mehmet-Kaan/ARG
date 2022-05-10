@@ -10,7 +10,7 @@ const MALMO_BOUNDS = {
 };
 
 // set the logged in user in a key
-async function setUserVariable(){
+async function setUserVariable() {
   let users = await getUsers();
   console.log(users)
   user = users.find((u) => u.userID == getFromSession("user").userID);
@@ -146,7 +146,7 @@ setInterval(() => {
 }, 20000);
 
 // Creates the map
-function initMap() {
+async function initMap() {
 
   // The map
   map = new google.maps.Map(document.getElementById('map'), {
@@ -160,23 +160,37 @@ function initMap() {
   });
 
 
-  // How to release the spots
   let spotsFirst = teams.find(team => team.teamID = user.teamID).phaseOne;
   let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
   let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
   let spotsFourth = teams.find(team => team.teamID = user.teamID).phaseFour;
-
   publishSpots(spotsFirst);
 
-  setTimeout(() => {
+  let users = await getUsers();
+  let userFromServer = users.find((u) => u.userID == user.userID);
+
+  let solvedRiddles = userFromServer.riddlesSolved.length;
+  if (solvedRiddles >= 1 & solvedRiddles <= 3) {
     publishSpots(spotsSecond);
-  }, 10000)
-  setTimeout(() => {
+  } else if (solvedRiddles >= 4 && solvedRiddles <= 6) {
+    publishSpots(spotsSecond);
     publishSpots(spotsThird);
-  }, 20000)
-  setTimeout(() => {
+  } else if (solvedRiddles >= 7) {
+    publishSpots(spotsSecond);
+    publishSpots(spotsThird);
     publishSpots(spotsFourth);
-  }, 30000);
+  }
+
+
+  // setTimeout(() => {
+  //   publishSpots(spotsSecond);
+  // }, 10000)
+  // setTimeout(() => {
+  //   publishSpots(spotsThird);
+  // }, 20000)
+  // setTimeout(() => {
+  //   publishSpots(spotsFourth);
+  // }, 30000);
 
   // //Updates the position of player
   // setInterval(() => {
@@ -264,7 +278,7 @@ function publishSpots(spotsArray) {
   spotsArray.forEach(spot => {
     locations.forEach(loc => {
       if (spot === loc.locationID) {
-        
+
         createSpot(loc);
         console.log(loc);
       }
@@ -337,6 +351,7 @@ async function createMessageBox(message, booleanValue, spot) {
 
   let riddles = await getRiddles();
 
+  console.log(riddles);
   let riddle = riddles.mainRiddles.find((riddle) => riddle.locationID == spot.locationID);
 
   console.log(riddle);
@@ -395,30 +410,43 @@ async function createMessageBox(message, booleanValue, spot) {
         // Make the spot unavaible and grey - USE SPOT
 
 
-        // Notification Send them part 2 of the diarypost
+        // END DIARY NOTIFICATION
         diaryNotification();
 
-        // Save the process in persons object
-        let preRiddle = null;
+        // UPDATES SOLVED RIDDLE & RELEASES THE PHASES
 
+        let preRiddle = null;
         if (riddle.relatedPreRiddles.length != 0) {
           preRiddle = riddle.relatedPreRiddles[0];
         }
-
-        updateUserProcess(riddle);
-
+        
         async function updateUserProcess(riddle) {
           let users = await getUsers();
 
           let userFromServer = users.find((u) => u.userID == user.userID);
 
+          userFromServer.riddlesSolved.push(riddle.riddleID);
+          userFromServer.preRiddlesSolved.push(preRiddle);
+          userFromServer.locationAchieved.push(riddle.locationID);
 
-          let uppdatedRiddle = userFromServer.riddlesSolved.push(`${riddle.riddleID}`);
-          let updatedPreRiddle = userFromServer.preRiddlesSolved.push(`${preRiddle}`);
-          let updatedLocation = userFromServer.locationAchieved.push(`${riddle.locationID}`);
-          console.log(updatedLocation, updatedPreRiddle, uppdatedRiddle);
-          update(userFromServer.userID, uppdatedRiddle, updatedPreRiddle, updatedLocation);
+          update(userFromServer.userID, userFromServer.riddlesSolved, userFromServer.preRiddlesSolved, userFromServer.locationAchieved);
+
+          let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
+          let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
+          let spotsFourth = teams.find(team => team.teamID = user.teamID).phaseFour;
+
+          if (userFromServer.riddlesSolved.length == 1) {
+            publishSpots(spotsSecond);
+          } else if (userFromServer.riddlesSolved.length == 4) {
+            publishSpots(spotsThird);
+          } else if (userFromServer.riddlesSolved.length == 7) {
+            publishSpots(spotsFourth);
+          }
         }
+
+        updateUserProcess(riddle);
+
+        // PLAYER WILL GET A MESSAGE/SHORT NOTIFICATION
 
       } else {
         // When you enter the wrong code - it gives out a shake
@@ -503,7 +531,7 @@ function createContainerBox(theBoxName, titleOfBox) {
 
   if (titleOfBox !== undefined) {
     theBoxName.innerHTML = `
-    <h1 style="text-align:center; margin-bottom:10px;">${titleOfBox}</h1>
+    <h1 class="middleTitle" style="text-align:center; margin-bottom:20px;">${titleOfBox}</h1>
   `;
 
     setTimeout(() => {
@@ -590,13 +618,13 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 
           //Creates close riddleBox button
           let closeBtnUnlockedRiddle = document.createElement("button");
-          closeBtnUnlockedRiddle.classList.add("closeBtnUnlockedRiddle");
+          closeBtnUnlockedRiddle.className = "closeBtnUnlockedRiddle button callToAction";
 
           setTimeout(() => {
             closeBtnUnlockedRiddle.classList.add("opacity");
           }, 1000);
 
-          closeBtnUnlockedRiddle.innerText = `X`;
+          closeBtnUnlockedRiddle.innerHTML = `<img src="../icons/x.png">`;
 
           closeBtnUnlockedRiddle.addEventListener("click", () => {
 
@@ -625,15 +653,18 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 //Creates a close button and appends it in the argument sended
 function createCloseButton(contianerBox) {
   let closeBtn = document.createElement("button");
-  closeBtn.classList.add("closeBtn");
+  closeBtn.className = "closeBtn button callToAction";
 
   setTimeout(() => {
     closeBtn.classList.add("opacity");
   }, 750);
 
-  closeBtn.innerText = `→`;
+  closeBtn.innerHTML = `<img src="../icons/arrow_down.png">`;
 
   closeBtn.addEventListener("click", () => {
+    if (document.querySelector(".closeBtnUnlockedRiddle")) {
+      document.querySelector(".closeBtnUnlockedRiddle").remove();
+    }
     contianerBox.classList.remove("up");
     closeBtn.remove();
 
@@ -645,3 +676,36 @@ function createCloseButton(contianerBox) {
   contianerBox.append(closeBtn);
   document.body.append(contianerBox);
 }
+
+
+function controlGeigerMeter(){
+    let meter = document.querySelector('.meter');
+    console.log(meter);
+
+
+    if(meter.classList.contains('low')){ //Ändra till: Om man är utanför området
+        // meter.classList.add('low');
+        meter.style.animation = "meter 1s infinite alternate";
+        
+    }else if(meter.classList.contains('mid')){ //Om man är innanför området
+        // meter.classList.remove('low');
+        // meter.classList.add('mid');
+        
+        meter.style.animation = "meterMid .5s infinite alternate";
+        //Efter en stund i området, aktivera high
+        setTimeout(() => {
+            // meter.classList.remove('mid');
+            meter.classList.add('high');
+
+        
+            meter.style.animation = "meterHigh .3s infinite alternate";
+        }, 1 * 60 * 1000)
+
+    }
+
+
+    
+
+}
+
+controlGeigerMeter();
