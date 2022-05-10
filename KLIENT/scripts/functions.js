@@ -1,8 +1,19 @@
 "use strict!";
+const urlAPI = "https://api.themalmoproject.se";
+const url = "https://themalmoproject.se";
+
+async function checkHTTP() {
+  if (!window.location.href.includes("https")) {
+    sessionStorage.clear();
+    window.location.href = url;
+  }
+}
+
+checkHTTP();
 
 async function login(username, password) {
 
-    let rqst = new Request("http://localhost:9000/login.php");
+    let rqst = new Request(`${urlAPI}/login.php`);
 
     let data = {
         "username": username,
@@ -31,7 +42,7 @@ async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved)
     console.log(update);
 
     // let rqst = new Request("https://localhost:9000/update.php");
-    let rqst = new Request("http://localhost:9000/update.php", {
+    let rqst = new Request(`${urlAPI}/update.php`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(update),
@@ -100,7 +111,7 @@ function getFromLocal(key) {
 
 // Fetches all riddles
 async function getRiddles() {
-    let response = await fetch("http://localhost:9000/get.php", {
+    let response = await fetch(`${urlAPI}/get.php`, {
         method: 'POST',
         body: JSON.stringify({ riddles: true }),
         headers: { "Content-type": "application/json" },
@@ -110,7 +121,7 @@ async function getRiddles() {
 }
 
 async function getUsers() {
-    let response = await fetch("http://localhost:9000/get.php", {
+    let response = await fetch(`${urlAPI}/get.php`, {
         method: 'POST',
         body: JSON.stringify({ users: true }),
         headers: { "Content-type": "application/json" },
