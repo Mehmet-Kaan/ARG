@@ -437,6 +437,8 @@ img.excerptImg {
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;
 	font-size: 22px;
+	gap: 4px;
+	margin-top:10px;
 	/* border: 1px solid white; */
 }
 .numbersBox div {
@@ -457,19 +459,22 @@ img.excerptImg {
 
 .numbersTop {
 	color: white;
+    width: 100%;
+    font-size: 18px;
+    margin-left: 4vw;
+    letter-spacing: 4.5vw;
 }
 
 .numbersBottom {
 	position: relative;
-	left: 12%;
-	top: 50%;
-	color: white;
-	/* letter-spacing: 0px; */
+    top: 38%;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px;
 }
 
-.numbersBottom>span {
-	margin-right: 4vw;
-}
 
 span> :nth-child(6) {
 	margin: 0;
@@ -486,20 +491,18 @@ span> :nth-child(6) {
 	position: relative;
 	height: 3px;
 	width: 90%;
-	top: 50%;
+	top: 22%;
 	left: 5%;
 	background: rgb(173, 255, 2);
 	background: linear-gradient(90deg, rgba(173, 255, 2, 1) 0%, rgba(253, 229, 29, 1) 50%, rgba(253, 29, 29, 1) 100%);
 }
 
 .meter {
-	position: relative;
+	position: absolute;
+	top: -5px;
 	height: 15px;
 	width: 15px;
 	border-radius: 50%;
-	top: 46%;
-	left: 5%;
-
 	background-color: white;
 	animation: meter 1s infinite alternate;
 }
@@ -507,7 +510,7 @@ span> :nth-child(6) {
 
 @keyframes meter {
 	0% {
-		left: 5%;
+		left: 0%;
 	}
 
 	100% {
@@ -517,7 +520,7 @@ span> :nth-child(6) {
 
 @keyframes meterMid {
 	0% {
-		left: 5%;
+		left: 0%;
 	}
 
 	100% {
@@ -527,7 +530,7 @@ span> :nth-child(6) {
 
 @keyframes meterHigh {
 	0% {
-		left: 5%;
+		left: 0%;
 	}
 
 	100% {

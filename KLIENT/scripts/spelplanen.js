@@ -2,12 +2,20 @@
 
 let latitude, longitude, currentPositionOfPlayer, playerInCircle, user;
 let map;
+let circles = {};
+let meter = document.querySelector('.meter');
+var exposed = document.querySelector('.exposed');
+if(getFromSession("exposureLevel") === null){
+  exposed.innerText = 0;
+}
+exposed.innerText = getFromSession("exposureLevel");
 const MALMO_BOUNDS = {
   north: 55.639951,
   south: 55.500386,
   west: 12.8811839,
   east: 13.1507609,
 };
+
 
 // set the logged in user in a key
 async function setUserVariable() {
@@ -34,7 +42,6 @@ async function setUserVariable() {
 }
 
 setUserVariable();
-
 
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
@@ -145,6 +152,51 @@ setInterval(() => {
   getLocation();
 }, 20000);
 
+// Checks if person in zone and then updating the exposure level
+setInterval(() => {
+  Object.values(circles).forEach((circle) => {
+    let booleanValue = checkIfInZone(circle);
+    if (booleanValue) {
+      controlGeigerMeter(booleanValue);
+      updateExposureLevel(booleanValue);
+      return;
+    } else {
+      updateExposureLevel(booleanValue);
+      if (meter.classList.contains("mid")) {
+        meter.classList.remove('mid');
+        meter.classList.add('low');
+        meter.style.animation = "meter 1s infinite alternate";
+
+      } else if (meter.classList.contains("high")) {
+        meter.classList.remove('high');
+        meter.classList.add('low');
+        meter.style.animation = "meter 1s infinite alternate";
+
+      }
+    }
+  })
+}, 5000);
+
+function updateExposureLevel(parameter) {
+
+  if (getFromSession("exposureLevel") === null) {
+    var seconds = 0;
+  } else {
+    var seconds = getFromSession("exposureLevel")
+  }
+  function incrementSeconds() {
+    seconds += 1;
+    exposed.innerText = seconds;
+    saveToSession("exposureLevel", seconds);
+  }
+
+  var cancel = setInterval(incrementSeconds, 1000);
+
+  if (!parameter) {
+    clearInterval(cancel);
+  }
+}
+
 // Creates the map
 async function initMap() {
 
@@ -180,46 +232,6 @@ async function initMap() {
     publishSpots(spotsThird);
     publishSpots(spotsFourth);
   }
-
-
-  // setTimeout(() => {
-  //   publishSpots(spotsSecond);
-  // }, 10000)
-  // setTimeout(() => {
-  //   publishSpots(spotsThird);
-  // }, 20000)
-  // setTimeout(() => {
-  //   publishSpots(spotsFourth);
-  // }, 30000);
-
-  // //Updates the position of player
-  // setInterval(() => {
-  //   //Deletes the latest position marker from map
-  //   locPlayer.setMap(null);
-
-  //   //Gets new location
-  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-  //   //Updates the lat and lang
-  //   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
-
-  //   //Creates new marker for the current position
-  //   locPlayer = new google.maps.Marker({
-  //     position: currentPositionOfPlayer,
-  //     map: map,
-  //   });
-
-  //   //Controls if player in the circle
-  //   playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
-  //   console.log(locPlayer.getPosition());
-
-  // }, 20000);
-
-
-  // // Check if in spot
-  // console.log(circleFour.getBounds().contains(locfour.getPosition()));
-  // console.log(circleFour.getBounds().contains(locfive.getPosition()));
-
 }
 // Creates the circles and markers / Argument that is sent to the parameter is the locationID
 function createSpot(spot) {
@@ -255,6 +267,10 @@ function createSpot(spot) {
     center: loc,
     radius: spot.circleRadius
   });
+
+  circles[`circle${spot.locationID}`] = circle;
+  console.log(circle);
+  console.log(circles[`circle${spot.locationID}`]);
 
   // Pulse effect
   nextAssignment(circle, spot.circleRadius);
@@ -314,10 +330,11 @@ function nextAssignment(circle, radiusBase) {
 // Returns true/false if player in bad zone
 function checkIfInZone(circle) {
   // Get players location
-  // let playerLoc = playerLocation();
-  let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
+  let playerLoc = playerLocation();
+  // let loc = new google.maps.LatLng(55.60753, 12.98978);
+  let loc = new google.maps.LatLng(playerLoc);
 
-  return circle.getBounds().contains(playerLoc);
+  return circle.getBounds().contains(loc);
 }
 // Creates a message box that appears when marker is being clicked
 async function createMessageBox(message, booleanValue, spot) {
@@ -677,35 +694,23 @@ function createCloseButton(contianerBox) {
   document.body.append(contianerBox);
 }
 
+// 
+function controlGeigerMeter(parameter) {
 
-function controlGeigerMeter(){
-    let meter = document.querySelector('.meter');
-    console.log(meter);
+  if (parameter) { //Om man är innanför området
+    meter.classList.remove('low');
+    meter.classList.add('mid');
 
-
-    if(meter.classList.contains('low')){ //Ändra till: Om man är utanför området
-        // meter.classList.add('low');
-        meter.style.animation = "meter 1s infinite alternate";
-        
-    }else if(meter.classList.contains('mid')){ //Om man är innanför området
-        // meter.classList.remove('low');
-        // meter.classList.add('mid');
-        
-        meter.style.animation = "meterMid .5s infinite alternate";
-        //Efter en stund i området, aktivera high
-        setTimeout(() => {
-            // meter.classList.remove('mid');
-            meter.classList.add('high');
-
-        
-            meter.style.animation = "meterHigh .3s infinite alternate";
-        }, 1 * 60 * 1000)
-
-    }
+    meter.style.animation = "meterMid .5s infinite alternate";
+    //Efter en stund i området, aktivera high
+    setTimeout(() => {
+      // meter.classList.remove('mid');
+      meter.classList.add('high');
 
 
-    
-
+      meter.style.animation = "meterHigh .3s infinite alternate";
+    }, 5 * 60 * 1000)
+  }
 }
 
 controlGeigerMeter();

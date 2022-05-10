@@ -201,6 +201,7 @@ const diary = [
         "locationID": 9
     }
 ];
+
 const messages = [
     {
         "messageID":1,
@@ -213,6 +214,7 @@ const messages = [
         "locationID":4
     }
 ];
+
 const teams = [
     {
         "teamID": 1,
@@ -221,7 +223,8 @@ const teams = [
         "phaseOne": [6],
         "phaseTwo": [7, 5, 0],
         "phaseThree": [8, 2, 1, 3],
-        "phaseFour": [4]
+        "phaseFour": [4],
+        "notifications": ["Jag har fått uppgifter om att det finns värdefulla objekt placerade i staden, ert uppdrag är att lokalisera dess exakta position och föra den funna informationen till mig.</br>Jag har tagit reda på ett antal områden, men var vaksamma och använd er geigermätare då det har uppmätts hög radioaktiv strålning på platserna. Använd er utbildning, var effektiva och hjälp varandra. Objekten bör finnas placerade i dessa områden men det är upp till er att hitta exakt vart. Jag fortsätter lokalisera nya områden.", "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.", "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.", "Jag har fått uppgifter om det finns dagboksutdrag från en gammal vän på stationerna. Ifall det finns fler så spara dem, men lägg störst fokus på uppdraget.", "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.", "Vad som än finns vid andra änden, låt inte Bethe komma först. Med honom vid makten hotas hela våra existens.", "Bra jobbat. Arbetet är långt ifrån klart. Tiden är snart slut, ni måste jobba snabbare.", "Uppdraget är inte färdigt. Vi kan inte ge upp än!", "Bra jobbat, fullfölj uppdraget."]
     },
     {
         "teamID": 2,
@@ -230,9 +233,11 @@ const teams = [
         "phaseOne": [5],
         "phaseTwo": [7, 6, 0],
         "phaseThree": [8, 2, 1, 3],
-        "phaseFour": [4]
+        "phaseFour": [4],
+        "notifications": ["Jag har fått uppgifter om att det finns värdefulla objekt placerade i staden, ert uppdrag är att lokalisera dess exakta position och föra den funna informationen till mig.</br>Jag har tagit reda på ett antal områden, men var vaksamma och använd er geigermätare då det har uppmätts hög radioaktiv strålning på platserna. Använd er utbildning, var effektiva och hjälp varandra. Objekten bör finnas placerade i dessa områden men det är upp till er att hitta exakt vart. Jag fortsätter lokalisera nya områden.", "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.","Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",  "Jag har fått uppgifter om det finns dagboksutdrag från en gammal bekant på stationerna. Ifall det uppkommer fler, spara dem men kom ihåg att inte tro på allt ni läser.", "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.", "Om ni hittar objektet kan vi tillsammans göra världen till en bättre plats. Jag håller alltid mitt löfte, ni kan lita på mig.", "Det är dem som förstör allt, det har de alltid gjort. Jag är för smart och det skrämmer dem.", "Uppdraget är inte färdigt, jag har tränat er för att hitta skatten och jag tänker inte ge upp.", "Jobba hårdare. De får inte komma först till slutmålet."]
     }
 ];
+
 const pageInformation = {
     headlines: {
         pageOne: {
@@ -258,6 +263,7 @@ const pageInformation = {
         bodyText: "bodyText",
     }
 };
+
 const buttons = {
     yes: {
         innerText: "Ja",
