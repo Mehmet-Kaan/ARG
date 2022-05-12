@@ -11,12 +11,11 @@ checkContentType();
 requestMethod("PATCH");
 
 // Hämtar users
-$users = openJSON("database/users.json");
+$users = openJSON("DATABASE/users.json");
 
 // Hämtar data som skickats med requesten
 $data = file_get_contents("php://input");
 $requestData = json_decode($data, true);
-
 
 // Kontrollerar att "userID"
 if (!isset($requestData["userID"]) ) {
@@ -57,7 +56,7 @@ if($found === false) {
     exit();
 }
         
-saveToJSON("database/users.json", $users);
+saveToJSON("DATABASE/users.json", $users);
 sendJSON(["message" => "Changes saved"]);
 
 ?>

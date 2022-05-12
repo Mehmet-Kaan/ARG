@@ -1,6 +1,8 @@
 "use strict!";
 const urlAPI = "https://api.themalmoproject.se";
-const url = "https://themalmoproject.se";
+const url = "https://www.themalmoproject.se";
+// const urlAPI = "http://localhost:9000";
+// const url = "http://localhost:9000";
 
 async function checkHTTP() {
   if (!window.location.href.includes("https")) {
@@ -32,13 +34,16 @@ async function login(username, password) {
 }
 
 async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved) {
-    
+   
     let update = {
         "userID": userID,
         "riddlesSolved": riddlesSolved,
         "preRiddlesSolved": preRiddlesSolved,
         "locationAchieved": locationAchieved
     };
+
+    
+
     console.log(update);
 
     // let rqst = new Request("https://localhost:9000/update.php");

@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <!-- styles -->
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/introduction.css">
-    <link rel="stylesheet" href="styles/gameConsole.css">
+    <!-- <link rel="stylesheet" href="styles/introduction.css">
+    <link rel="stylesheet" href="styles/gameConsole.css"> -->
 
     <title>The Malmö Project</title>
 </head>

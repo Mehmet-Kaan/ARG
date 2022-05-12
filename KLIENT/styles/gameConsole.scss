@@ -1,0 +1,573 @@
+/* MAP */
+
+#map {
+	height: 100vh;
+	width: 100vw;
+}
+
+header {
+	position: absolute;
+	top: 0;
+	z-index: 200;
+	height: 7.5%;
+	width: 100%;
+	background: var(--darkColor);
+	color: var(--mainColor);
+	font-weight: bolder;
+	font-size: larger;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header>.title {
+	position: relative;
+	color: var(--mainColor);
+	letter-spacing: 0.1em;
+	/* Animation provies a slight random skew. Check bottom of doc
+    for more information on how to random skew. */
+	animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+header>.title::before {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	left: 2px;
+	text-shadow: -2px 0 #ff00c1;
+	/* Creates an initial clip for our glitch. This works in
+    a typical top,right,bottom,left fashion and creates a mask
+    to only show a certain part of the glitch at a time. */
+	clip: rect(44px, 450px, 56px, 0);
+	/* Runs our glitch-anim defined below to run in a 5s loop, infinitely,
+    with an alternating animation to keep things fresh. */
+	animation: glitch-anim 5s infinite linear alternate-reverse;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+header>.title::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	left: -2px;
+	text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+	animation: glitch-anim2 1s infinite linear alternate-reverse;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+.responseBox {
+	position: absolute;
+	width: 55px;
+	z-index: 1000;
+	background: var(--mainColor);
+	top: 10%;
+	left: 3%;
+	border: 1px solid var(--darkColor);
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 55px;
+	opacity: 75%;
+}
+.responseBox > img {
+	width: 90%;
+}
+.bigger {
+	width: 50%;
+	border-radius: unset;
+	height: 15%;
+	opacity: 100%;
+	background: var(--darkColor);
+	color: var(--mainColor);
+	padding: 5%;
+}
+.innerResponseBox {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+/* Content icons */
+#subContent {
+	display: grid;
+	grid-template-rows: 4fr 4fr 1fr;
+	grid-template-columns: 4fr 1fr;
+	background-color: var(--mainColor);
+	gap: 3px;
+	height: 22%;
+	width: 100%;
+	z-index: 200;
+	position: absolute;
+	bottom: 0;
+}
+
+#hintWrapper {
+	grid-row: 3/4;
+	grid-column: 1/3;
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+}
+
+#hintWrapper>p {
+	font-size: 1.3rem;
+	font-weight: 400;
+	color: var(--darkColor);
+	overflow: hidden;
+	height: 1.5rem;
+}
+
+#geigermeter {
+	grid-row: 1/3;
+	grid-column: 1/2;
+	height: 100%;
+	width: 100%;
+	background-color: var(--darkColor);
+}
+
+#diary_icon {
+	grid-row: 1/2;
+	grid-column: 2/3;
+	height: 100%;
+	width: 100%;
+	background-color: var(--darkColor);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#riddles_icon {
+	grid-row: 2/3;
+	grid-column: 2/3;
+	height: 100%;
+	width: 100%;
+	background-color: var(--darkColor);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#diary_icon>img,
+#riddles_icon>img {
+	width: 30%;
+}
+
+/* RIDDLES */
+.riddlesContainer,
+.diaryBox {
+	height: 100%;
+	width: 100%;
+	z-index: 200;
+	position: absolute;
+	background: var(--darkColor);
+	color: var(--mainColor);
+	overflow: scroll;
+	transition: all ease .5s;
+	padding: 5%;
+	top: 100%;
+}
+
+.riddlesBoxes {
+	width: 100%;
+	height: 90%;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	overflow: scroll;
+}
+
+.riddleBox {
+	height: 80%;
+	background-color: var(--lightColor);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.riddleBoxImg {
+	width: 15%;
+}
+
+.unlockedRiddleBox {
+	display: flex;
+	flex-direction: column;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	gap: var(--viewerMargin);
+	opacity: 0%;
+
+	transition: all .5s ease;
+}
+
+.unlocked {
+	border: 2px solid var(--mainColor);
+}
+
+.locked {
+	border: 2px solid red;
+}
+
+.closeBtnUnlockedRiddle {
+	position: fixed;
+	bottom: 4rem;
+	left: 4rem;
+	opacity: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 2s ease;
+}
+
+.closeBtnUnlockedRiddle>img {
+	height: 2rem;
+	width: 2rem;
+}
+
+.riddleImg {
+	width: 50%;
+	position: unset;
+}
+
+.glitchedLetter {
+	position: relative;
+	color: var(--mainColor);
+	letter-spacing: 0.1em;
+	/* Animation provies a slight random skew. Check bottom of doc
+    for more information on how to random skew. */
+	animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+.glitchedLetter::before {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	left: 2px;
+	text-shadow: -2px 0 #ff00c1;
+	/* Creates an initial clip for our glitch. This works in
+    a typical top,right,bottom,left fashion and creates a mask
+    to only show a certain part of the glitch at a time. */
+	clip: rect(44px, 450px, 56px, 0);
+	/* Runs our glitch-anim defined below to run in a 5s loop, infinitely,
+    with an alternating animation to keep things fresh. */
+	animation: glitch-anim 5s infinite linear alternate-reverse;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+.glitchedLetter::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	left: -2px;
+	text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+	animation: glitch-anim2 1s infinite linear alternate-reverse;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+/* COMMAND INTERPRETER */
+.excerptBox {
+	margin-bottom: 10%;
+	font-size: var(--bodyFontSz);
+	font-family: var(--bodyTextFont);
+}
+
+.date_time {
+	margin-bottom: 10px;
+	color: white;
+}
+
+img.excerptImg {
+	position: relative;
+	width: 50%;
+	left: 25%;
+}
+
+.excerptText {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.excerptPage {
+	color: white;
+	text-align: right;
+}
+
+.closeBtn {
+	position: fixed;
+	right: 4rem;
+	bottom: 4rem;
+	opacity: 0%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all ease 2s;
+}
+
+.closeBtn>img {
+	height: 2rem;
+	width: 2rem;
+}
+
+/* MESSAGES */
+.codeBox {
+	position: absolute;
+	top: 20%;
+	z-index: 10;
+	background: black;
+	overflow: scroll;
+
+	display: flex;
+	flex-direction: column;
+	margin: var(--viewerMargin);
+	/* box-shadow: 0px 0px 10000px var(--mainColor); */
+	animation: pulse 3s infinite;
+}
+
+@keyframes shake {
+
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+	}
+}
+
+@keyframes pulse {
+	0% {
+		-moz-box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0.3);
+		box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0.3);
+	}
+
+	70% {
+		-moz-box-shadow: 0 0 100px 500px rgba(173, 255, 2, 0);
+		box-shadow: 0 0 100px 500px rgba(173, 255, 2, 0);
+	}
+
+	100% {
+		-moz-box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
+		box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
+	}
+}
+
+
+.titleWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: var(--viewerMargin);
+}
+
+.closeButton {
+	height: 20px;
+	width: 20px;
+	background-color: var(--mainColor);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	padding: var(--buttonPadding);
+	cursor: pointer;
+}
+
+.closeButton>img {
+	height: 15px;
+}
+
+.codeBox>.bodyText {
+	margin: 0px var(--viewerMargin);
+	margin-bottom: var(--viewerMargin);
+}
+
+#answer {
+	margin: 0px var(--viewerMargin);
+	display: grid;
+	gap: 5px;
+	grid-template-columns: repeat(6, 1fr);
+	margin-bottom: var(--viewerMargin);
+}
+
+.number {
+	max-width: 40px;
+	height: 40px;
+	background-color: var(--mainColor);
+	border: none;
+	color: var(--darkColor);
+	font-weight: 400;
+	padding: 30%;
+}
+
+#answer>button {
+	grid-row: 2;
+	grid-column: 1 / 7;
+	padding: 8px;
+	margin-top: var(--viewerMargin);
+}
+
+.up {
+	top: 6.2%;
+}
+
+.opacity {
+	opacity: 1;
+}
+
+/* geiger meter  */
+#geigermeter {
+	grid-row: 1/3;
+	grid-column: 1/2;
+	background-color: black;
+	font-family: 'VT323', monospace;
+	padding: var(--textPadding);
+	display:flex;
+	flex-direction: column;
+}
+
+.numbersBox {
+	color: white;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	font-size: 22px;
+	gap: 4px;
+	margin-top:10px;
+	/* border: 1px solid white; */
+}
+.numbersBox div {
+	display: flex;
+	width: 100%;
+}
+
+.MaxP, .maximum {
+	justify-content: start;
+	margin-left: var(--viewerMargin);
+}
+
+.exposedP, .exposed {
+	justify-content: flex-end;
+	margin-right: var(--viewerMargin);
+}
+
+
+.numbersTop {
+	color: white;
+    width: 100%;
+    font-size: 18px;
+    margin-left: 4vw;
+    letter-spacing: 4.5vw;
+}
+
+.numbersBottom {
+	position: relative;
+    top: 38%;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px;
+}
+
+
+span> :nth-child(6) {
+	margin: 0;
+}
+
+
+
+.ten {
+	letter-spacing: 0px;
+	position: absolute;
+}
+
+.line {
+	position: relative;
+	height: 3px;
+	width: 90%;
+	top: 22%;
+	left: 5%;
+	background: rgb(173, 255, 2);
+	background: linear-gradient(90deg, rgba(173, 255, 2, 1) 0%, rgba(253, 229, 29, 1) 50%, rgba(253, 29, 29, 1) 100%);
+}
+
+.meter {
+	position: absolute;
+	top: -5px;
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	background-color: white;
+	animation: meter 1s infinite alternate;
+}
+
+
+@keyframes meter {
+	0% {
+		left: 0%;
+	}
+
+	100% {
+		left: 30%;
+	}
+}
+
+@keyframes meterMid {
+	0% {
+		left: 0%;
+	}
+
+	100% {
+		left: 60%;
+	}
+}
+
+@keyframes meterHigh {
+	0% {
+		left: 0%;
+	}
+
+	100% {
+		left: 92%;
+	}
+}

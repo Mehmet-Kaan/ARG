@@ -1,5 +1,6 @@
 "use strict";
 
+
 const wrapper = document.querySelector("#wrapper");
 
 if(getFromSession("entered") != true){
@@ -7,7 +8,7 @@ if(getFromSession("entered") != true){
     const phaseOne = document.querySelector("#firstPhase");
     phaseOne.style.animation =  "fadeIn 3s";
 } else {
-    window.location.replace("http://localhost:8000/php/map.php")
+    window.location.replace(`${url}/map.php`);
     loadingPage();
     setTimeout(() => {
       displayMap();
@@ -93,7 +94,7 @@ function pageOne(info, button){
 function pageTwo(info, button){
     // The wrapper
     let page = document.createElement("div");
-    page.setAttribute("id", "secondPhase")
+    page.setAttribute("id", "secondPhase");
 
     let title = document.createElement("h1");
     title.innerHTML = info.headlines.pageTwo.title;
@@ -157,13 +158,14 @@ function pageTwo(info, button){
         event.preventDefault();
         const formData = new FormData(form);
 
-        const req2 = new Request(`http://localhost:9000/login.php`, 
+        const req2 = new Request(`${urlAPI}/login.php`, 
             postFormData(formData)
         );
           
         fetch(req2)
             .then((response) => {
                 if (response.ok) {
+                    console.log(response);
                     return response.json();
                 } else {
                     throw new Error("Password or username is wrong");
@@ -178,7 +180,7 @@ function pageTwo(info, button){
                 phaseTwo.style.animation =  "fadeOut 2s";
 
                 setTimeout(()=> {
-                    window.location.replace("http://localhost:8000/php/map.php");
+                    window.location.replace(`${url}/map.php`);
                      
                 }, 1700);
             })
