@@ -2,7 +2,7 @@
     {
         "teamID": 1,
         "name": "Teller",
-        "avatar":"",
+        "avatar":"vishnu_emblem.png",
         "phaseOne": [6],
         "phaseTwo": [7, 5, 0],
         "phaseThree": [2, 8, 1, 3],
@@ -11,7 +11,7 @@
     {
         "teamID": 2,
         "name": "Bethe",
-        "avatar":"",
+        "avatar":"shiva_emblem.png",
         "phaseOne": [5],
         "phaseTwo": [7, 0, 6],
         "phaseThree": [2, 8, 1, 3],

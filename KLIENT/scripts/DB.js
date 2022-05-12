@@ -217,7 +217,7 @@ const teams = [
     {
         "teamID": 1,
         "name": "Teller",
-        "avatar":"",
+        "avatar":"../images/vishnu_emblem.png",
         "phaseOne": [6],
         "phaseTwo": [7, 5, 0],
         "phaseThree": [8, 2, 1, 3],
@@ -226,7 +226,7 @@ const teams = [
     {
         "teamID": 2,
         "name": "Bethe",
-        "avatar":"",
+        "avatar":"../images/shiva_emblem.png",
         "phaseOne": [5],
         "phaseTwo": [7, 6, 0],
         "phaseThree": [8, 2, 1, 3],

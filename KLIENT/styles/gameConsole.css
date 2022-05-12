@@ -66,6 +66,39 @@ header > .title::after {
     align-items: center
 }
 
+.responseBox {
+	position: absolute;
+	width: 55px;
+	z-index: 1000;
+	background: var(--mainColor);
+	top: 10%;
+	left: 3%;
+	border: 1px solid var(--darkColor);
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 55px;
+	opacity: 75%;
+}
+.responseBox > img {
+	width: 90%;
+}
+.bigger {
+	width: 50%;
+	border-radius: unset;
+	height: 15%;
+	opacity: 100%;
+	background: var(--darkColor);
+	color: var(--mainColor);
+	padding: 5%;
+}
+.innerResponseBox {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
 /* Content icons */
 #subContent {
 	display: grid;
@@ -302,7 +335,7 @@ img.excerptImg{
 		-moz-box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
 		box-shadow: 0 0 100px 0 rgba(173, 255, 2, 0);
 	}
-  }
+}
 
 
 .titleWrapper {

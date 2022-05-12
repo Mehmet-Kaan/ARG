@@ -8,13 +8,6 @@ const GAME_BOUNDS = {
   west: 12.98488243064912,
   east: 13.003699854890414,
 };
-// const MALMO_BOUNDS = {
-//   north: 55.639951,
-//   south: 55.500386,
-//   west: 12.8811839,
-//   east: 13.1507609,
-// };
-
 
 // set the logged in user in a key
 async function setUserVariable(){
@@ -44,7 +37,7 @@ setUserVariable();
 
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
-  window.location.replace("http://localhost:8000/php/index.php");
+  window.location.replace("http://www.themalmoproject/index.php");
 };
 
 
@@ -185,34 +178,6 @@ function initMap() {
     publishSpots(spotsFourth);
   }, 30000);
 
-  // //Updates the position of player
-  // setInterval(() => {
-  //   //Deletes the latest position marker from map
-  //   locPlayer.setMap(null);
-
-  //   //Gets new location
-  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
-  //   //Updates the lat and lang
-  //   currentPositionOfPlayer = new google.maps.LatLng(latitude, longitude);
-
-  //   //Creates new marker for the current position
-  //   locPlayer = new google.maps.Marker({
-  //     position: currentPositionOfPlayer,
-  //     map: map,
-  //   });
-
-  //   //Controls if player in the circle
-  //   playerInCircle = circleFour.getBounds().contains(locPlayer.getPosition());
-  //   console.log(locPlayer.getPosition());
-
-  // }, 20000);
-
-
-  // // Check if in spot
-  // console.log(circleFour.getBounds().contains(locfour.getPosition()));
-  // console.log(circleFour.getBounds().contains(locfive.getPosition()));
-
 }
 // Creates the circles and markers / Argument that is sent to the parameter is the locationID
 function createSpot(spot) {
@@ -281,11 +246,6 @@ function createSpot(spot) {
   // Pulse effect
   nextAssignment(circle, spot.circleRadius);
   let booleanValue;
-
-  // booleanValue = true;
-  // setTimeout(() => {
-  //   booleanValue = false;
-  // }, 10000);
 
   // Click Event
   google.maps.event.addListener(marker, 'click', function () {
@@ -376,9 +336,6 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
   closeButton.addEventListener("click", () => {
     codeBox.remove();
 
-    // ENBART HÄR FÖR TEST
-    // riddleNotification(false);
-    // diaryNotification(false);
   });
 
   let riddles = await getRiddles();
@@ -462,6 +419,40 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           codeBox.remove();
         }, 2000);
 
+        //Creates responsebox when location achieved
+        function createResponseBox() {
+        let responseBox = createContainerBox("responseBox");
+        let responseIcon = document.createElement("img");
+
+        let usersTeam = teams.find(team => team.teamID = user.teamID);
+        responseIcon.setAttribute("src", usersTeam["avatar"]);
+
+        responseIcon.addEventListener("click", ()=>{
+          responseBox.classList.add("bigger");
+          responseBox.innerHTML = "";
+          responseBox.innerHTML = `
+          <div class="innerResponseBox">
+            <h2>Grupp ${usersTeam["name"]}</h2>
+            <p>${riddle["response"][usersTeam["name"].toLowerCase()]}</p>
+            <p>- ${usersTeam["name"]}</p>
+          </div> 
+          `;
+
+          let closeResponseBoxButton = document.createElement("button");
+          closeResponseBoxButton.classList.add("closeResponseBoxButton");
+          closeResponseBoxButton.innerHTML = "X";
+
+          closeResponseBoxButton.addEventListener("click", ()=>{
+            responseBox.remove();
+          })
+          responseBox.append(closeResponseBoxButton);
+        });
+
+        responseBox.append(responseIcon);
+        document.body.append(responseBox);
+        }
+        createResponseBox();
+
         //Deletes the old marker to create a new one with gray color
         function reCreateMarker() {
             //Gets positions of the marker inside the clicked area
@@ -521,6 +512,7 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           //Updates the user riddlesSolved 
           user["riddlesSolved"].push(riddle.riddleID);
         }
+
         user["preRiddlesSolved"] = preRiddle;
         user["locationAchieved"].push(spot.locationID);
         update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"],user["locationAchieved"], user["diaryExcerpts"]);
@@ -604,9 +596,7 @@ document.getElementById("riddles_icon").addEventListener("click", createRiddlesV
 //Creates Diaries view
 function createDiaryView() {
   setTimeout(() => {
-    if(document.getElementById("diaryIMG").src == "http://localhost:8000/icons/diary_icon_notification.svg"){
-      document.getElementById("diaryIMG").src = "http://localhost:8000/icons/diary_icon.svg";
-    }
+    diaryNotification(false);
   }, 2000);
   //Creates div element for the Diary Excerpts
   let diaryBox = createContainerBox("diaryBox", "Diary Excerpts");
@@ -620,9 +610,10 @@ function createDiaryView() {
 //Creates Riddles view
 function createRiddlesView() {
   setTimeout(() => {
-    if(document.getElementById("riddlesIMG").src == "http://localhost:8000/icons/riddle_icon_notification.svg"){
-      document.getElementById("riddlesIMG").src = "http://localhost:8000/icons/riddle_icon.svg";
-    }
+    // if(document.getElementById("riddlesIMG").src == "http://localhost:8000/icons/riddle_icon_notification.svg"){
+    //   document.getElementById("riddlesIMG").src = "http://localhost:8000/icons/riddle_icon.svg";
+    // }
+    riddleNotification(false);
   }, 2000);
  
   //Creates the main riddles container
