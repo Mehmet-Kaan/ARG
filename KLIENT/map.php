@@ -39,6 +39,7 @@
         <p class="bodyText">THIS IS NOT A GAME! THIS IS NOT A GAME! THIS IS NOT A GAME!</p>
       </div>
     </div>
+    <audio id="audio" src="audio/alarm.wav"></audio>
 
     <script src="../scripts/DB.js"></script>
     <script src="../scripts/functions.js"></script>

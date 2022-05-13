@@ -176,6 +176,7 @@ setInterval(() => {
   }
 
   if (execute) {
+    play();
     controlGeigerMeter(execute);
 
     if (getFromSession("exposureLevel") === null) {
@@ -257,13 +258,13 @@ async function initMap() {
   let users = await getUsers();
   let userFromServer = users.find((u) => u.userID == user.userID);
 
-  let solvedRiddles = userFromServer.riddlesSolved.length;
-  if (solvedRiddles >= 1 & solvedRiddles <= 3) {
+  let solvedLocation = userFromServer.locationAchieved.length;
+  if (solvedLocation >= 1 & solvedLocation <= 3) {
     publishSpots(spotsSecond);
-  } else if (solvedRiddles >= 4 && solvedRiddles <= 6) {
+  } else if (solvedLocation >= 4 && solvedLocation <= 6) {
     publishSpots(spotsSecond);
     publishSpots(spotsThird);
-  } else if (solvedRiddles >= 7) {
+  } else if (solvedLocation >= 7) {
     publishSpots(spotsSecond);
     publishSpots(spotsThird);
     publishSpots(spotsFourth);
@@ -478,14 +479,23 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
     if (!user["riddlesSolved"].includes(riddle.riddleID)) {
       //Updates the user riddlesSolved 
       user["riddlesSolved"].push(riddle.riddleID);
-      update(user["userID"], user["riddlesSolved"]);
+      let change = {
+        "userID": user.userID,
+        "riddlesSolved": user["riddlesSolved"]
+      }
+      update(change);
     }
 
     //if diaryExcerpts does not already includes diary id 
     if (!user["diaryExcerpts"].includes(riddle.diaryid)) {
       //Updates the user riddlesSolved 
       user["diaryExcerpts"].push(riddle.diaryid);
-      update(user["userID"], user["diaryExcerpts"]);
+      let change = {
+        "userID": user.userID,
+        "diaryExcerpts": user["diaryExcerpts"]
+      }
+      update(change);
+
     }
 
 
@@ -637,17 +647,26 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           userFromServer.preRiddlesSolved.push(preRiddle);
           userFromServer.locationAchieved.push(riddle.locationID);
 
-          update(userFromServer.userID, userFromServer.riddlesSolved, userFromServer.preRiddlesSolved, userFromServer.locationAchieved);
+          console.log(userFromServer);
+          let change = {
+            "userID": userFromServer.userID,
+            "preRiddlesSolved": userFromServer.preRiddlesSolved,
+            "riddlesSolved": userFromServer.riddlesSolved,
+            "locationAchieved": userFromServer.locationAchieved
+          };
+          console.log(change);
+
+          update(userFromServer);
 
           let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
           let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
           let spotsFourth = teams.find(team => team.teamID = user.teamID).phaseFour;
 
-          if (userFromServer.riddlesSolved.length == 1) {
+          if (userFromServer.locationAchieved.length == 1) {
             publishSpots(spotsSecond);
-          } else if (userFromServer.riddlesSolved.length == 4) {
+          } else if (userFromServer.locationAchieved.length == 4) {
             publishSpots(spotsThird);
-          } else if (userFromServer.riddlesSolved.length == 7) {
+          } else if (userFromServer.locationAchieved.length == 7) {
             publishSpots(spotsFourth);
           }
         }
@@ -679,6 +698,7 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
         });
       });
       console.log(update(user["userID"], user["riddlesSolved"]));
+      console.log("KÖRS JAG?")
       update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"], user["locationAchieved"]);
     }
   }
@@ -774,11 +794,15 @@ function createContainerBox(theBoxName, titleOfBox) {
   return theBoxName;
 }
 //Foreach diary creates diary excerpts
-function forEachDiary(containerBox) {
+async function forEachDiary(containerBox) {
+  let users = await getUsers();
+  let userFromServer = users.find((u) => u.userID == user.userID);
+
   diary.forEach(excerpt => {
 
+
     //Creates a excerpt box for every excerpts received for inlogged user
-    if (user.diaryExcerpts.includes(excerpt.id)) {
+    if (userFromServer.diaryExcerpts.includes(excerpt.id)) {
 
       //Creates the excerpt container
       let excerptBox = createContainerBox("excerptBox");
@@ -797,12 +821,13 @@ function forEachDiary(containerBox) {
 
       //Body text and page number
       //Body text and page number
-      if (!user["locationAchieved"].includes(excerpt.locationID)) {
+      if (!userFromServer["locationAchieved"].includes(excerpt.locationID)) {
         excerptBox.innerHTML += `
           <p class="excerptText">${excerpt.bodyText.start}</p>
         `;
       } else {
         excerptBox.innerHTML += `
+        <p class="excerptText">${excerpt.bodyText.start}</p>
           <p class="excerptText">${excerpt.bodyText.end}</p>
         `;
       }
@@ -817,17 +842,26 @@ function forEachDiary(containerBox) {
 //Foreach riddle creates a box and eventlisteners to the boxes
 async function forEachRiddle(containerBox, innerContainerBox) {
   let riddles = await getRiddles();
+  let users = await getUsers();
+  let userFromServer = users.find((u) => u.userID == user.userID);
 
   riddles.mainRiddles.forEach(riddle => {
     //Creates a box
     let riddleBox = createContainerBox("riddleBox");
 
     //Checks if the inlogged user has unlocked the riddle
-    if (user.riddlesSolved.includes(riddle.riddleID)) {
-      riddleBox.innerHTML = ` 
-            <img src="../images/unlocked.png" class="riddleBoxImg"> 
-          `;
-      riddleBox.classList.add("unlocked");
+    if (userFromServer.riddlesSolved.includes(riddle.riddleID)) {
+      if(userFromServer["locationAchieved"].includes(riddle.locationID)){
+        riddleBox.innerHTML = ` 
+          <img src="../images/checked.png" class="riddleBoxImg"> 
+        `;
+        riddleBox.classList.add("solved");
+      }else{
+        riddleBox.innerHTML = ` 
+          <img src="../images/unlocked.png" class="riddleBoxImg"> 
+        `;
+        riddleBox.classList.add("unlocked");
+      } 
     } else {
       riddleBox.innerHTML = ` 
             <img src="../images/locked.png" class="riddleBoxImg"> 
@@ -837,54 +871,338 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 
     if (riddleBox.classList.contains("unlocked")) {
       riddleBox.addEventListener("click", () => {
-        //Hides riddlesBoxes
-        setTimeout(() => {
-          document.querySelector(".riddlesContainer > h1").style.display = "none";
-          document.querySelector(".riddlesBoxes").style.display = "none";
-        }, 500);
 
-        let unlockedRiddleBox = createContainerBox("unlockedRiddleBox");
-        setTimeout(() => {
-          unlockedRiddleBox.classList.add("opacity");
-        }, 500);
+       //Hides riddlesBoxes
+       setTimeout(() => {
+        document.querySelector(".riddlesContainer > h1").style.display = "none";
+        document.querySelector(".riddlesBoxes").style.display = "none";
+      }, 500);
 
-        if (riddle.img !== "" || riddle.img !== null) {
-          unlockedRiddleBox.innerHTML += `
-              <img src="../images/${riddle.img}" class="riddleImg">
-            `;
+        let preRiddlesSolvedByUser = true;
 
-          unlockedRiddleBox.innerHTML += `
-              <h2>${riddle.riddle}</h2>
-            `;
-
-          //Creates close riddleBox button
-          let closeBtnUnlockedRiddle = document.createElement("button");
-          closeBtnUnlockedRiddle.className = "closeBtnUnlockedRiddle button callToAction";
+        //Controlls if user solved all preriddles
+        function checkTheUserPreRiddlesSolved() {
+          riddle.relatedPreRiddles.forEach(ridID => {
+            if(!userFromServer["preRiddlesSolved"].includes(ridID)){
+              preRiddlesSolvedByUser = false;
+            }
+          })
+        }
+        checkTheUserPreRiddlesSolved(user["preRiddlesSolved"]);
+        
+        //If user does not solved all pre-riddles
+        if(riddle.relatedPreRiddles.length > 0 && preRiddlesSolvedByUser == false){
+          let preRiddleBoxes = createContainerBox("preRiddleBoxes");
+          
+          //Creates info about preriddles if user did not take info before
+          let infoAboutPreRiddles;
+          if (getFromSession(`preRiddlesInfoTaken`) === null) {
+            infoAboutPreRiddles = document.createElement("p");
+            infoAboutPreRiddles.style.textAlign = "center";
+            infoAboutPreRiddles.style.marginBottom = "10px";
+            infoAboutPreRiddles.style.fontSize = "14px";
+            infoAboutPreRiddles.innerText = "Pre-gåtor måste lösas för att låsa upp huvudgåtan";
+            containerBox.append(infoAboutPreRiddles);
+            saveToSession(`preRiddlesInfoTaken`, "true");
+          }
 
           setTimeout(() => {
-            closeBtnUnlockedRiddle.classList.add("opacity");
-          }, 1000);
+            document.querySelector(".riddlesContainer > h1").style.display = "inherit";
+            document.querySelector(".riddlesContainer > h1").innerText = "Pre-Riddles";
+            preRiddleBoxes.classList.add("opacity");
+          }, 500);
 
-          closeBtnUnlockedRiddle.innerHTML = `<img src="../icons/x.png">`;
+          //For every preRiddle 
+          riddle.relatedPreRiddles.forEach(preRiddleID => {
+            //The finds the clicked preRiddle
+            let preRiddle = riddles.preRiddles.find(preRidd => preRidd.riddleID == preRiddleID);
 
-          closeBtnUnlockedRiddle.addEventListener("click", () => {
+            let preRiddleBox = createContainerBox("preRiddleBox");
 
-            unlockedRiddleBox.classList.remove("opacity");
-            closeBtnUnlockedRiddle.classList.remove("opacity");
+            if(userFromServer.preRiddlesSolved.includes(preRiddle.riddleID)){
+              preRiddleBox.innerHTML = ` 
+                <img src="../images/unlocked.png" class="riddleBoxImg"> 
+              `;
+              preRiddleBox.classList.add("solved");
+            }else{
+              preRiddleBox.innerHTML = ` 
+                <img src="../images/unlocked.png" class="riddleBoxImg"> 
+              `;
+              preRiddleBox.classList.add("unlocked");
+            }
 
-            setTimeout(() => {
-              document.querySelector(".riddlesContainer > h1").style.display = "";
-              document.querySelector(".riddlesBoxes").style.display = "";
-            }, 600);
+            //Click on preRiddles that does not solved yet
+            if(preRiddleBox.classList.contains("unlocked")){
+            //On click to preRiddleBox
+              preRiddleBox.addEventListener("click", function createPreRiddleBox (){
 
-            setTimeout(() => {
-              unlockedRiddleBox.remove();
-              closeBtnUnlockedRiddle.remove();
-            }, 750);
-          })
-          containerBox.append(closeBtnUnlockedRiddle);
+                setTimeout(() => {
+                  document.querySelector(".riddlesContainer > h1").style.display = "none";
+                  preRiddleBoxes.style.display = "none";
+                  backBtnUnlockedRiddle.style.display = "none";
+
+                  if(infoAboutPreRiddles){
+                    infoAboutPreRiddles.remove();
+                  }
+                }, 500);
+
+                let unlockedPreRiddleBox = createContainerBox("unlockedPreRiddleBox");
+                setTimeout(() => {
+                  unlockedPreRiddleBox.classList.add("opacity");
+                }, 500);
+
+                //Controls if the preRiddle has an img or not
+                if (preRiddle.img !== "" || preRiddle.img !== null) {
+                  unlockedPreRiddleBox.innerHTML += `
+                    <img src="../images/${preRiddle.img}" class="riddleImg">
+                  `;
+                }
+                  unlockedPreRiddleBox.innerHTML += `
+                    <h2>${preRiddle.riddle}</h2>
+                  `;
+                  
+                  //Creates a form for preRiddle
+                  let preRiddleform;
+                  function createPreRiddleForm() {
+                    preRiddleform = document.createElement("form");
+                    preRiddleform.setAttribute("id", "preRiddleAnswer");
+                    preRiddleform.setAttribute("method", "POST");
+                
+                    for (let i = 0; i < preRiddle.correctAnswer.toString().length; i++) {
+                      let input = document.createElement("input");
+                      input.setAttribute("type", "text");
+                      input.setAttribute("name", `${i}`);
+                      input.setAttribute("id", `number${i}`);
+                      input.className = "number bodyText";
+                      preRiddleform.append(input);
+                    }
+                
+                    let preRiddleSubmitButton = document.createElement("button");
+                    preRiddleSubmitButton.className = "button callToAction bodyText";
+                    preRiddleSubmitButton.innerHTML = "Skicka";
+                    preRiddleform.append(preRiddleSubmitButton);
+                    unlockedPreRiddleBox.append(preRiddleform);
+                
+                    // Submit preRiddle Answer        
+                    preRiddleform.addEventListener("submit", (event) => {
+                      event.preventDefault();
+                      let preRiddleAnswer;
+
+                      for (let i = 0; i < preRiddle.correctAnswer.toString().length; i++) {
+                        const numberPreRiddleForm = preRiddle.correctAnswer.toString()[i];
+                        if (numberPreRiddleForm != document.querySelector(`#number${i}`).value) {
+                          preRiddleAnswer = false;
+                          break;
+                        } else {
+                          preRiddleAnswer = true;
+                        }
+                      }
+                      
+                      //If given answer is true
+                      if(preRiddleAnswer){
+
+                        //Adds the id of preRiddle if user does not already contains the id of the solved preriddle 
+                        if(!userFromServer["preRiddlesSolved"].includes(preRiddle.riddleID)){
+                          userFromServer["preRiddlesSolved"].push(preRiddle.riddleID);
+                        }
+
+                        //Updates the user
+                        let change = {
+                          "userID": userFromServer["userID"],
+                          "preRiddlesSolved": userFromServer.preRiddlesSolved
+                        }
+                        update(change);
+
+                        unlockedPreRiddleBox.classList.remove("opacity");
+                        
+                        setTimeout(() => {
+                          unlockedPreRiddleBox.style.height = "85%";
+                          unlockedPreRiddleBox.innerHTML = `
+                          <h1>Correct Answer!</h1> 
+                          <p>Pre-riddle solved, keep going!</p>
+                        `;
+
+                        // //Call the function to check if user solved other preriddles to
+                        // checkTheUserPreRiddlesSolved();
+
+                        // //If user solved others preriddles also
+                        //   if(userPreRiddlesSolved == true){
+                        //     unlockedPreRiddleBox.innerHTML += `
+                        //       <p>Well done! You have now solved all Pre-riddles and will unlock the Main riddle!</p>
+                        //     `;
+                        //   }else{
+                        //     unlockedPreRiddleBox.innerHTML += `
+                        //       <p>Pre-riddle solved, Solve the other Pre-riddles to unlock the Main riddle!</p>
+                        //     `;
+                        //   }
+
+                        unlockedPreRiddleBox.classList.add("opacity");
+                        closeBtnUnlockedPreRiddle.remove();
+                        }, 500);
+
+                        setTimeout(() => {
+                          //Removes created unlockbox for preriddle
+                          unlockedPreRiddleBox.remove();
+                          //Click to close button on the preriddleunlocked box to move
+                          closeBtnUnlockedPreRiddle.click();
+                          //Removes event listener on preRiddleBox
+                          preRiddleBox.removeEventListener("click", createPreRiddleBox);
+                          //Replaces class unlocked with solved to change color on box
+                          preRiddleBox.classList.replace("unlocked", "solved");
+                        }, 2000);
+                      }else{
+
+                        unlockedPreRiddleBox.classList.remove("opacity");
+
+                        setTimeout(() => {
+                          unlockedPreRiddleBox.style.height = "85%";
+                          unlockedPreRiddleBox.innerHTML = `
+                          <h1 style="color:red;">Wrong Answer!</h1> 
+                          <p  style="color:red;">Try again!</p>
+                        `;
+                        unlockedPreRiddleBox.classList.add("opacity");
+                        closeBtnUnlockedPreRiddle.style.display = "none";
+                        }, 500);
+
+                        setTimeout(() => {
+                          unlockedPreRiddleBox.remove();
+                          closeBtnUnlockedPreRiddle.click();
+                        }, 2000);
+
+                      }
+
+                    });
+                  }
+                  createPreRiddleForm();
+
+                  //Creates close button for UnlockedPreRiddleBox button
+                  let closeBtnUnlockedPreRiddle;
+                  function createCloseBtnUnlockedPreRiddle() {
+                    closeBtnUnlockedPreRiddle = document.createElement("button");
+                    closeBtnUnlockedPreRiddle.classList.add("closeBtnUnlockedPreRiddle");
+      
+                    setTimeout(() => {
+                      closeBtnUnlockedPreRiddle.classList.add("opacity");
+                    }, 1000);
+          
+                    closeBtnUnlockedPreRiddle.innerText = `X`;
+          
+                    closeBtnUnlockedPreRiddle.addEventListener("click", () => {
+          
+                      unlockedPreRiddleBox.classList.remove("opacity");
+                      closeBtnUnlockedPreRiddle.classList.remove("opacity");
+          
+                      setTimeout(() => {
+                        document.querySelector(".riddlesContainer > h1").style.display = "";
+                        preRiddleBoxes.style.display = "";
+                        backBtnUnlockedRiddle.style.display = "";
+                      }, 600);
+          
+                      setTimeout(() => {
+                        unlockedPreRiddleBox.remove();
+                        closeBtnUnlockedPreRiddle.remove();
+                      }, 750);
+                    });
+                    containerBox.append(closeBtnUnlockedPreRiddle);
+                  }
+                  createCloseBtnUnlockedPreRiddle();
+               
+                containerBox.append(unlockedPreRiddleBox);
+              });
+            }
+         
+            preRiddleBoxes.append(preRiddleBox);
+          });
+
+            let backBtnUnlockedRiddle;
+            //Creates close preUnlockedRiddleBox button
+            function createBackBtnUnlockedRiddle() {
+              backBtnUnlockedRiddle = document.createElement("button");
+              backBtnUnlockedRiddle.classList.add("backBtnUnlockedRiddle");
+    
+              setTimeout(() => {
+                backBtnUnlockedRiddle.classList.add("opacity");
+              }, 1000);
+    
+              backBtnUnlockedRiddle.innerText = `<`;
+    
+              backBtnUnlockedRiddle.addEventListener("click", () => {
+    
+                preRiddleBoxes.classList.remove("opacity");
+                backBtnUnlockedRiddle.classList.remove("opacity");
+
+                if(infoAboutPreRiddles){
+                  infoAboutPreRiddles.remove();
+                }
+    
+                setTimeout(() => {
+                  document.querySelector(".riddlesContainer > h1").style.display = "";
+                  document.querySelector(".riddlesContainer > h1").innerText = "Riddles";
+                  document.querySelector(".riddlesBoxes").style.display = "";
+                }, 600);
+    
+                setTimeout(() => {
+                  preRiddleBoxes.remove();
+                  backBtnUnlockedRiddle.remove();
+                }, 750);
+              })
+              containerBox.append(backBtnUnlockedRiddle);
+            }
+            createBackBtnUnlockedRiddle();
+           
+          containerBox.append(preRiddleBoxes);
+
+        }else{
+
+          let unlockedRiddleBox = createContainerBox("unlockedRiddleBox");
+          setTimeout(() => {
+            unlockedRiddleBox.classList.add("opacity");
+          }, 500);
+
+          if (riddle.img !== "" || riddle.img !== null) {
+            unlockedRiddleBox.innerHTML += `
+                <img src="../images/${riddle.img}" class="riddleImg">
+              `;
+  
+            unlockedRiddleBox.innerHTML += `
+                <h2>${riddle.riddle}</h2>
+              `;
+  
+            //Creates close riddleBox button
+            let closeBtnUnlockedRiddle;
+            function createCloseBtnUnlockedRiddle() {   
+              closeBtnUnlockedRiddle = document.createElement("button");
+              closeBtnUnlockedRiddle.classList.add("closeBtnUnlockedRiddle");
+    
+              setTimeout(() => {
+                closeBtnUnlockedRiddle.classList.add("opacity");
+              }, 1000);
+    
+              closeBtnUnlockedRiddle.innerText = `X`;
+    
+              closeBtnUnlockedRiddle.addEventListener("click", () => {
+    
+                unlockedRiddleBox.classList.remove("opacity");
+                closeBtnUnlockedRiddle.classList.remove("opacity");
+    
+                setTimeout(() => {
+                  document.querySelector(".riddlesContainer > h1").style.display = "";
+                  document.querySelector(".riddlesBoxes").style.display = "";
+                }, 600);
+    
+                setTimeout(() => {
+                  unlockedRiddleBox.remove();
+                  closeBtnUnlockedRiddle.remove();
+                }, 750);
+              })
+              containerBox.append(closeBtnUnlockedRiddle);
+            }
+            createCloseBtnUnlockedRiddle();
+           
+          }
+          containerBox.append(unlockedRiddleBox);
         }
-        containerBox.append(unlockedRiddleBox);
+
       })
     }
     //Appends the box inte riddlesboxes container
@@ -935,4 +1253,9 @@ function controlGeigerMeter(parameter) {
       meter.style.animation = "meterHigh .3s infinite alternate";
     }, 5 * 60 * 1000)
   }
+}
+
+function play() {
+  var audio = document.getElementById("audio");
+  audio.play();
 }

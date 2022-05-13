@@ -36,14 +36,17 @@ foreach($users as $index => $user) {
     if($user["userID"] == $userID) {
         $found = true;
                 
-        if(!empty($requestData["riddlesSolved"])) {
+        if(isset($requestData["riddlesSolved"])) {
             $user["riddlesSolved"] = $requestData["riddlesSolved"];
         }
-        if(!empty($requestData["preRiddlesSolved"])) {
+        if(isset($requestData["preRiddlesSolved"])) {
             $user["preRiddlesSolved"] = $requestData["preRiddlesSolved"];
         }
-        if(!empty($requestData["locationAchieved"])) {
+        if(isset($requestData["locationAchieved"])) {
             $user["locationAchieved"] = $requestData["locationAchieved"];
+        }
+        if(isset($requestData["diaryExcerpts"])) {
+            $user["diaryExcerpts"] = $requestData["diaryExcerpts"];
         }
         $users[$index] = $user;
     }

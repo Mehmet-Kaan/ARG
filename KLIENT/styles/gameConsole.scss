@@ -193,7 +193,7 @@ header>.title::after {
 	overflow: scroll;
 }
 
-.riddleBox {
+.riddleBox, .preRiddleBox {
 	height: 80%;
 	background-color: var(--lightColor);
 	width: 100%;
@@ -206,7 +206,7 @@ header>.title::after {
 	width: 15%;
 }
 
-.unlockedRiddleBox {
+.unlockedRiddleBox, .unlockedPreRiddleBox {
 	display: flex;
 	flex-direction: column;
 	width: auto;
@@ -226,7 +226,11 @@ header>.title::after {
 	border: 2px solid red;
 }
 
-.closeBtnUnlockedRiddle {
+.solved {
+	border: 2px solid grey;
+}
+
+.closeBtnUnlockedRiddle, .closeBtnUnlockedPreRiddle, .backBtnUnlockedRiddle {
 	position: fixed;
 	bottom: 4rem;
 	left: 4rem;
@@ -237,7 +241,9 @@ header>.title::after {
 	transition: all 2s ease;
 }
 
-.closeBtnUnlockedRiddle>img {
+.closeBtnUnlockedRiddle>img,
+.closeBtnUnlockedPreRiddle>img
+ {
 	height: 2rem;
 	width: 2rem;
 }

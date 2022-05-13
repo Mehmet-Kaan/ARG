@@ -17,11 +17,11 @@
         {
             "riddleID":1,
             "riddle":"Minns ni vad vi exprimenterade med i labbet?",
-            "img":"",
+            "img":"images/labbhistoria_mainriddle.svg",
             "correctAnswer":94,
             "locationID":6,
             "diaryid": 1,
-            "relatedPreRiddles": [],
+            "relatedPreRiddles": [2],
             "relatedClues":[],
             "response": {
                 "bethe": ".",
@@ -45,7 +45,7 @@
         {
             "riddleID":3,
             "riddle":"Sista kortet är lagt...",
-            "img":"",
+            "img":"images/sveket_mainriddle.svg",
             "correctAnswer":7,
             "locationID":7,
             "diaryid": 3,
@@ -59,8 +59,8 @@
         {
             "riddleID":4,
             "riddle":"Det som komma skall",
-            "img":"",
-            "correctAnswer": "BEHÖVER FIXAS",
+            "img":"images/braket.svg",
+            "correctAnswer": 1904,
             "locationID":3,
             "diaryid": 4,
             "relatedPreRiddles": [2],
@@ -73,7 +73,7 @@
         {
             "riddleID":5,
             "riddle":"Vi startade i vårt labb R3, vart hamnade vi?",
-            "img":"",
+            "img":"images/oppenheimershemligheter_mainriddle",
             "correctAnswer": 36,
             "locationID":2,
             "diaryid": 5,
@@ -87,7 +87,7 @@
         {
             "riddleID":6,
             "riddle":"Rätt mängd gör skillnad",
-            "img":"",
+            "img":"images/receptet_mainriddle",
             "correctAnswer": 863,
             "locationID":1,
             "diaryid": 6,
@@ -114,9 +114,9 @@
         },
         {
             "riddleID":8,
-            "riddle":"SISTA",
-            "img":"",
-            "correctAnswer": "KODEN",
+            "riddle":"Kapitel hör ihop, och ord lika så, vinsten beror på ifall du kan förstå",
+            "img":"images/supervapnet_mainriddle",
+            "correctAnswer": 7210,
             "locationID":4,
             "diaryid": 7,
             "relatedPreRiddles": [],
@@ -131,7 +131,7 @@
         {
             "riddleID":0,
             "riddle":"Det sägs att fission skapar energi med solen från klockan ett",
-            "img":"",
+            "img":"images/upptackten_preriddle.svg",
             "correctAnswer":47923,
             "locationID":0,
             "relatedMainRiddle":2
@@ -139,15 +139,15 @@
         {
             "riddleID":1,
             "riddle":"Ser du mönstret?",
-            "img":"",
-            "correctAnswer": "0123",
+            "img":"images/sveket_preriddle.svg",
+            "correctAnswer": 3210,
             "locationID":7,
             "relatedMainRiddle":3
         },
         {
             "riddleID":2,
             "riddle":"Kollar du verkligen på rätt sak just nu?",
-            "img":"",
+            "img":"images/braket.svg",
             "correctAnswer":35,
             "locationID":3,
             "relatedMainRiddle":4
@@ -155,14 +155,14 @@
         {
             "riddleID":3,
             "riddle":"Ord kan få en ny mening",
-            "img":"",
+            "img":"images/oppenheimershemligheter.svg",
             "correctAnswer":9948,
             "locationID":2,
             "relatedMainRiddle":5
         },
         {
             "riddleID":4,
-            "riddle":"INTE FÄRDIGT",
+            "riddle":"Ta dig till denna plats och följ pilen till midroc",
             "img":"",
             "correctAnswer":88631,
             "locationID":1,
@@ -171,16 +171,16 @@
         {
             "riddleID":5,
             "riddle":"Svaret finns alltid i FYSIK men hur många?",
-            "img":"",
+            "img":"images/dodsbadden_preriddle.svg",
             "correctAnswer":22151,
             "locationID":8,
             "relatedMainRiddle":7
         },
         {
             "riddleID":6,
-            "riddle":"SISTA",
+            "riddle":"Använd dig av det du har fått längs med vägen",
             "img":"",
-            "correctAnswer": "KODEN",
+            "correctAnswer": 1942,
             "locationID":4,
             "relatedMainRiddle":8
         }

@@ -1,17 +1,17 @@
 "use strict!";
-const urlAPI = "https://api.themalmoproject.se";
-const url = "https://www.themalmoproject.se";
-// const urlAPI = "http://localhost:9000";
-// const url = "http://localhost:9000";
+// const urlAPI = "https://api.themalmoproject.se";
+// const url = "https://www.themalmoproject.se";
+const urlAPI = "http://localhost:9000";
+const url = "http://localhost:8000";
 
-async function checkHTTP() {
-  if (!window.location.href.includes("https")) {
-    sessionStorage.clear();
-    window.location.href = url;
-  }
-}
+// async function checkHTTP() {
+//   if (!window.location.href.includes("https")) {
+//     sessionStorage.clear();
+//     window.location.href = url;
+//   }
+// }
 
-checkHTTP();
+// checkHTTP();
 
 async function login(username, password) {
 
@@ -33,52 +33,17 @@ async function login(username, password) {
     inLoggedUser = await response.json();
 }
 
-async function update(userID, riddlesSolved, preRiddlesSolved, locationAchieved) {
-   
-    let update = {
-        "userID": userID,
-        "riddlesSolved": riddlesSolved,
-        "preRiddlesSolved": preRiddlesSolved,
-        "locationAchieved": locationAchieved
-    };
+async function update(object) {
 
-    
-
-    console.log(update);
-
-    // let rqst = new Request("https://localhost:9000/update.php");
     let rqst = new Request(`${urlAPI}/update.php`, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(update),
+        body: JSON.stringify(object),
     });
 
     let response = await fetch(rqst);
     let data = await response.json();
     return data;
-
-
-
-
-    fetch("https://localhost:9000/update.php", {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: "PATCH",
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                alert("Something missing!");
-                return false;
-            }
-        })
-        .then(data => {
-            return data;
-        })
 }
 
 function postFormData(formData) {
