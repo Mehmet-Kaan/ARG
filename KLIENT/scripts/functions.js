@@ -89,11 +89,21 @@ async function getRiddles() {
     let data = await response.json();
     return data;
 }
-
+// Fetches all users
 async function getUsers() {
     let response = await fetch(`${urlAPI}/get.php`, {
         method: 'POST',
         body: JSON.stringify({ users: true }),
+        headers: { "Content-type": "application/json" },
+    });
+    let data = await response.json();
+    return data;
+}
+// Fetches all teams
+async function getTeams() {
+    let response = await fetch(`${urlAPI}/get.php`, {
+        method: 'POST',
+        body: JSON.stringify({ teams: true }),
         headers: { "Content-type": "application/json" },
     });
     let data = await response.json();

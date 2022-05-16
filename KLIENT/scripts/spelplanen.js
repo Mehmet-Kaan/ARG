@@ -254,7 +254,8 @@ async function initMap() {
   let spotsFourth = teams.find(team => team.teamID == user.teamID).phaseFour;
 
   publishSpots(spotsFirst);
-
+  let teamsOnServer = await getTeams();
+  console.log(teamsOnServer);
   let users = await getUsers();
   let userFromServer = users.find((u) => u.userID == user.userID);
 
