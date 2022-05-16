@@ -11,10 +11,10 @@ if (getFromSession("exposureLevel") === null) {
 }
 exposed.innerText = getFromSession("exposureLevel");
 const GAME_BOUNDS = {
-  north: 55.61535512261388,
-  south: 55.605431830636334,
-  west: 12.98488243064912,
-  east: 13.003699854890414,
+  north: 55.638067,
+  south: 55.583009,
+  west: 12.962928,
+  east: 13.033099,
 };
 
 
