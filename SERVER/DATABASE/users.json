@@ -14,12 +14,16 @@
         "username": "Mehmet",
         "email": "mehmet@hotmail.com",
         "riddlesSolved": [
-            0
+            1
         ],
-        "preRiddlesSolved": [],
-        "locationAchieved": [],
+        "preRiddlesSolved": [
+            2
+        ],
+        "locationAchieved": [
+            6
+        ],
         "diaryExcerpts": [
-            0
+            1
         ],
         "userID": 2,
         "password": "0000",
@@ -28,10 +32,14 @@
     {
         "username": "Mercie",
         "email": "mercie@hotmail.com",
-        "riddlesSolved": [],
+        "riddlesSolved": [
+            1
+        ],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [],
+        "diaryExcerpts": [
+            1
+        ],
         "userID": 3,
         "password": "0000",
         "teamID": 1
@@ -50,10 +58,18 @@
     {
         "username": "Elsa",
         "email": "elsa@hotmail.com",
-        "riddlesSolved": [],
-        "preRiddlesSolved": [],
-        "locationAchieved": [],
-        "diaryExcerpts": [],
+        "riddlesSolved": [
+            1
+        ],
+        "preRiddlesSolved": [
+            2
+        ],
+        "locationAchieved": [
+            6
+        ],
+        "diaryExcerpts": [
+            1
+        ],
         "userID": 5,
         "password": "0000",
         "teamID": 1

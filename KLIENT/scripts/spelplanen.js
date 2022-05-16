@@ -44,7 +44,9 @@ async function setUserVariable() {
 
 setUserVariable();
 
+//Checks if any team has cleared the all zones
 async function controlTeams() {
+  //Fetches teams 
   let teamsOnServer = await getTeams();
 
   let nonWinnerYet = true;
@@ -62,23 +64,24 @@ async function controlTeams() {
       if(team.teamID == user.userID){
         //If true creates the win box
         if(team.wins == true){
-          // // SPARAR IN SESSION NÄR MAN ÄR INLOGGAD PÅ FÖRSTA GÅNGEN!
-          // if (getFromSession(`infoAboutWinnerTeam`) === null) {
-          //   saveToSession(`infoAboutWinnerTeam`, team.name);
-          // }
-
-          createWinBox();
+          // SPARAR IN SESSION NÄR MAN ÄR INLOGGAD PÅ FÖRSTA GÅNGEN!
+          if (getFromSession(`infoAboutWinnerTeam`) === null) {
+            saveToSession(`infoAboutWinnerTeam`, team.name);
+          }
+          createWinLoseBox("win");
         }else{
-          createLoseBox();
+          createWinLoseBox("lose");
         }
       }
     });
   }
-
 }
+// controlTeams();
 
-controlTeams();
-
+//Checks the teams for every 20s
+let controlTheTeams = setInterval(() => {
+  controlTeams()
+}, 20000);
 
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
@@ -727,7 +730,7 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
             }
             update(changeOnTeam);
 
-            createWinBox();
+            createWinLoseBox("win", );
           }
         }
 
@@ -1297,43 +1300,80 @@ function createCloseButton(contianerBox) {
   document.body.append(contianerBox);
 }
 
-  //Creates win box if users team has won completed all 
-  function createWinBox() {
-    let winBox = createContainerBox("responceBox");
-    let attentionIcon = document.createElement("img");
+//Creates a winner box if users team has won completed all 
+function createWinLoseBox(arg) {
     let usersTeam = teams.find(team => team.teamID = user.teamID);
 
-    attentionIcon.setAttribute("src", usersTeam["avatar"]);
+    let responseBox = createContainerBox("responseBox");
+    responseBox.classList.add("winnerBox");
     
-    winBox.classList.add("winner");
+    responseBox.style.background = "unset";
+    responseBox.style.border = "unset";
+    responseBox.style.left = "unset";
+    responseBox.style.right = "3%";
 
-    attentionIcon.addEventListener("click", () => {
-      winBox.classList.add("bigger");
-      winBox.innerHTML = "";
-      winBox.innerHTML = `
-      <div class="innerResponseBox">
-        <h2>Grupp ${usersTeam["name"]}</h2>
-        <p>GRATTIS! Bra kämpat lag Shiva/Vishnu. Ni lyckades genomföra alla uppgifter före 
-        lag Shiva/Vishnu och makten är därför nu i era händer. Detta innebär att ni nu besitter 
-        maken att bestämma vad ni vill göra med receptet. Vill ni använda det eller vill ni förstöra det? 
-        Valet är ert.</p>
-        <p>- ${usersTeam["name"]}</p>
-      </div> 
-      `;
+    let attentionIcon = document.createElement("img");
+    attentionIcon.setAttribute("src", "icons/attention.svg");
 
-      let closeWinBoxButton = document.createElement("button");
-      closeWinBoxButton.classList.add("closeResponseBoxButton");
-      closeWinBoxButton.innerHTML = "X";
+    let winnerTeam;
+    let loserTeam;
 
-      closeWinBoxButton.addEventListener("click", () => {
-        winBox.remove();
-      })
-      winBox.append(closeWinBoxButton);
-    });
+      attentionIcon.addEventListener("click", () => {
+        
+        responseBox.classList.add("bigger");
+        responseBox.innerHTML = "";
+        if(arg == "win"){
 
-    winBox.append(attentionIcon);
-    document.body.append(winBox);
-  }
+          if(usersTeam.teamID == 1){
+            winnerTeam = "Vishnu";
+            loserTeam = "Shiva";
+          }else{
+            winnerTeam = "Shiva";
+            loserTeam = "Vishnu";
+          }
+          responseBox.innerHTML = `
+            <div class="innerResponseBox">
+              <h2>Grupp ${usersTeam["name"]}</h2>
+              <p>GRATTIS! Bra kämpat lag ${winnerTeam}. Ni lyckades genomföra alla uppgifter före 
+              lag ${loserTeam} och makten är därför nu i era händer. Detta innebär att ni nu besitter 
+              maken att bestämma vad ni vill göra med receptet. Vill ni använda det eller vill ni förstöra det? 
+              Valet är ert.</p>
+              <p>- ${usersTeam["name"]}</p>
+            </div> 
+          `;
+        }else{
+
+          if(usersTeam.teamID == 1){
+            winnerTeam = "Vishnu";
+            loserTeam = "Shiva";
+          }else{
+            winnerTeam = "Shiva";
+            loserTeam = "Vishnu";
+          }
+
+          responseBox.innerHTML = `
+            <div class="innerResponseBox">
+              <h2>Grupp ${usersTeam["name"]}</h2>
+              <p>SORRY! Lag ${winnerTeam} lyckades genomföra alla uppgifter före 
+              lag ${loserTeam} och makten är därför nu i deras händer.</p>
+              <p>- ${usersTeam["name"]}</p>
+            </div> 
+          `;
+        }
+      
+        let closeWinBoxButton = document.createElement("button");
+        closeWinBoxButton.classList.add("closeResponseBoxButton");
+        closeWinBoxButton.innerHTML = "X";
+  
+        closeWinBoxButton.addEventListener("click", () => {
+          responseBox.remove();
+        })
+        responseBox.append(closeWinBoxButton);
+      });
+
+    responseBox.append(attentionIcon);
+    document.body.append(responseBox);
+}
 
 // 
 function controlGeigerMeter(parameter) {

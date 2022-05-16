@@ -85,7 +85,7 @@ header > .title::after {
 .responseBox {
   position: absolute;
   width: 55px;
-  z-index: 1000;
+  z-index: 100;
   background: var(--mainColor);
   top: 10%;
   left: 3%;
@@ -104,8 +104,10 @@ header > .title::after {
   opacity: 75%;
 }
 
-.winner{
-  left: 0%;
+.winnerBox, .loserBox{
+  background: unset;
+  border: unset;
+  left: unset;
   right: 3%;
 }
 
