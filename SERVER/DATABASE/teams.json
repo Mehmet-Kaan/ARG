@@ -2,23 +2,69 @@
     {
         "teamID": 1,
         "name": "Teller",
-        "avatar":"icons/vishnu_emblem.png",
-        "phaseOne": [6],
-        "phaseTwo": [7, 5, 0],
-        "phaseThree": [8, 2, 1, 3],
-        "phaseFour": [4],
-        "notifications": ["Jag har fått uppgifter om att det finns värdefulla objekt placerade i staden, ert uppdrag är att lokalisera dess exakta position och föra den funna informationen till mig.</br>Jag har tagit reda på ett antal områden, men var vaksamma och använd er geigermätare då det har uppmätts hög radioaktiv strålning på platserna. Använd er utbildning, var effektiva och hjälp varandra. Objekten bör finnas placerade i dessa områden men det är upp till er att hitta exakt vart. Jag fortsätter lokalisera nya områden.", "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.", "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.", "Jag har fått uppgifter om det finns dagboksutdrag från en gammal vän på stationerna. Ifall det finns fler så spara dem, men lägg störst fokus på uppdraget.", "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.", "Vad som än finns vid andra änden, låt inte Bethe komma först. Med honom vid makten hotas hela våra existens.", "Bra jobbat. Arbetet är långt ifrån klart. Tiden är snart slut, ni måste jobba snabbare.", "Uppdraget är inte färdigt. Vi kan inte ge upp än!", "Bra jobbat, fullfölj uppdraget."],
-        "win": false
+        "avatar": "icons\/vishnu_emblem.png",
+        "phaseOne": [
+            6
+        ],
+        "phaseTwo": [
+            7,
+            5,
+            0
+        ],
+        "phaseThree": [
+            8,
+            2,
+            1,
+            3
+        ],
+        "phaseFour": [
+            4
+        ],
+        "notifications": [
+            "Jag har f\u00e5tt uppgifter om att det finns v\u00e4rdefulla objekt placerade i staden, ert uppdrag \u00e4r att lokalisera dess exakta position och f\u00f6ra den funna informationen till mig.<\/br>Jag har tagit reda p\u00e5 ett antal omr\u00e5den, men var vaksamma och anv\u00e4nd er geigerm\u00e4tare d\u00e5 det har uppm\u00e4tts h\u00f6g radioaktiv str\u00e5lning p\u00e5 platserna. Anv\u00e4nd er utbildning, var effektiva och hj\u00e4lp varandra. Objekten b\u00f6r finnas placerade i dessa omr\u00e5den men det \u00e4r upp till er att hitta exakt vart. Jag forts\u00e4tter lokalisera nya omr\u00e5den.",
+            "Forts\u00e4tt med uppdraget. Var f\u00f6rsiktiga i de radioaktiva omr\u00e5dena och ha koll p\u00e5 er geigerm\u00e4tare.",
+            "Jag har lokaliserat 3 omr\u00e5den till. Kartan \u00e4r uppdaterad. Skynda er.",
+            "Jag har f\u00e5tt uppgifter om det finns dagboksutdrag fr\u00e5n en gammal v\u00e4n p\u00e5 stationerna. Ifall det finns fler s\u00e5 spara dem, men l\u00e4gg st\u00f6rst fokus p\u00e5 uppdraget.",
+            "Isotopia f\u00e5r inte hinna f\u00f6rst, ni vet vad som h\u00e4nder ifall det sker. Forts\u00e4tt med uppdraget.",
+            "Vad som \u00e4n finns vid andra \u00e4nden, l\u00e5t inte Bethe komma f\u00f6rst. Med honom vid makten hotas hela v\u00e5ra existens.",
+            "Bra jobbat. Arbetet \u00e4r l\u00e5ngt ifr\u00e5n klart. Tiden \u00e4r snart slut, ni m\u00e5ste jobba snabbare.",
+            "Uppdraget \u00e4r inte f\u00e4rdigt. Vi kan inte ge upp \u00e4n!",
+            "Bra jobbat, fullf\u00f6lj uppdraget."
+        ],
+        "wins": false
     },
     {
         "teamID": 2,
         "name": "Bethe",
-        "avatar":"icons/shiva_emblem.png",
-        "phaseOne": [5],
-        "phaseTwo": [7, 6, 0],
-        "phaseThree": [8, 2, 1, 3],
-        "phaseFour": [4],
-        "notifications": ["Jag har fått uppgifter om att det finns värdefulla objekt placerade i staden, ert uppdrag är att lokalisera dess exakta position och föra den funna informationen till mig.</br>Jag har tagit reda på ett antal områden, men var vaksamma och använd er geigermätare då det har uppmätts hög radioaktiv strålning på platserna. Använd er utbildning, var effektiva och hjälp varandra. Objekten bör finnas placerade i dessa områden men det är upp till er att hitta exakt vart. Jag fortsätter lokalisera nya områden.", "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.","Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",  "Jag har fått uppgifter om det finns dagboksutdrag från en gammal bekant på stationerna. Ifall det uppkommer fler, spara dem men kom ihåg att inte tro på allt ni läser.", "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.", "Om ni hittar objektet kan vi tillsammans göra världen till en bättre plats. Jag håller alltid mitt löfte, ni kan lita på mig.", "Det är dem som förstör allt, det har de alltid gjort. Jag är för smart och det skrämmer dem.", "Uppdraget är inte färdigt, jag har tränat er för att hitta skatten och jag tänker inte ge upp.", "Jobba hårdare. De får inte komma först till slutmålet."],
-        "win": false
+        "avatar": "icons\/shiva_emblem.png",
+        "phaseOne": [
+            5
+        ],
+        "phaseTwo": [
+            7,
+            6,
+            0
+        ],
+        "phaseThree": [
+            8,
+            2,
+            1,
+            3
+        ],
+        "phaseFour": [
+            4
+        ],
+        "notifications": [
+            "Jag har f\u00e5tt uppgifter om att det finns v\u00e4rdefulla objekt placerade i staden, ert uppdrag \u00e4r att lokalisera dess exakta position och f\u00f6ra den funna informationen till mig.<\/br>Jag har tagit reda p\u00e5 ett antal omr\u00e5den, men var vaksamma och anv\u00e4nd er geigerm\u00e4tare d\u00e5 det har uppm\u00e4tts h\u00f6g radioaktiv str\u00e5lning p\u00e5 platserna. Anv\u00e4nd er utbildning, var effektiva och hj\u00e4lp varandra. Objekten b\u00f6r finnas placerade i dessa omr\u00e5den men det \u00e4r upp till er att hitta exakt vart. Jag forts\u00e4tter lokalisera nya omr\u00e5den.",
+            "Forts\u00e4tt med uppdraget. Var f\u00f6rsiktiga i de radioaktiva omr\u00e5dena och ha koll p\u00e5 er geigerm\u00e4tare.",
+            "Jag har lokaliserat 3 omr\u00e5den till. Kartan \u00e4r uppdaterad. Skynda er.",
+            "Jag har f\u00e5tt uppgifter om det finns dagboksutdrag fr\u00e5n en gammal bekant p\u00e5 stationerna. Ifall det uppkommer fler, spara dem men kom ih\u00e5g att inte tro p\u00e5 allt ni l\u00e4ser.",
+            "L\u00e5t inte U92 hinna f\u00f6rst, ni vet vad som h\u00e4nder ifall det sker. Forts\u00e4tt med uppdraget.",
+            "Om ni hittar objektet kan vi tillsammans g\u00f6ra v\u00e4rlden till en b\u00e4ttre plats. Jag h\u00e5ller alltid mitt l\u00f6fte, ni kan lita p\u00e5 mig.",
+            "Det \u00e4r dem som f\u00f6rst\u00f6r allt, det har de alltid gjort. Jag \u00e4r f\u00f6r smart och det skr\u00e4mmer dem.",
+            "Uppdraget \u00e4r inte f\u00e4rdigt, jag har tr\u00e4nat er f\u00f6r att hitta skatten och jag t\u00e4nker inte ge upp.",
+            "Jobba h\u00e5rdare. De f\u00e5r inte komma f\u00f6rst till slutm\u00e5let."
+        ],
+        "wins": false
     }
 ]

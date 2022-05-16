@@ -104,6 +104,11 @@ header > .title::after {
   opacity: 75%;
 }
 
+.winner{
+  left: 0%;
+  right: 3%;
+}
+
 .responseBox > img {
   width: 90%;
 }
