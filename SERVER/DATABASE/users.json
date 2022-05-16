@@ -14,15 +14,12 @@
         "username": "Mehmet",
         "email": "mehmet@hotmail.com",
         "riddlesSolved": [
-            
+            0
         ],
-        "preRiddlesSolved": [
-
-        ],
-        "locationAchieved": [
-        ],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
         "diaryExcerpts": [
-            
+            0
         ],
         "userID": 2,
         "password": "0000",

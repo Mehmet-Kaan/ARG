@@ -457,8 +457,8 @@ function nextAssignment(circle, radiusBase) {
 function checkIfInZone(circle) {
   // Get players location
   // let playerLoc = playerLocation();
-  // Första mötet
-  let playerLoc = new google.maps.LatLng(55.61079, 12.99538);
+  // Gäddan
+  let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
   //orkanen
   // setTimeout(() => {
   //   playerLoc = new google.maps.LatLng(55.61079, 12.99538);
