@@ -499,7 +499,6 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
 
     }
 
-
     let form = document.createElement("form");
     form.setAttribute("id", "answer");
     form.setAttribute("method", "POST");
@@ -698,9 +697,12 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           };
         });
       });
-      console.log(update(user["userID"], user["riddlesSolved"]));
-      console.log("KÖRS JAG?")
-      update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"], user["locationAchieved"]);
+      let change = {
+        "userID": user.userID,
+        "riddlesSolved": user["riddlesSolved"]
+      }
+      update(change);
+      console.log(update(change));
     }
   }
 
