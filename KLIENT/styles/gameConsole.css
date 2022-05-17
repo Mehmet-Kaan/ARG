@@ -104,6 +104,13 @@ header > .title::after {
   height: 55px;
 }
 
+.winnerBox, .loserBox{
+  background: unset;
+  border: unset;
+  left: unset;
+  right: 3%;
+}
+
 .responseBox > img {
   width: 90%;
 }

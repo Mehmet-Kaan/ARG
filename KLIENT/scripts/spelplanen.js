@@ -11,10 +11,10 @@ if (getFromSession("exposureLevel") === null) {
 }
 exposed.innerText = getFromSession("exposureLevel");
 const GAME_BOUNDS = {
-  north: 55.61535512261388,
-  south: 55.605431830636334,
-  west: 12.98488243064912,
-  east: 13.003699854890414,
+  north: 55.638067,
+  south: 55.583009,
+  west: 12.962928,
+  east: 13.033099,
 };
 
 
@@ -43,6 +43,45 @@ async function setUserVariable() {
 }
 
 setUserVariable();
+
+//Checks if any team has cleared the all zones
+async function controlTeams() {
+  //Fetches teams 
+  let teamsOnServer = await getTeams();
+
+  let nonWinnerYet = true;
+
+  //Controls if the any team has already won
+  teamsOnServer.forEach(team => {
+    if(team.wins == true){
+      nonWinnerYet = false;
+    }
+  });
+
+  if(nonWinnerYet == false && getFromSession(`infoAboutWinnerTeam`) == null){
+   
+    teamsOnServer.forEach(team => {
+      if(team.teamID == user.userID){
+        //If true creates the win box
+        if(team.wins == true){
+          // SPARAR IN SESSION NÄR MAN ÄR INLOGGAD PÅ FÖRSTA GÅNGEN!
+          if (getFromSession(`infoAboutWinnerTeam`) === null) {
+            saveToSession(`infoAboutWinnerTeam`, team.name);
+          }
+          createWinLoseBox("win");
+        }else{
+          createWinLoseBox("lose");
+        }
+      }
+    });
+  }
+}
+// controlTeams();
+
+//Checks the teams for every 20s
+let controlTheTeams = setInterval(() => {
+  controlTeams()
+}, 20000);
 
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
@@ -429,12 +468,12 @@ function nextAssignment(circle, radiusBase) {
 function checkIfInZone(circle) {
   // Get players location
   // let playerLoc = playerLocation();
-  // gäddan
+  // Gäddan
   let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
   //orkanen
-  setTimeout(() => {
-    playerLoc = new google.maps.LatLng(55.61079, 12.99538);
-  }, 20000);
+  // setTimeout(() => {
+  //   playerLoc = new google.maps.LatLng(55.61079, 12.99538);
+  // }, 20000);
 
   let loc = new google.maps.LatLng(playerLoc);
 
@@ -466,6 +505,7 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
     codeBox.remove();
   });
 
+  let teamsOnServer = await getTeams();
   let riddles = await getRiddles();
   let riddle = riddles.mainRiddles.find((riddle) => riddle.locationID == spot.locationID);
 
@@ -505,7 +545,6 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
       update(change);
 
     }
-
 
     let form = document.createElement("form");
     form.setAttribute("id", "answer");
@@ -657,16 +696,14 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           userFromServer.preRiddlesSolved.push(preRiddle);
           userFromServer.locationAchieved.push(riddle.locationID);
 
-          console.log(userFromServer);
           let change = {
             "userID": userFromServer.userID,
             "preRiddlesSolved": userFromServer.preRiddlesSolved,
             "riddlesSolved": userFromServer.riddlesSolved,
             "locationAchieved": userFromServer.locationAchieved
           };
-          console.log(change);
 
-          update(userFromServer);
+          update(change);
 
           let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
           let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
@@ -682,6 +719,30 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
         }
 
         updateUserProcess(riddle);
+
+        //If the last riddle solved
+        if(riddle.riddleID == 8){
+
+          let nonWinnerYet = true;
+
+          //Controls if the any team has already won
+          teamsOnServer.forEach(team => {
+            if(team.wins == true){
+              nonWinnerYet = false;
+            }
+          });
+
+          //Controls if the users team key "wins" is true
+          if(nonWinnerYet){
+            let changeOnTeam = {
+              "userID": user["userID"],
+              "teamID": user["teamID"]
+            }
+            update(changeOnTeam);
+
+            createWinLoseBox("win", );
+          }
+        }
 
         // PLAYER WILL GET A MESSAGE/SHORT NOTIFICATION
 
@@ -707,9 +768,12 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           };
         });
       });
-      console.log(update(user["userID"], user["riddlesSolved"]));
-      console.log("KÖRS JAG?")
-      update(user["userID"], user["riddlesSolved"], user["preRiddlesSolved"], user["locationAchieved"]);
+
+      let change = {
+        "userID": user.userID,
+        "riddlesSolved": user["riddlesSolved"]
+      }
+      update(change);
     }
   }
 
@@ -1248,6 +1312,81 @@ function createCloseButton(contianerBox) {
 
   contianerBox.append(closeBtn);
   document.body.append(contianerBox);
+}
+
+//Creates a winner box if users team has won completed all 
+function createWinLoseBox(arg) {
+    let usersTeam = teams.find(team => team.teamID = user.teamID);
+
+    let responseBox = createContainerBox("responseBox");
+    responseBox.classList.add("winnerBox");
+    
+    responseBox.style.background = "unset";
+    responseBox.style.border = "unset";
+    responseBox.style.left = "unset";
+    responseBox.style.right = "3%";
+
+    let attentionIcon = document.createElement("img");
+    attentionIcon.setAttribute("src", "icons/attention.svg");
+
+    let winnerTeam;
+    let loserTeam;
+
+      attentionIcon.addEventListener("click", () => {
+        
+        responseBox.classList.add("bigger");
+        responseBox.innerHTML = "";
+        if(arg == "win"){
+
+          if(usersTeam.teamID == 1){
+            winnerTeam = "Vishnu";
+            loserTeam = "Shiva";
+          }else{
+            winnerTeam = "Shiva";
+            loserTeam = "Vishnu";
+          }
+          responseBox.innerHTML = `
+            <div class="innerResponseBox">
+              <h2>Grupp ${usersTeam["name"]}</h2>
+              <p>GRATTIS! Bra kämpat lag ${winnerTeam}. Ni lyckades genomföra alla uppgifter före 
+              lag ${loserTeam} och makten är därför nu i era händer. Detta innebär att ni nu besitter 
+              maken att bestämma vad ni vill göra med receptet. Vill ni använda det eller vill ni förstöra det? 
+              Valet är ert.</p>
+              <p>- ${usersTeam["name"]}</p>
+            </div> 
+          `;
+        }else{
+
+          if(usersTeam.teamID == 1){
+            winnerTeam = "Vishnu";
+            loserTeam = "Shiva";
+          }else{
+            winnerTeam = "Shiva";
+            loserTeam = "Vishnu";
+          }
+
+          responseBox.innerHTML = `
+            <div class="innerResponseBox">
+              <h2>Grupp ${usersTeam["name"]}</h2>
+              <p>SORRY! Lag ${winnerTeam} lyckades genomföra alla uppgifter före 
+              lag ${loserTeam} och makten är därför nu i deras händer.</p>
+              <p>- ${usersTeam["name"]}</p>
+            </div> 
+          `;
+        }
+      
+        let closeWinBoxButton = document.createElement("button");
+        closeWinBoxButton.classList.add("closeResponseBoxButton");
+        closeWinBoxButton.innerHTML = "X";
+  
+        closeWinBoxButton.addEventListener("click", () => {
+          responseBox.remove();
+        })
+        responseBox.append(closeWinBoxButton);
+      });
+
+    responseBox.append(attentionIcon);
+    document.body.append(responseBox);
 }
 
 // 

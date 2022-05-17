@@ -13,10 +13,12 @@ requestMethod("PATCH");
 // Hämtar users
 $users = openJSON("database/users.json");
 
+// Hämtar teams
+$teams = openJSON("database/teams.json");
+
 // Hämtar data som skickats med requesten
 $data = file_get_contents("php://input");
 $requestData = json_decode($data, true);
-
 
 // Kontrollerar att "userID"
 if (!isset($requestData["userID"]) ) {
@@ -28,8 +30,19 @@ if (!isset($requestData["userID"]) ) {
     );
 }
 
-$userID = $requestData["userID"];
+$inLoggedUserTeamID = $requestData["teamID"];
+if(isset($inLoggedUserTeamID)){
+    foreach($teams as $index => $team){
+        if($team["teamID"] == $inLoggedUserTeamID){
+            $team["wins"] = true;
+            $teams[$index] = $team;
+        }
+    }
+    saveToJSON("database/teams.json", $teams);
+    sendJSON(["message" => "team updated"]);
+}
 
+$userID = $requestData["userID"];
 $found = false;
 
 foreach($users as $index => $user) {
