@@ -9,7 +9,7 @@ header {
 	position: absolute;
 	top: 0;
 	z-index: 200;
-	height: 7.5%;
+	height:55px;
 	width: 100%;
 	background: var(--darkColor);
 	color: var(--mainColor);
@@ -20,6 +20,8 @@ header {
 	align-items: center;
 }
 
+
+
 header>.title {
 	position: relative;
 	color: var(--mainColor);
@@ -27,6 +29,7 @@ header>.title {
 	/* Animation provies a slight random skew. Check bottom of doc
     for more information on how to random skew. */
 	animation: glitch-skew 1s infinite linear alternate-reverse;
+	font-size: 2.5rem;
 }
 
 header>.title::before {
@@ -68,35 +71,51 @@ header>.title::after {
 .responseBox {
 	position: absolute;
 	width: 55px;
-	z-index: 1000;
+	z-index: 99;
 	background: var(--mainColor);
 	top: 10%;
-	left: 3%;
+	left: var(--viewerMargin);
 	border: 1px solid var(--darkColor);
 	border-radius: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 55px;
-	opacity: 75%;
 }
+
 .responseBox > img {
 	width: 90%;
 }
+
 .bigger {
-	width: 50%;
-	border-radius: unset;
-	height: 15%;
-	opacity: 100%;
+	width: calc(100vw - 40px);
+    border-radius: unset;
+    height: unset;
+	opacity: 94vw;
 	background: var(--darkColor);
 	color: var(--mainColor);
 	padding: 5%;
+	align-items: flex-start;
 }
+
 .innerResponseBox {
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
+}
+
+
+.closeResponseBoxButton {
+    height: 20px;
+    width: 20px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeResponseBoxButton > img{
+	height: 15px;
 }
 
 /* Content icons */
@@ -106,8 +125,8 @@ header>.title::after {
 	grid-template-columns: 4fr 1fr;
 	background-color: var(--mainColor);
 	gap: 3px;
-	height: 22%;
 	width: 100%;
+	height: 200px;
 	z-index: 200;
 	position: absolute;
 	bottom: 0;
@@ -134,7 +153,6 @@ header>.title::after {
 #geigermeter {
 	grid-row: 1/3;
 	grid-column: 1/2;
-	height: 100%;
 	width: 100%;
 	background-color: var(--darkColor);
 }
@@ -171,7 +189,7 @@ header>.title::after {
 /* RIDDLES */
 .riddlesContainer,
 .diaryBox {
-	height: 100%;
+	height: calc(100vh - 50px);
 	width: 100%;
 	z-index: 200;
 	position: absolute;
@@ -181,15 +199,22 @@ header>.title::after {
 	transition: all ease .5s;
 	padding: 5%;
 	top: 100%;
+	padding-bottom:100px;
+}
+
+.riddlesContainer > h1, 
+.diaryBox > h1 {
+	text-align: center;
+	margin-bottom: 5vh;
 }
 
 .riddlesBoxes {
 	width: 100%;
-	height: 90%;
+	height: 60vh;
 	display: grid;
 	gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
 	overflow: scroll;
 }
 
@@ -203,32 +228,70 @@ header>.title::after {
 }
 
 .riddleBoxImg {
-	width: 15%;
+	width: 50%;
+}
+
+.unlockedPreRiddleBox > img,
+.unlockedRiddleBox > img {
+	width:100%;
+	padding: 20px 20px 0px 20px;
 }
 
 .unlockedRiddleBox, .unlockedPreRiddleBox {
 	display: flex;
 	flex-direction: column;
 	width: auto;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	gap: var(--viewerMargin);
 	opacity: 0%;
 
 	transition: all .5s ease;
+	height: 100%;
 }
 
 .unlocked {
 	border: 2px solid var(--mainColor);
+	background-color: var(--darkColor);
 }
 
 .locked {
-	border: 2px solid red;
+	border: 2px solid #ff0000;
+	background-color: var(--darkColor);
+}
+
+.locked > img{
+	width: 28%;
 }
 
 .solved {
-	border: 2px solid grey;
+	border: 2px solid #808080;
+	background-color: var(--darkColor);
 }
+
+form#preRiddleAnswer {
+    display: grid;
+    /* grid-row: 6; */
+    /* grid-column: 2; */
+    gap: 5px;
+    grid-template-columns: repeat(6, 1fr);
+	width: 100%;
+    padding: 20px;
+
+}
+.unlockedPreRiddleBox > .middleTitle,
+.unlockedRiddleBox > .middleTitle {
+	padding: 0px 20px;
+    text-transform: none;
+}
+
+form#preRiddleAnswer >button {
+	grid-row: 2;
+	grid-column: 1 / 7;
+	padding: 8px;
+	margin-top: var(--viewerMargin);
+}
+
 
 .closeBtnUnlockedRiddle, .closeBtnUnlockedPreRiddle, .backBtnUnlockedRiddle {
 	position: fixed;
@@ -242,11 +305,16 @@ header>.title::after {
 }
 
 .closeBtnUnlockedRiddle>img,
-.closeBtnUnlockedPreRiddle>img
+.closeBtnUnlockedPreRiddle>img,
+.backBtnUnlockedRiddle>img 
  {
-	height: 2rem;
-	width: 2rem;
-}
+	height: 1.5rem;
+    width: 1.5rem;
+ }
+
+ .backBtnUnlockedRiddle>img {
+	transform: rotate(90deg);
+ }
 
 .riddleImg {
 	width: 50%;
@@ -345,8 +413,8 @@ img.excerptImg {
 /* MESSAGES */
 .codeBox {
 	position: absolute;
-	top: 20%;
-	z-index: 10;
+	top: 60px;
+	z-index: 100;
 	background: black;
 	overflow: scroll;
 
@@ -437,12 +505,12 @@ img.excerptImg {
 
 .number {
 	max-width: 40px;
-	height: 40px;
-	background-color: var(--mainColor);
-	border: none;
-	color: var(--darkColor);
-	font-weight: 400;
-	padding: 30%;
+    height: 40px;
+    background-color: var(--darkColor);
+    border: 1px solid var(--mainColor);
+    color: var(--mainColor);
+    font-weight: 400;
+    padding: 30%;
 }
 
 #answer>button {
@@ -507,7 +575,6 @@ img.excerptImg {
 
 .numbersBottom {
 	position: relative;
-    top: 38%;
     color: white;
     font-size: 18px;
     display: flex;
@@ -531,10 +598,11 @@ span> :nth-child(6) {
 	position: relative;
 	height: 3px;
 	width: 90%;
-	top: 22%;
 	left: 5%;
 	background: rgb(173, 255, 2);
 	background: linear-gradient(90deg, rgba(173, 255, 2, 1) 0%, rgba(253, 229, 29, 1) 50%, rgba(253, 29, 29, 1) 100%);
+	margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .meter {

@@ -1,17 +1,17 @@
 "use strict!";
-// const urlAPI = "https://api.themalmoproject.se";
-// const url = "https://www.themalmoproject.se";
-const urlAPI = "http://localhost:9000";
-const url = "http://localhost:8000";
+const urlAPI = "https://api.themalmoproject.se";
+const url = "https://www.themalmoproject.se";
+// const urlAPI = "http://localhost:9000";
+// const url = "http://localhost:8000";
 
-// async function checkHTTP() {
-//   if (!window.location.href.includes("https")) {
-//     sessionStorage.clear();
-//     window.location.href = url;
-//   }
-// }
+async function checkHTTP() {
+  if (!window.location.href.includes("https")) {
+    sessionStorage.clear();
+    window.location.href = url;
+  }
+}
 
-// checkHTTP();
+checkHTTP();
 
 async function login(username, password) {
 
@@ -105,7 +105,7 @@ function loadingPage() {
     overlay.setAttribute("id", "loadingPage");
 
     let logo = document.createElement("img");
-    logo.setAttribute("src", "../images/TheMalmoProject_Logo.png");
+    logo.setAttribute("src", "../icons/TheMalmoProject_Logo.png");
 
     overlay.append(logo);
     document.body.append(overlay);

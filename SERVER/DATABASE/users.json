@@ -1,11 +1,14 @@
 [
+   
     {
         "username": "Niklas",
         "email": "niklas.sta@hotmail.com",
-        "riddlesSolved": [],
+        "riddlesSolved": [
+        ],
         "preRiddlesSolved": [],
         "locationAchieved": [],
-        "diaryExcerpts": [],
+        "diaryExcerpts": [
+        ],
         "userID": 1,
         "password": "0000",
         "teamID": 1

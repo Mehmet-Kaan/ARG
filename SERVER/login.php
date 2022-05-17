@@ -10,6 +10,7 @@ $requestData = json_decode($dataPHP, true);
 checkContentType();
 $data = openJSON("database/users.json");
 
+
 if(isset($requestData["username"], $requestData["password"])) {
     $username = $requestData["username"];
     $password = $requestData["password"];

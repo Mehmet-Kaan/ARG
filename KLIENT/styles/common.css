@@ -14,7 +14,7 @@
   /* <--- meaning the default value will be 10 px = 1 rem */
   --bodyFontSz: 1.6rem;
   --middleTitleSz:2rem;
-  --titleFontSz: 3rem;
+  --titleFontSz: 2.2rem;
   /* MARGINALER, PADDING, BORDER */
   --viewerMargin: 20px;
   --textPadding:8px;
@@ -627,7 +627,7 @@ header {
   position: absolute;
   top: 0;
   z-index: 200;
-  height: 7.5%;
+  height: 55px;
   width: 100%;
   background: var(--darkColor);
   color: var(--mainColor);
@@ -651,6 +651,7 @@ header > .title {
   /* Animation provies a slight random skew. Check bottom of doc
     for more information on how to random skew. */
   animation: glitch-skew 1s infinite linear alternate-reverse;
+  font-size: 2.5rem;
 }
 
 header > .title::before {
@@ -704,10 +705,10 @@ header > .title::after {
 .responseBox {
   position: absolute;
   width: 55px;
-  z-index: 1000;
+  z-index: 99;
   background: var(--mainColor);
   top: 10%;
-  left: 3%;
+  left: var(--viewerMargin);
   border: 1px solid var(--darkColor);
   border-radius: 100%;
   display: -webkit-box;
@@ -728,13 +729,16 @@ header > .title::after {
 }
 
 .bigger {
-  width: 50%;
+  width: calc(100vw - 40px);
   border-radius: unset;
-  height: 15%;
-  opacity: 100%;
+  height: unset;
+  opacity: 94vw;
   background: var(--darkColor);
   color: var(--mainColor);
   padding: 5%;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .innerResponseBox {
@@ -751,6 +755,24 @@ header > .title::after {
           flex-direction: column;
 }
 
+.closeResponseBoxButton {
+  height: 20px;
+  width: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.closeResponseBoxButton > img {
+  height: 15px;
+}
+
 /* Content icons */
 #subContent {
   display: -ms-grid;
@@ -761,8 +783,8 @@ header > .title::after {
       grid-template-columns: 4fr 1fr;
   background-color: var(--mainColor);
   gap: 3px;
-  height: 22%;
   width: 100%;
+  height: 200px;
   z-index: 200;
   position: absolute;
   bottom: 0;
@@ -800,7 +822,6 @@ header > .title::after {
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
-  height: 100%;
   width: 100%;
   background-color: var(--darkColor);
 }
@@ -855,7 +876,7 @@ header > .title::after {
 /* RIDDLES */
 .riddlesContainer,
 .diaryBox {
-  height: 100%;
+  height: calc(100vh - 50px);
   width: 100%;
   z-index: 200;
   position: absolute;
@@ -866,18 +887,25 @@ header > .title::after {
   transition: all ease .5s;
   padding: 5%;
   top: 100%;
+  padding-bottom: 100px;
+}
+
+.riddlesContainer > h1,
+.diaryBox > h1 {
+  text-align: center;
+  margin-bottom: 5vh;
 }
 
 .riddlesBoxes {
   width: 100%;
-  height: 90%;
+  height: 60vh;
   display: -ms-grid;
   display: grid;
   gap: 10px;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
   overflow: scroll;
 }
 
@@ -897,7 +925,13 @@ header > .title::after {
 }
 
 .riddleBoxImg {
-  width: 15%;
+  width: 50%;
+}
+
+.unlockedPreRiddleBox > img,
+.unlockedRiddleBox > img {
+  width: 100%;
+  padding: 20px 20px 0px 20px;
 }
 
 .unlockedRiddleBox, .unlockedPreRiddleBox {
@@ -909,9 +943,9 @@ header > .title::after {
       -ms-flex-direction: column;
           flex-direction: column;
   width: auto;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -919,21 +953,57 @@ header > .title::after {
   opacity: 0%;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
+  height: 100%;
 }
 
 .unlocked {
   border: 2px solid var(--mainColor);
+  background-color: var(--darkColor);
 }
 
 .locked {
-  border: 2px solid red;
+  border: 2px solid #ff0000;
+  background-color: var(--darkColor);
+}
+
+.locked > img {
+  width: 28%;
 }
 
 .solved {
-  border: 2px solid grey;
+  border: 2px solid #808080;
+  background-color: var(--darkColor);
 }
 
-.closeBtnUnlockedRiddle, .closeBtnUnlockedRiddle, .backBtnUnlockedRiddle {
+form#preRiddleAnswer {
+  display: -ms-grid;
+  display: grid;
+  /* grid-row: 6; */
+  /* grid-column: 2; */
+  gap: 5px;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  padding: 20px;
+}
+
+.unlockedPreRiddleBox > .middleTitle,
+.unlockedRiddleBox > .middleTitle {
+  padding: 0px 20px;
+  text-transform: none;
+}
+
+form#preRiddleAnswer > button {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 6;
+  grid-column: 1 / 7;
+  padding: 8px;
+  margin-top: var(--viewerMargin);
+}
+
+.closeBtnUnlockedRiddle, .closeBtnUnlockedPreRiddle, .backBtnUnlockedRiddle {
   position: fixed;
   bottom: 4rem;
   left: 4rem;
@@ -951,9 +1021,16 @@ header > .title::after {
   transition: all 2s ease;
 }
 
-.closeBtnUnlockedRiddle > img {
+.closeBtnUnlockedRiddle > img,
+.closeBtnUnlockedPreRiddle > img,
+.backBtnUnlockedRiddle > img {
   height: 2rem;
   width: 2rem;
+}
+
+.backBtnUnlockedRiddle > img {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .riddleImg {
@@ -1072,8 +1149,8 @@ img.excerptImg {
 /* MESSAGES */
 .codeBox {
   position: absolute;
-  top: 20%;
-  z-index: 10;
+  top: 60px;
+  z-index: 100;
   background: black;
   overflow: scroll;
   display: -webkit-box;
@@ -1220,9 +1297,9 @@ img.excerptImg {
 .number {
   max-width: 40px;
   height: 40px;
-  background-color: var(--mainColor);
-  border: none;
-  color: var(--darkColor);
+  background-color: var(--darkColor);
+  border: 1px solid var(--mainColor);
+  color: var(--mainColor);
   font-weight: 400;
   padding: 30%;
 }
@@ -1309,7 +1386,6 @@ img.excerptImg {
 
 .numbersBottom {
   position: relative;
-  top: 38%;
   color: white;
   font-size: 18px;
   display: -webkit-box;
@@ -1334,11 +1410,12 @@ span > :nth-child(6) {
   position: relative;
   height: 3px;
   width: 90%;
-  top: 22%;
   left: 5%;
   background: #adff02;
   background: -webkit-gradient(linear, left top, right top, from(#adff02), color-stop(50%, #fde51d), to(#fd1d1d));
   background: linear-gradient(90deg, #adff02 0%, #fde51d 50%, #fd1d1d 100%);
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .meter {
@@ -1710,6 +1787,7 @@ span > :nth-child(6) {
 
 #information {
   height: 100vw;
+  width: calc(100vw - 40px);
   background-color: var(--mainColor);
   margin: auto var(--viewerMargin);
   border-radius: 10px 10px 0px 0px;
@@ -1805,5 +1883,28 @@ span > :nth-child(6) {
 #loadingPage > img {
   width: 35vw;
   height: 35vw;
+}
+
+#landingPage {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#landingPage form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 /*# sourceMappingURL=common.css.map */

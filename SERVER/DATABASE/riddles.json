@@ -3,71 +3,71 @@
         {
             "riddleID":0,
             "riddle":"First four in...",
-            "img":"",
+            "img":"fortstamotet_mainriddle",
             "correctAnswer":9780, 
             "locationID":5,
             "diaryid": 0,
             "relatedPreRiddles": [],
             "relatedClues":[],
             "response": {
-                "bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
-                "teller": ""
+                "Hans Bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
+                "Edward Teller": "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare."
             }
         },
         {
             "riddleID":1,
             "riddle":"Minns ni vad vi exprimenterade med i labbet?",
-            "img":"images/labbhistoria_mainriddle.svg",
+            "img":"images/labbhistoria_mainriddle",
             "correctAnswer":94,
             "locationID":6,
             "diaryid": 1,
-            "relatedPreRiddles": [2],
+            "relatedPreRiddles": [],
             "relatedClues":[],
             "response": {
-                "bethe": ".",
-                "teller": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er"
+                "Hans Bethe": "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.",
+                "Edward Teller": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er"
             }
         },
         {
             "riddleID":2,
             "riddle":"Låt oss mäta dina färdigheter...",
-            "img":"",
+            "img":"images/upptackten_mainriddle",
             "correctAnswer":17,
             "locationID":0,
             "diaryid": 2,
             "relatedPreRiddles": [0],
             "relatedClues":[],
             "response": {
-                "bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
-                "teller": ""
+                "Hans Bethe": "Jag har fått uppgifter om det finns dagboksutdrag från en gammal bekant på stationerna. Ifall det uppkommer fler, spara dem men kom ihåg att inte tro på allt ni läser.",
+                "Edward Teller": "Jag har fått uppgifter om det finns dagboksutdrag från en gammal vän på stationerna. Ifall det finns fler så spara dem, men lägg störst fokus på uppdraget."
             }
         },
         {
             "riddleID":3,
             "riddle":"Sista kortet är lagt...",
-            "img":"images/sveket_mainriddle.svg",
+            "img":"images/sveket_mainriddle",
             "correctAnswer":7,
             "locationID":7,
             "diaryid": 3,
             "relatedPreRiddles": [1],
             "relatedClues":[],
             "response": {
-                "bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
-                "teller": "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
+                "Hans Bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
+                "Edward Teller": "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
             }
         },
         {
             "riddleID":4,
             "riddle":"Det som komma skall",
-            "img":"images/braket.svg",
+            "img":"images/braket_mainriddle",
             "correctAnswer": 1904,
             "locationID":3,
             "diaryid": 4,
             "relatedPreRiddles": [2],
             "relatedClues":[],
             "response": {
-                "bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
-                "teller": "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
+                "Hans Bethe": "Om ni hittar objektet kan vi tillsammans göra världen till en bättre plats. Jag håller alltid mitt löfte, ni kan lita på mig.",
+                "Edward Teller": "Vad som än finns vid andra änden, låt inte Bethe komma först. Med honom vid makten hotas hela våra existens."
             }
         },
         {
@@ -80,8 +80,8 @@
             "relatedPreRiddles": [3],
             "relatedClues":[],
             "response": {
-                "bethe": "Det är dem som förstör allt, det har de alltid gjort. Jag är för smart och det skrämmer dem.",
-                "teller": "Bra jobbat. Arbetet är långt ifrån klart. Tiden är snart slut, ni måste jobba snabbare."
+                "Hans Bethe": "Det är dem som förstör allt, det har de alltid gjort. Jag är för smart och det skrämmer dem.",
+                "Edward Teller": "Bra jobbat. Arbetet är långt ifrån klart. Tiden är snart slut, ni måste jobba snabbare."
             }
         },
         {
@@ -94,22 +94,22 @@
             "relatedPreRiddles": [4],
             "relatedClues":[],
             "response": {
-                "bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
-                "teller": "sotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
+                "Hans Bethe": "Uppdraget är inte färdigt, jag har tränat er för att hitta skatten och jag tänker inte ge upp.",
+                "Edward Teller": "Uppdraget är inte färdigt. Vi kan inte ge upp än!"
             }
         },
         {
             "riddleID":7,
             "riddle":"pamudAS, kommer ni väl ihåg?",
-            "img":"",
+            "img":"images/dodsbadden_mainriddle",
             "correctAnswer": 659,
             "locationID":8,
             "diaryid": 7,
             "relatedPreRiddles": [5],
             "relatedClues":[],
             "response": {
-                "bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
-                "teller": "sotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
+                "Hans Bethe": "Jobba hårdare. De får inte komma först till slutmålet.",
+                "Edward Teller": "Bra jobbat, fullfölj uppdraget."
             }
         },
         {
@@ -119,11 +119,11 @@
             "correctAnswer": 7210,
             "locationID":4,
             "diaryid": 7,
-            "relatedPreRiddles": [],
+            "relatedPreRiddles": [6],
             "relatedClues":[],
             "response": {
-                "bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
-                "teller": "sotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
+                "Hans Bethe": "FINaaaalo",
+                "Edward Teller": "LESFINALES"
             }
         }
     ],
@@ -131,7 +131,7 @@
         {
             "riddleID":0,
             "riddle":"Det sägs att fission skapar energi med solen från klockan ett",
-            "img":"images/upptackten_preriddle.svg",
+            "img":"images/upptackten_preriddle",
             "correctAnswer":47923,
             "locationID":0,
             "relatedMainRiddle":2
@@ -139,7 +139,7 @@
         {
             "riddleID":1,
             "riddle":"Ser du mönstret?",
-            "img":"images/sveket_preriddle.svg",
+            "img":"images/sveket_preriddle",
             "correctAnswer": 3210,
             "locationID":7,
             "relatedMainRiddle":3
@@ -147,7 +147,7 @@
         {
             "riddleID":2,
             "riddle":"Kollar du verkligen på rätt sak just nu?",
-            "img":"images/braket.svg",
+            "img":"images/braket_preriddle",
             "correctAnswer":35,
             "locationID":3,
             "relatedMainRiddle":4
@@ -155,7 +155,7 @@
         {
             "riddleID":3,
             "riddle":"Ord kan få en ny mening",
-            "img":"images/oppenheimershemligheter.svg",
+            "img":"images/oppenheimershemligheter_preriddle",
             "correctAnswer":9948,
             "locationID":2,
             "relatedMainRiddle":5
@@ -163,7 +163,7 @@
         {
             "riddleID":4,
             "riddle":"Ta dig till denna plats och följ pilen till midroc",
-            "img":"",
+            "img":"images/receptet_preriddle",
             "correctAnswer":88631,
             "locationID":1,
             "relatedMainRiddle":6
@@ -171,7 +171,7 @@
         {
             "riddleID":5,
             "riddle":"Svaret finns alltid i FYSIK men hur många?",
-            "img":"images/dodsbadden_preriddle.svg",
+            "img":"images/dodsbadden_preriddle",
             "correctAnswer":22151,
             "locationID":8,
             "relatedMainRiddle":7
@@ -183,15 +183,6 @@
             "correctAnswer": 1942,
             "locationID":4,
             "relatedMainRiddle":8
-        }
-    ],
-    "clues":[
-        {
-            "clueID":1,
-            "clue":"Kolla på ....",
-            "img":"",
-            "relatedMainRiddle":1,
-            "relatedPreRiddle":0
         }
     ]
 }

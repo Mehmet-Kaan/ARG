@@ -1,7 +1,8 @@
 [
     {
         "teamID": 1,
-        "name": "Teller",
+        "teamName": "Vishnu",
+        "name": "Edward Teller",
         "avatar":"",
         "phaseOne": [6],
         "phaseTwo": [7, 5, 0, 3],
@@ -11,7 +12,8 @@
     },
     {
         "teamID": 2,
-        "name": "Bethe",
+        "teamName": "Shiva",
+        "name": "Hans Bethe",
         "avatar":"",
         "phaseOne": [5],
         "phaseTwo": [7, 0, 6, 3],

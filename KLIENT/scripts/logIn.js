@@ -3,20 +3,102 @@
 
 const wrapper = document.querySelector("#wrapper");
 
-if(getFromSession("entered") != true){
-    pageOne(pageInformation, buttons);   
-    const phaseOne = document.querySelector("#firstPhase");
-    phaseOne.style.animation =  "fadeIn 3s";
+if (getFromSession("entered") != true) {
+
+    enterCode();
+    // pageOne(pageInformation, buttons);
+    // const phaseOne = document.querySelector("#firstPhase");
+    // phaseOne.style.animation = "fadeIn 3s";
 } else {
     window.location.replace(`${url}/map.php`);
     loadingPage();
     setTimeout(() => {
-      displayMap();
-    },2000);
+        displayMap();
+    }, 2000);
+}
+
+function enterCode() {
+    let landingPage = document.createElement("div");
+    landingPage.setAttribute("id", "landingPage");
+
+    // FORM that will be sending a post and get a response
+    let form = document.createElement("form");
+    form.setAttribute("id", "form");
+    form.setAttribute("method", "POST");
+
+
+    let password = document.createElement("div");
+    password.setAttribute("id", "passwordBox");
+    // password
+    let label2 = document.createElement("label");
+    label2.innerHTML = "PIN";
+    label2.className = "bodyText";
+    let input2 = document.createElement("input");
+    input2.setAttribute("type", "password");
+    input2.setAttribute("name", "password");
+    input2.setAttribute("id", "password");
+
+    let errorMessage = document.createElement("p");
+    errorMessage.className = "errorMessage";
+
+    // let verifyButton = document.createElement("button");
+    // // verifyButton.setAttribute("type", "submit")
+    // verifyButton.className = buttons.verify.class;
+    // verifyButton.innerHTML = buttons.verify.innerText;
+
+    // Second Press        
+    form.addEventListener("keydown", (event) => {
+        
+        if (event.key === "Enter") {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const req2 = new Request(`${urlAPI}/enter-page.php`,
+                postFormData(formData)
+            )
+
+            fetch(req2)
+                .then((response) => {
+                    if (response.ok) {
+                        console.log(response);
+                        return response.json();
+                    } else {
+                        throw new Error("Password or username is wrong");
+                    }
+                })
+                .then((data) => {
+                    // FADE OUT 
+                    landingPage.style.animation = "fadeOut 2s";
+
+                    setTimeout(() => {
+                        landingPage.remove();
+                        pageOne(pageInformation, buttons);
+                        const phaseOne = document.querySelector("#firstPhase");
+                        phaseOne.style.animation = "fadeIn 3s";
+                    }, 1700);
+
+                })
+                .catch((error) => {
+                    console.log("not OK");
+                    errorMessage.style.animation = "fadeIn 2s";
+                    errorMessage.innerHTML = "*Du vet när du vet, va inte orolig.";
+
+                    //   document.getElementById("errorDiv").innerHTML = "Wrong combination of username and password";
+                    //   sessionStorage.clear();
+                })
+        };
+    });
+
+
+
+    password.append(label2, input2);
+    form.append(password, errorMessage);
+    landingPage.append(form);
+    wrapper.append(landingPage);
 }
 
 
-function pageOne(info, button){
+function pageOne(info, button) {
     // The wrapper
     let page = document.createElement("div");
     page.setAttribute("id", "firstPhase")
@@ -35,7 +117,7 @@ function pageOne(info, button){
     choiceSection.setAttribute("id", "choiceSection");
 
     let titleTwo = document.createElement("h1");
-    titleTwo.innerHTML = "Är du redo?"; 
+    titleTwo.innerHTML = "Är du redo?";
     titleTwo.className = info.classes.middleTitle; // <- cause it should have source code
 
     let yesButton = document.createElement("button");
@@ -47,20 +129,20 @@ function pageOne(info, button){
 
     // event
     yesButton.addEventListener("click", () => {
-        page.style.animation =  "fadeOut 2s";
-        
-        setTimeout(()=> {
+        page.style.animation = "fadeOut 2s";
+
+        setTimeout(() => {
             wrapper.innerHTML = "";
             pageTwo(pageInformation, buttons);
-            
+
             // Fade In
             const phaseTwo = document.querySelector("#secondPhase");
-            phaseTwo.style.animation =  "fadeIn 3s";
-            
-            
+            phaseTwo.style.animation = "fadeIn 3s";
+
+
         }, 1700);
     });
-    
+
     noButton.addEventListener("click", () => {
 
         let message = document.createElement("div");
@@ -83,7 +165,7 @@ function pageOne(info, button){
 
         message.append(exit, text);
         wrapper.append(message);
-        
+
     });
 
     choiceSection.append(titleTwo, yesButton, noButton);
@@ -91,7 +173,7 @@ function pageOne(info, button){
     wrapper.append(page);
 }
 
-function pageTwo(info, button){
+function pageTwo(info, button) {
     // The wrapper
     let page = document.createElement("div");
     page.setAttribute("id", "secondPhase");
@@ -109,7 +191,7 @@ function pageTwo(info, button){
     logIn.setAttribute("id", "logIn");
 
     let titleTwo = document.createElement("h1");
-    titleTwo.innerHTML = "Verifikation av identitet"; 
+    titleTwo.innerHTML = "Verifikation av identitet";
     titleTwo.className = info.classes.middleTitle; // <- cause it should have source code
 
     // FORM that will be sending a post and get a response
@@ -132,7 +214,7 @@ function pageTwo(info, button){
     input1.setAttribute("type", "text");
     input1.setAttribute("name", "username");
     input1.setAttribute("id", "username");
-    
+
     let password = document.createElement("div");
     password.setAttribute("id", "passwordBox");
     // password
@@ -146,7 +228,7 @@ function pageTwo(info, button){
 
     let errorMessage = document.createElement("p");
     errorMessage.className = "errorMessage";
-    
+
     let verifyButton = document.createElement("button");
     // verifyButton.setAttribute("type", "submit")
     verifyButton.className = button.verify.class;
@@ -158,10 +240,10 @@ function pageTwo(info, button){
         event.preventDefault();
         const formData = new FormData(form);
 
-        const req2 = new Request(`${urlAPI}/login.php`, 
+        const req2 = new Request(`${urlAPI}/login.php`,
             postFormData(formData)
         );
-          
+
         fetch(req2)
             .then((response) => {
                 if (response.ok) {
@@ -177,25 +259,25 @@ function pageTwo(info, button){
 
                 // FADE OUT 
                 const phaseTwo = document.querySelector("#secondPhase");
-                phaseTwo.style.animation =  "fadeOut 2s";
+                phaseTwo.style.animation = "fadeOut 2s";
 
-                setTimeout(()=> {
+                setTimeout(() => {
                     window.location.replace(`${url}/map.php`);
-                     
+
                 }, 1700);
             })
             .catch((error) => {
                 console.log("not OK");
-                errorMessage.style.animation =  "fadeIn 2s";
+                errorMessage.style.animation = "fadeIn 2s";
                 errorMessage.innerHTML = "*Om du är den utvalde, se över dina dokument för att ta dig vidare";
-                
-            //   document.getElementById("errorDiv").innerHTML = "Wrong combination of username and password";
-            //   sessionStorage.clear();
+
+                //   document.getElementById("errorDiv").innerHTML = "Wrong combination of username and password";
+                //   sessionStorage.clear();
             });
-        });
-       
-    
-    
+    });
+
+
+
     user.append(label1, input1);
     password.append(label2, input2);
     form.append(user, password, errorMessage, verifyButton);

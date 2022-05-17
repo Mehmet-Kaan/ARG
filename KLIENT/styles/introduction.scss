@@ -215,6 +215,7 @@
 
 #information {
     height: 100vw;
+    width: calc(100vw - 40px);
     background-color: var(--mainColor);
     margin: auto var(--viewerMargin);
     border-radius: 10px 10px 0px 0px;
@@ -273,4 +274,18 @@
 #loadingPage > img{
     width:35vw;
     height:35vw;
+}
+
+// Lading Page 
+
+#landingPage {
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#landingPage form {
+    display: flex;
+    flex-direction: column;
 }
