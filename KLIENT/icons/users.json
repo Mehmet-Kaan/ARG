@@ -1,0 +1,219 @@
+[
+    {
+        "username": "Niklas",
+        "riddlesSolved": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            6,
+            5,
+            7
+        ],
+        "preRiddlesSolved": [
+            null,
+            1,
+            null,
+            0,
+            0,
+            2,
+            2,
+            3,
+            3,
+            5
+        ],
+        "locationAchieved": [
+            6,
+            7,
+            5,
+            0,
+            3,
+            2
+        ],
+        "diaryExcerpts": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            6,
+            5
+        ],
+        "userID": 1,
+        "password": "0000",
+        "teamID": 0
+    },
+    {
+        "username": "Mehmet",
+        "riddlesSolved": [
+            0
+        ],
+        "preRiddlesSolved": [
+            null,
+            2,
+            2,
+            null,
+            1,
+            5
+        ],
+        "locationAchieved": [
+            5,
+            3,
+            6,
+            7
+        ],
+        "diaryExcerpts": [
+            0,
+            4,
+            1,
+            2,
+            3
+        ],
+        "userID": 2,
+        "password": "0000",
+        "teamID": 1
+    },
+    {
+        "username": "Mercie",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 3,
+        "password": "0000",
+        "teamID": 0
+    },
+    {
+        "username": "Alice",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 4,
+        "password": "0000",
+        "teamID": 1
+    },
+    {
+        "username": "Elsa",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 5,
+        "password": "0000",
+        "teamID": 0
+    },
+    {
+        "username": "Alpha",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 6,
+        "password": "1001",
+        "teamID": 0
+    },
+    {
+        "username": "Beta",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 7,
+        "password": "1002",
+        "teamID": 0
+    },
+    {
+        "username": "Gamma",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 8,
+        "password": "1003",
+        "teamID": 0
+    },
+    {
+        "username": "Epilson",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 9,
+        "password": "1005",
+        "teamID": 0
+    },
+    {
+        "username": "Zeta",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 10,
+        "password": "1006",
+        "teamID": 0
+    },
+    {
+        "username": "Omega",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 11,
+        "password": "2006",
+        "teamID": 1
+    },
+    {
+        "username": "Theta",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 12,
+        "password": "2001",
+        "teamID": 1
+    },
+    {
+        "username": "Kappa",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 13,
+        "password": "2003",
+        "teamID": 1
+    },
+    {
+        "username": "Pi",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 14,
+        "password": "2004",
+        "teamID": 1
+    },
+    {
+        "username": "Sigma",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 15,
+        "password": "2005",
+        "teamID": 1
+    },
+    {
+        "username": "Eta",
+        "riddlesSolved": [],
+        "preRiddlesSolved": [],
+        "locationAchieved": [],
+        "diaryExcerpts": [],
+        "userID": 16,
+        "password": "2007",
+        "teamID": 1
+    }
+]mID": 1
+    }
+]

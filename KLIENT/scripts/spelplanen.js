@@ -53,24 +53,24 @@ async function controlTeams() {
 
   //Controls if the any team has already won
   teamsOnServer.forEach(team => {
-    if(team.wins == true){
+    if (team.wins == true) {
       nonWinnerYet = false;
     }
   });
 
-  if(nonWinnerYet == false && getFromSession(`infoAboutWinnerTeam`) == null){
-   
+  if (nonWinnerYet == false && getFromSession(`infoAboutWinnerTeam`) == null) {
+
     teamsOnServer.forEach(team => {
-      if(team.teamID == user.userID){
+      if (team.teamID == user.userID) {
         //If true creates the win box
-        if(team.wins == true){
+        if (team.wins == true) {
           // SPARAR IN SESSION NÄR MAN ÄR INLOGGAD PÅ FÖRSTA GÅNGEN!
           if (getFromSession(`infoAboutWinnerTeam`) === null) {
             saveToSession(`infoAboutWinnerTeam`, team.name);
           }
-          createWinLoseBox("win");
-        }else{
-          createWinLoseBox("lose");
+         
+         createWinLoseBox("lose");
+        
         }
       }
     });
@@ -82,6 +82,8 @@ async function controlTeams() {
 let controlTheTeams = setInterval(() => {
   controlTeams()
 }, 20000);
+
+
 
 // Checks if user is logged in / otherwise sends them to first place
 if (getFromSession("user") === null) {
@@ -104,13 +106,13 @@ function pageThree(info, button, user) {
   let teamName;
   let leader;
   teams.forEach(team => {
-    if (team.teamID == user.teamID){
+    if (team.teamID == user.teamID) {
       teamName = team.teamName;
       leader = team.name;
     }
   })
   let bodyText = document.createElement("p");
-  bodyText.innerHTML = `"Du är utvald av en anledning. Din träning är över och du är nu en medlem av det särskilda operationsteamet ${teamName}. Uppdraget är hemlighetsstämplat av en anledning, men jag vet att ni inte kommer säga något om vart ni tillhör, det har vi tränat er för. Ligg lågt och använd det här emblemet för att hitta dina kamrater. Ta dig vidare in och låt oss börja. Tiden är knapp och liv kan vara i fara. </br></br>- ${leader}`;
+  bodyText.innerHTML = `Du är utvald av en anledning. Din träning är över och du är nu en medlem av det särskilda operationsteamet ${teamName}. Uppdraget är hemlighetsstämplat av en anledning, men jag vet att ni inte kommer säga något om vart ni tillhör, det har vi tränat er för. Ligg lågt och använd det här emblemet för att hitta dina kamrater. Ta dig vidare in och låt oss börja. Tiden är knapp och liv kan vara i fara. </br></br>- ${leader}`;
   bodyText.className = info.classes.bodyText;
 
   let letsBeginButton = document.createElement("button");
@@ -172,7 +174,6 @@ function successCallback(position) {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
 
-  console.log(latitude, longitude);
 }
 function errorCallback(error) {
   switch (error.code) {
@@ -223,7 +224,7 @@ setInterval(() => {
   }
 
   if (execute) {
-    // play();
+
     controlGeigerMeter(execute);
 
     if (getFromSession("exposureLevel") === null) {
@@ -242,7 +243,6 @@ setInterval(() => {
 
     values = [];
   } else {
-    console.log(false);
 
     if (meter.classList.contains("mid")) {
       meter.classList.remove('mid');
@@ -317,22 +317,6 @@ async function initMap() {
     publishSpots(spotsFourth);
   }
 }
-
-// function playerSpot(lat, lng) {
-
-//   let loc = new google.maps.LatLng(lat, lng);
-
-//   let circle = new google.maps.Circle({
-//     strokeColor: "#000000",
-//     strokeOpacity: 0.5,
-//     strokeWeight: 2,
-//     fillColor: "#00FF01",
-//     fillOpacity: 0.19,
-//     map: map,
-//     center: loc,
-//     radius: 20
-//   });
-// }
 
 // Creates the circles and markers / Argument that is sent to the parameter is the locationID
 function createSpot(spot) {
@@ -411,6 +395,7 @@ function createSpot(spot) {
   google.maps.event.addListener(marker, 'click', function () {
     let message;
     booleanValue = checkIfInZone(circle);
+    // booleanValue = true;
     let zoneCleared = user["locationAchieved"].includes(spot.locationID);
 
     if (zoneCleared == false) {
@@ -466,17 +451,16 @@ function nextAssignment(circle, radiusBase) {
 }
 // Returns true/false if player in bad zone
 function checkIfInZone(circle) {
-  // Get players location
-  // let playerLoc = playerLocation();
   // Gäddan
-  let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
+  // let playerLoc = new google.maps.LatLng(55.60753, 12.98978);
   //orkanen
   // setTimeout(() => {
-  //   playerLoc = new google.maps.LatLng(55.61079, 12.99538);
   // }, 20000);
 
+  // let playerLoc = new google.maps.LatLng(55.61079, 12.99538);
+  // Get players location
+  let playerLoc = playerLocation();
   let loc = new google.maps.LatLng(playerLoc);
-
   return circle.getBounds().contains(loc);
 }
 // Creates a message box that appears when marker is being clicked
@@ -505,10 +489,9 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
     codeBox.remove();
   });
 
-  let teamsOnServer = await getTeams();
   let riddles = await getRiddles();
   let riddle = riddles.mainRiddles.find((riddle) => riddle.locationID == spot.locationID);
-
+  let teamsOnServer = await getTeams();
 
   // Fixa sifferkodsinmatning och vad som sker när det är rätt
   if (booleanValue) {
@@ -600,7 +583,9 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           let responseBox = createContainerBox("responseBox");
           let responseIcon = document.createElement("img");
 
-          let usersTeam = teams.find(team => team.teamID = user.teamID);
+          let usersTeam = teams.find(team => team.teamID == user.teamID);
+          console.log(usersTeam);
+          console.log(user);
           responseIcon.setAttribute("src", usersTeam["avatar"]);
 
           responseIcon.addEventListener("click", () => {
@@ -628,8 +613,9 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
           responseBox.append(responseIcon);
           document.body.append(responseBox);
         }
-        createResponseBox();
-
+        if(riddle.locationID !== 4){
+          createResponseBox();
+        }
         //Deletes the old marker to create a new one with gray color
         function reCreateMarker() {
           //Gets positions of the marker inside the clicked area
@@ -705,9 +691,9 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
 
           update(change);
 
-          let spotsSecond = teams.find(team => team.teamID = user.teamID).phaseTwo;
-          let spotsThird = teams.find(team => team.teamID = user.teamID).phaseThree;
-          let spotsFourth = teams.find(team => team.teamID = user.teamID).phaseFour;
+          let spotsSecond = teams.find(team => team.teamID == user.teamID).phaseTwo;
+          let spotsThird = teams.find(team => team.teamID == user.teamID).phaseThree;
+          let spotsFourth = teams.find(team => team.teamID == user.teamID).phaseFour;
 
           if (userFromServer.locationAchieved.length == 1) {
             publishSpots(spotsSecond);
@@ -721,26 +707,27 @@ async function createMessageBox(message, booleanValue, spot, marker, circle, zon
         updateUserProcess(riddle);
 
         //If the last riddle solved
-        if(riddle.riddleID == 8){
+        if (riddle.locationID == 4) {
 
           let nonWinnerYet = true;
 
           //Controls if the any team has already won
           teamsOnServer.forEach(team => {
-            if(team.wins == true){
+            if (team.wins == true) {
               nonWinnerYet = false;
             }
           });
 
           //Controls if the users team key "wins" is true
-          if(nonWinnerYet){
+          if (nonWinnerYet) {
+            // console.log(nonWinnerYet);
             let changeOnTeam = {
               "userID": user["userID"],
               "teamID": user["teamID"]
             }
             update(changeOnTeam);
 
-            createWinLoseBox("win", );
+            createWinLoseBox("win");
           }
         }
 
@@ -829,6 +816,12 @@ function createDiaryView() {
 }
 //Creates Riddles view
 function createRiddlesView() {
+  if(document.querySelector(".codeBox")){
+    document.querySelector(".codeBox").style.animation = "fadeOut 2s";
+    setTimeout(()=>{
+      document.querySelector(".codeBox").remove();
+    },1700)
+  }
 
   setTimeout(() => {
     riddleNotification(false);
@@ -863,7 +856,7 @@ function createContainerBox(theBoxName, titleOfBox) {
 
     setTimeout(() => {
       theBoxName.classList.add("up");
-    }, 100);
+    }, 1000);
   }
   return theBoxName;
 }
@@ -872,46 +865,43 @@ async function forEachDiary(containerBox) {
   let users = await getUsers();
   let userFromServer = users.find((u) => u.userID == user.userID);
 
-  diary.forEach(excerpt => {
+  userFromServer.diaryExcerpts.forEach(userExcerpt => {
+    diary.forEach(excerpt => {
+      if (userExcerpt == excerpt.id) {
+        //Creates the excerpt container
+        let excerptBox = createContainerBox("excerptBox");
 
-
-    //Creates a excerpt box for every excerpts received for inlogged user
-    if (userFromServer.diaryExcerpts.includes(excerpt.id)) {
-
-      //Creates the excerpt container
-      let excerptBox = createContainerBox("excerptBox");
-
-      //Date and Time
-      excerptBox.innerHTML = `
+        //Date and Time
+        excerptBox.innerHTML = `
             <p class="date_time"> ${excerpt.date} - ${excerpt.time}</p>
           `;
 
-      //Creates an img element If excerpt has one
-      if (excerpt.img !== null && excerpt.img !== "") {
-        excerptBox.innerHTML += `
+        //Creates an img element If excerpt has one
+        if (excerpt.img !== null && excerpt.img !== "") {
+          excerptBox.innerHTML += `
               <img src="../images/${excerpt.img}.png" class="excerptImg">
           `;
-      }
+        }
 
-      //Body text and page number
-      //Body text and page number
-      if (!userFromServer["locationAchieved"].includes(excerpt.locationID)) {
-        excerptBox.innerHTML += `
+        //Body text and page number
+        //Body text and page number
+        if (!userFromServer["locationAchieved"].includes(excerpt.locationID)) {
+          excerptBox.innerHTML += `
           <p class="excerptText">${excerpt.bodyText.start}</p>
         `;
-      } else {
-        excerptBox.innerHTML += `
+        } else {
+          excerptBox.innerHTML += `
         <p class="excerptText">${excerpt.bodyText.start}</p>
           <p class="excerptText">${excerpt.bodyText.end}</p>
         `;
-      }
-      excerptBox.innerHTML += `
+        }
+        excerptBox.innerHTML += `
         <p style="color:white; text-align:right;" class="excerptPage">s. ${excerpt.page}</p>
       `;
-      containerBox.append(excerptBox);
-    }
-
-  });
+        containerBox.append(excerptBox);
+      }
+    })
+  })
 }
 //Foreach riddle creates a box and eventlisteners to the boxes
 async function forEachRiddle(containerBox, innerContainerBox) {
@@ -946,7 +936,6 @@ async function forEachRiddle(containerBox, innerContainerBox) {
     if (riddleBox.classList.contains("unlocked")) {
       riddleBox.addEventListener("click", () => {
 
-        
         //Hides riddlesBoxes
         setTimeout(() => {
           document.querySelector(".riddlesContainer > h1").style.display = "none";
@@ -963,6 +952,7 @@ async function forEachRiddle(containerBox, innerContainerBox) {
             }
           })
         }
+
         checkTheUserPreRiddlesSolved(user["preRiddlesSolved"]);
 
         //If user does not solved all pre-riddles
@@ -973,9 +963,7 @@ async function forEachRiddle(containerBox, innerContainerBox) {
           let infoAboutPreRiddles;
           if (getFromSession(`preRiddlesInfoTaken`) === null) {
             infoAboutPreRiddles = document.createElement("p");
-            infoAboutPreRiddles.style.textAlign = "center";
-            infoAboutPreRiddles.style.marginBottom = "10px";
-            infoAboutPreRiddles.style.fontSize = "14px";
+            infoAboutPreRiddles.className = "infoAboutPreRiddles";
             infoAboutPreRiddles.innerText = "Du måste lösa dessa uppdrag innan du kan skriva in den slutgiltiga koden och röra dig vidare.";
             containerBox.append(infoAboutPreRiddles);
             saveToSession(`preRiddlesInfoTaken`, "true");
@@ -983,7 +971,6 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 
           setTimeout(() => {
             document.querySelector(".riddlesContainer > h1").style.display = "inherit";
-            document.querySelector(".riddlesContainer > h1").innerText = "Förberedande";
             preRiddleBoxes.classList.add("opacity");
           }, 500);
 
@@ -994,17 +981,25 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 
             let preRiddleBox = createContainerBox("preRiddleBox");
 
-            if (userFromServer.preRiddlesSolved.includes(preRiddle.riddleID)) {
+            preRiddleBox.classList.add("unlocked");
+            preRiddleBox.style.opacity = 0;
+            setTimeout(() => {
+              preRiddleBox.style.opacity = 1;
               preRiddleBox.innerHTML = ` 
-                <img src="../icons/unlocked.svg" class="riddleBoxImg"> 
+                <img src="../icons/preriddle.svg" class="riddleBoxImg"> 
               `;
-              preRiddleBox.classList.add("solved");
-            } else {
-              preRiddleBox.innerHTML = ` 
-                <img src="../icons/unlocked.svg" class="riddleBoxImg"> 
-              `;
-              preRiddleBox.classList.add("unlocked");
-            }
+            }, 1000)
+
+
+            // if (userFromServer.preRiddlesSolved.includes(preRiddle.riddleID)) {
+            //   preRiddleBox.innerHTML = ` 
+            //     <img src="../icons/checked.svg" class="riddleBoxImg"> 
+            //   `;
+            //   preRiddleBox.classList.add("solved");
+            // } else {
+
+            // }
+
 
             //Click on preRiddles that does not solved yet
             if (preRiddleBox.classList.contains("unlocked")) {
@@ -1027,11 +1022,12 @@ async function forEachRiddle(containerBox, innerContainerBox) {
                 }, 500);
 
                 unlockedPreRiddleBox.innerHTML += `
-                    <h2 class="middleTitle">${preRiddle.riddle}</h2>
+                    <h1 class="title"> ${riddle.title} </h1>
+                    <h2 class="bodyText">${preRiddle.riddle}</h2>
                 `;
 
                 //Controls if the preRiddle has an img or not
-                if (preRiddle.img !== "" || preRiddle.img !== null) {
+                if (preRiddle.img !== "" && preRiddle.img !== null) {
                   unlockedPreRiddleBox.innerHTML += `
                     <img src="${preRiddle.img}.png" class="riddleImg">
                   `;
@@ -1095,23 +1091,25 @@ async function forEachRiddle(containerBox, innerContainerBox) {
                       setTimeout(() => {
                         unlockedPreRiddleBox.style.height = "85%";
                         unlockedPreRiddleBox.innerHTML = `
-                          <h1>Bra jobbat!</h1> 
-                          <p>Du har nu löst en del av uppdraget, se över nästa uppgift för koppla ner hela platsen.</p>
+                        <div class="wrapperResponseAnswer">
+                          <h1 class="title">Bra jobbat!</h1> 
+                          <p class="bodyText">Du har nu löst en del av uppdraget, se över nästa uppgift.</p>
+                        </div>
                         `;
 
-                        // //Call the function to check if user solved other preriddles to
-                        // checkTheUserPreRiddlesSolved();
+                        //Call the function to check if user solved other preriddles to
+                        checkTheUserPreRiddlesSolved();
 
-                        // //If user solved others preriddles also
-                        //   if(userPreRiddlesSolved == true){
-                        //     unlockedPreRiddleBox.innerHTML += `
-                        //       <p>Well done! You have now solved all Pre-riddles and will unlock the Main riddle!</p>
-                        //     `;
-                        //   }else{
-                        //     unlockedPreRiddleBox.innerHTML += `
-                        //       <p>Pre-riddle solved, Solve the other Pre-riddles to unlock the Main riddle!</p>
-                        //     `;
-                        //   }
+                        //If user solved others preriddles also
+                          if(userPreRiddlesSolved == true){
+                            unlockedPreRiddleBox.innerHTML += `
+                              <p>Well done! You have now solved all Pre-riddles and will unlock the Main riddle!</p>
+                            `;
+                          }else{
+                            unlockedPreRiddleBox.innerHTML += `
+                              <p>Pre-riddle solved, Solve the other Pre-riddles to unlock the Main riddle!</p>
+                            `;
+                          }
 
                         unlockedPreRiddleBox.classList.add("opacity");
                         closeBtnUnlockedPreRiddle.remove();
@@ -1126,6 +1124,7 @@ async function forEachRiddle(containerBox, innerContainerBox) {
                         preRiddleBox.removeEventListener("click", createPreRiddleBox);
                         //Replaces class unlocked with solved to change color on box
                         preRiddleBox.classList.replace("unlocked", "solved");
+                        preRiddleBox.innerHTML = `<img src="../icons/checked.svg" class="riddleBoxImg"> `;
                       }, 2000);
                     } else {
 
@@ -1134,8 +1133,10 @@ async function forEachRiddle(containerBox, innerContainerBox) {
                       setTimeout(() => {
                         unlockedPreRiddleBox.style.height = "85%";
                         unlockedPreRiddleBox.innerHTML = `
-                          <h1 style="color:red;">Wrong Answer!</h1> 
-                          <p  style="color:red;">Try again!</p>
+                        <div class="wrapperResponseAnswer">
+                          <h1 class="title red">Ajdå</h1> 
+                          <p class="bodyText red">Inte riktigt det va, du tar det snart!</p>
+                        </div>
                         `;
                         unlockedPreRiddleBox.classList.add("opacity");
                         closeBtnUnlockedPreRiddle.style.display = "none";
@@ -1221,7 +1222,7 @@ async function forEachRiddle(containerBox, innerContainerBox) {
               setTimeout(() => {
                 preRiddleBoxes.remove();
                 backBtnUnlockedRiddle.remove();
-              }, 750);
+              }, 500);
             })
             containerBox.append(backBtnUnlockedRiddle);
           }
@@ -1238,13 +1239,14 @@ async function forEachRiddle(containerBox, innerContainerBox) {
 
           if (riddle.img !== "" || riddle.img !== null) {
             unlockedRiddleBox.innerHTML += `
+            <h1 class="title"> ${riddle.title} </h1>
+            <h2 class="bodyText">${riddle.riddle}</h2> 
+          `;
+            if(riddle.riddleID !== 8){
+              unlockedRiddleBox.innerHTML += `
                 <img src="${riddle.img}.png" class="riddleImg">
               `;
-
-            unlockedRiddleBox.innerHTML += `
-                <h2>${riddle.riddle}</h2>
-              `;
-
+            }
             //Creates close riddleBox button
             let closeBtnUnlockedRiddle;
             function createCloseBtnUnlockedRiddle() {
@@ -1280,7 +1282,6 @@ async function forEachRiddle(containerBox, innerContainerBox) {
           }
           containerBox.append(unlockedRiddleBox);
         }
-
       })
     }
     //Appends the box inte riddlesboxes container
@@ -1316,36 +1317,31 @@ function createCloseButton(contianerBox) {
 
 //Creates a winner box if users team has won completed all 
 function createWinLoseBox(arg) {
-    let usersTeam = teams.find(team => team.teamID = user.teamID);
+  let usersTeam = teams.find(team => team.teamID == user.teamID);
 
-    let responseBox = createContainerBox("responseBox");
-    responseBox.classList.add("winnerBox");
-    
-    responseBox.style.background = "unset";
-    responseBox.style.border = "unset";
-    responseBox.style.left = "unset";
-    responseBox.style.right = "3%";
+  let responseBox = createContainerBox("responseBox");
+  responseBox.classList.add("winnerBox");
 
-    let attentionIcon = document.createElement("img");
-    attentionIcon.setAttribute("src", "icons/attention.svg");
+  let attentionIcon = document.createElement("img");
+  attentionIcon.setAttribute("src", "icons/attention.svg");
 
-    let winnerTeam;
-    let loserTeam;
+  let winnerTeam;
+  let loserTeam;
 
-      attentionIcon.addEventListener("click", () => {
-        
-        responseBox.classList.add("bigger");
-        responseBox.innerHTML = "";
-        if(arg == "win"){
+  attentionIcon.addEventListener("click", () => {
 
-          if(usersTeam.teamID == 1){
-            winnerTeam = "Vishnu";
-            loserTeam = "Shiva";
-          }else{
-            winnerTeam = "Shiva";
-            loserTeam = "Vishnu";
-          }
-          responseBox.innerHTML = `
+    responseBox.classList.add("bigger");
+    responseBox.innerHTML = "";
+    if (arg == "win") {
+
+      if (usersTeam.teamID == 1) {
+        winnerTeam = "Vishnu";
+        loserTeam = "Shiva";
+      } else {
+        winnerTeam = "Shiva";
+        loserTeam = "Vishnu";
+      }
+      responseBox.innerHTML = `
             <div class="innerResponseBox">
               <h2>Grupp ${usersTeam["name"]}</h2>
               <p>GRATTIS! Bra kämpat lag ${winnerTeam}. Ni lyckades genomföra alla uppgifter före 
@@ -1355,17 +1351,17 @@ function createWinLoseBox(arg) {
               <p>- ${usersTeam["name"]}</p>
             </div> 
           `;
-        }else{
+    } else {
 
-          if(usersTeam.teamID == 1){
-            winnerTeam = "Vishnu";
-            loserTeam = "Shiva";
-          }else{
-            winnerTeam = "Shiva";
-            loserTeam = "Vishnu";
-          }
+      if (usersTeam.teamID == 1) {
+        winnerTeam = "Vishnu";
+        loserTeam = "Shiva";
+      } else {
+        winnerTeam = "Shiva";
+        loserTeam = "Vishnu";
+      }
 
-          responseBox.innerHTML = `
+      responseBox.innerHTML = `
             <div class="innerResponseBox">
               <h2>Grupp ${usersTeam["name"]}</h2>
               <p>SORRY! Lag ${winnerTeam} lyckades genomföra alla uppgifter före 
@@ -1373,20 +1369,20 @@ function createWinLoseBox(arg) {
               <p>- ${usersTeam["name"]}</p>
             </div> 
           `;
-        }
-      
-        let closeWinBoxButton = document.createElement("button");
-        closeWinBoxButton.classList.add("closeResponseBoxButton");
-        closeWinBoxButton.innerHTML = "X";
-  
-        closeWinBoxButton.addEventListener("click", () => {
-          responseBox.remove();
-        })
-        responseBox.append(closeWinBoxButton);
-      });
+    }
 
-    responseBox.append(attentionIcon);
-    document.body.append(responseBox);
+    // let closeWinBoxButton = document.createElement("button");
+    // closeWinBoxButton.classList.add("closeResponseBoxButton");
+    // closeWinBoxButton.innerHTML = "X";
+
+    // closeWinBoxButton.addEventListener("click", () => {
+    //   responseBox.remove();
+    // })
+    // responseBox.append(closeWinBoxButton);
+  });
+
+  responseBox.append(attentionIcon);
+  document.body.append(responseBox);
 }
 
 // 
@@ -1411,4 +1407,4 @@ function controlGeigerMeter(parameter) {
 // function play() {
 //   var audio = document.getElementById("audio");
 //   audio.play();
-// }
+// }'''

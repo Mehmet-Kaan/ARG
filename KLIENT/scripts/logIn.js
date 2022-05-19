@@ -31,7 +31,7 @@ function enterCode() {
     password.setAttribute("id", "passwordBox");
     // password
     let label2 = document.createElement("label");
-    label2.innerHTML = "PIN";
+    label2.innerHTML = "DATUM";
     label2.className = "bodyText";
     let input2 = document.createElement("input");
     input2.setAttribute("type", "password");

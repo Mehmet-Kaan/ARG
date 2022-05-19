@@ -1,24 +1,50 @@
 [
     {
-        "teamID": 1,
+        "teamID": 0,
         "teamName": "Vishnu",
         "name": "Edward Teller",
-        "avatar":"",
-        "phaseOne": [6],
-        "phaseTwo": [7, 5, 0, 3],
-        "phaseThree": [2, 8, 1],
-        "phaseFour": [4],
-        "notifications": []
+        "avatar": "",
+        "phaseOne": [
+            6
+        ],
+        "phaseTwo": [
+            7,
+            5,
+            0,
+            3
+        ],
+        "phaseThree": [
+            2,
+            8,
+            1
+        ],
+        "phaseFour": [
+            4
+        ],
+        "wins": false
     },
     {
-        "teamID": 2,
+        "teamID": 1,
         "teamName": "Shiva",
         "name": "Hans Bethe",
-        "avatar":"",
-        "phaseOne": [5],
-        "phaseTwo": [7, 0, 6, 3],
-        "phaseThree": [2, 8, 1],
-        "phaseFour": [4],
-        "notifications": []
+        "avatar": "",
+        "phaseOne": [
+            5
+        ],
+        "phaseTwo": [
+            7,
+            0,
+            6,
+            3
+        ],
+        "phaseThree": [
+            2,
+            8,
+            1
+        ],
+        "phaseFour": [
+            4
+        ],
+        "wins": false
     }
 ]

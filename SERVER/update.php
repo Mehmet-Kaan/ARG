@@ -30,10 +30,9 @@ if (!isset($requestData["userID"]) ) {
     );
 }
 
-$inLoggedUserTeamID = $requestData["teamID"];
-if(isset($inLoggedUserTeamID)){
+if(isset($requestData["teamID"])){
     foreach($teams as $index => $team){
-        if($team["teamID"] == $inLoggedUserTeamID){
+        if($team["teamID"] == $requestData["teamID"]){
             $team["wins"] = true;
             $teams[$index] = $team;
         }

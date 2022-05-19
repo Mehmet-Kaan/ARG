@@ -104,11 +104,13 @@ header > .title::after {
   height: 55px;
 }
 
-.winnerBox, .loserBox{
-  background: unset;
-  border: unset;
-  left: unset;
-  right: 3%;
+.responseBox.winnerBox {
+  border: none;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 50px;
+  z-index: 1000;
 }
 
 .responseBox > img {
@@ -140,6 +142,10 @@ header > .title::after {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.innerResponseBox > .bodyText:first-child {
+  padding: 20px 0px;
 }
 
 .closeResponseBoxButton {
@@ -318,29 +324,16 @@ header > .title::after {
 .unlockedPreRiddleBox > img,
 .unlockedRiddleBox > img {
   width: 100%;
-  padding: 20px 20px 0px 20px;
+  padding: 20px;
 }
 
 .unlockedRiddleBox, .unlockedPreRiddleBox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   width: auto;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: var(--viewerMargin);
   opacity: 0%;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
   height: 100%;
+  overflow: scroll;
 }
 
 .unlocked {
@@ -374,10 +367,16 @@ form#preRiddleAnswer {
   padding: 20px;
 }
 
-.unlockedPreRiddleBox > .middleTitle,
-.unlockedRiddleBox > .middleTitle {
-  padding: 0px 20px;
+.unlockedPreRiddleBox > .bodyText,
+.unlockedRiddleBox > .bodyText {
   text-transform: none;
+  padding: 20px;
+  text-align: center;
+}
+
+.unlockedPreRiddleBox > .title,
+.unlockedRiddleBox > .title {
+  text-align: center;
 }
 
 form#preRiddleAnswer > button {
@@ -529,8 +528,8 @@ img.excerptImg {
 }
 
 .closeBtn > img {
-  height: 2rem;
-  width: 2rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 /* MESSAGES */
@@ -814,6 +813,32 @@ span > :nth-child(6) {
   background-color: white;
   -webkit-animation: meter 1s infinite alternate;
           animation: meter 1s infinite alternate;
+}
+
+.wrapperResponseAnswer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+}
+
+.wrapperResponseAnswer > .title,
+.wrapperResponseAnswer > .bodyText {
+  text-align: center;
+}
+
+.red {
+  color: #ff0000;
 }
 
 @-webkit-keyframes meter {

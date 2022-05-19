@@ -16,7 +16,7 @@
       <div class="numbersBox">
             <div class="MaxP">Max</div>
             <div class="exposedP">Exposed</div>
-            <div class="maximum">7000</div>
+            <div class="maximum">10000</div>
             <div class="exposed">0</div>
           </div>
           <div class="line"><div class="meter low"></div></div>

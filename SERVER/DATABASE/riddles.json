@@ -3,7 +3,7 @@
         {
             "riddleID":0,
             "riddle":"First four in...",
-            "img":"fortstamotet_mainriddle",
+            "img":"images/forstamotet_mainriddle",
             "correctAnswer":9780, 
             "locationID":5,
             "diaryid": 0,
@@ -12,11 +12,12 @@
             "response": {
                 "Hans Bethe": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er.",
                 "Edward Teller": "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare."
-            }
+            },
+            "title": "Första mötet"
         },
         {
             "riddleID":1,
-            "riddle":"Minns ni vad vi exprimenterade med i labbet?",
+            "riddle":"SKRIVA TEXT FÖR PLATSEN",
             "img":"images/labbhistoria_mainriddle",
             "correctAnswer":94,
             "locationID":6,
@@ -26,13 +27,14 @@
             "response": {
                 "Hans Bethe": "Fortsätt med uppdraget. Var försiktiga i de radioaktiva områdena och ha koll på er geigermätare.",
                 "Edward Teller": "Jag har lokaliserat 3 områden till. Kartan är uppdaterad. Skynda er"
-            }
+            },
+            "title": "Labbet"
         },
         {
             "riddleID":2,
-            "riddle":"Låt oss mäta dina färdigheter...",
+            "riddle":"Svaret finns alltid i FYSIK, men hur många?",
             "img":"images/upptackten_mainriddle",
-            "correctAnswer":17,
+            "correctAnswer":22151,
             "locationID":0,
             "diaryid": 2,
             "relatedPreRiddles": [0],
@@ -40,7 +42,8 @@
             "response": {
                 "Hans Bethe": "Jag har fått uppgifter om det finns dagboksutdrag från en gammal bekant på stationerna. Ifall det uppkommer fler, spara dem men kom ihåg att inte tro på allt ni läser.",
                 "Edward Teller": "Jag har fått uppgifter om det finns dagboksutdrag från en gammal vän på stationerna. Ifall det finns fler så spara dem, men lägg störst fokus på uppdraget."
-            }
+            },
+            "title": "Upptäckten"
         },
         {
             "riddleID":3,
@@ -54,11 +57,12 @@
             "response": {
                 "Hans Bethe": "Låt inte U92 hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget.",
                 "Edward Teller": "Isotopia får inte hinna först, ni vet vad som händer ifall det sker. Fortsätt med uppdraget."
-            }
+            },
+            "title": "Sveket"
         },
         {
             "riddleID":4,
-            "riddle":"Det som komma skall",
+            "riddle":"Det som komma skall...",
             "img":"images/braket_mainriddle",
             "correctAnswer": 1904,
             "locationID":3,
@@ -68,7 +72,8 @@
             "response": {
                 "Hans Bethe": "Om ni hittar objektet kan vi tillsammans göra världen till en bättre plats. Jag håller alltid mitt löfte, ni kan lita på mig.",
                 "Edward Teller": "Vad som än finns vid andra änden, låt inte Bethe komma först. Med honom vid makten hotas hela våra existens."
-            }
+            },
+            "title": "Bråket"
         },
         {
             "riddleID":5,
@@ -82,7 +87,8 @@
             "response": {
                 "Hans Bethe": "Det är dem som förstör allt, det har de alltid gjort. Jag är för smart och det skrämmer dem.",
                 "Edward Teller": "Bra jobbat. Arbetet är långt ifrån klart. Tiden är snart slut, ni måste jobba snabbare."
-            }
+            },
+            "title": "Oppenheimers hemligheter"
         },
         {
             "riddleID":6,
@@ -96,11 +102,12 @@
             "response": {
                 "Hans Bethe": "Uppdraget är inte färdigt, jag har tränat er för att hitta skatten och jag tänker inte ge upp.",
                 "Edward Teller": "Uppdraget är inte färdigt. Vi kan inte ge upp än!"
-            }
+            },
+            "title": "Receptet"
         },
         {
             "riddleID":7,
-            "riddle":"pamudAS, kommer ni väl ihåg?",
+            "riddle":"Visst har ni hört om...",
             "img":"images/dodsbadden_mainriddle",
             "correctAnswer": 659,
             "locationID":8,
@@ -110,21 +117,23 @@
             "response": {
                 "Hans Bethe": "Jobba hårdare. De får inte komma först till slutmålet.",
                 "Edward Teller": "Bra jobbat, fullfölj uppdraget."
-            }
+            },
+            "title": "Dödsbädden"
         },
         {
             "riddleID":8,
-            "riddle":"Kapitel hör ihop, och ord lika så, vinsten beror på ifall du kan förstå",
-            "img":"images/supervapnet_mainriddle",
+            "riddle":"Finner du mina hjälpredor på plats får du delar till lösningen. Det är nu eller aldrig.",
+            "img":"",
             "correctAnswer": 7210,
             "locationID":4,
-            "diaryid": 7,
+            "diaryid": 8,
             "relatedPreRiddles": [6],
             "relatedClues":[],
             "response": {
                 "Hans Bethe": "FINaaaalo",
                 "Edward Teller": "LESFINALES"
-            }
+            },
+            "title": "Supervapnet"
         }
     ],
     "preRiddles":[
@@ -138,24 +147,24 @@
         },
         {
             "riddleID":1,
-            "riddle":"Ser du mönstret?",
-            "img":"images/sveket_preriddle",
+            "riddle":"Ett litet hus, av mycket kraft kan hjälpa dig att hitta det du söker. Se upp så att du inte får böter.",
+            "img":"",
             "correctAnswer": 3210,
             "locationID":7,
             "relatedMainRiddle":3
         },
         {
             "riddleID":2,
-            "riddle":"Kollar du verkligen på rätt sak just nu?",
-            "img":"images/braket_preriddle",
-            "correctAnswer":35,
+            "riddle":"Kasta aldrig sten i glashus. Det vore väldigt onödigt och synd. Låt gärna stenarna ligga kvar då det alltid finns någonting under dem. Va noga med att enbart ta det som tillhör er",
+            "img":"",
+            "correctAnswer":1556,
             "locationID":3,
             "relatedMainRiddle":4
         },
         {
             "riddleID":3,
-            "riddle":"Ord kan få en ny mening",
-            "img":"images/oppenheimershemligheter_preriddle",
+            "riddle":"Staplar pekar mot skyn bland fallna hjältar. Kanske finner du något av värde för det fortsatta uppdraget.",
+            "img":"",
             "correctAnswer":9948,
             "locationID":2,
             "relatedMainRiddle":5
@@ -170,15 +179,15 @@
         },
         {
             "riddleID":5,
-            "riddle":"Svaret finns alltid i FYSIK men hur många?",
+            "riddle":"RGB är standard...",
             "img":"images/dodsbadden_preriddle",
-            "correctAnswer":22151,
+            "correctAnswer":363,
             "locationID":8,
             "relatedMainRiddle":7
         },
         {
             "riddleID":6,
-            "riddle":"Använd dig av det du har fått längs med vägen",
+            "riddle":"Vad har Oppenheimers kvarlevor att säga dig?",
             "img":"",
             "correctAnswer": 1942,
             "locationID":4,

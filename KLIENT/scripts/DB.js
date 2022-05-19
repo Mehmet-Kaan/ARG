@@ -5,7 +5,7 @@ const locations = [
         "lat":"55.61173",
         "lng":"12.99411",
         "circleRadius": 50, 
-        "mainRiddleID":4,  
+        "mainRiddleID":2,  
         "diaryID": 2,
     },
     {
@@ -14,7 +14,7 @@ const locations = [
         "lat":"55.61062",
         "lng":"12.98636",
         "circleRadius":100,
-        "mainRiddleID":2,
+        "mainRiddleID":6,
         "diaryID":6
     },
     {
@@ -23,7 +23,7 @@ const locations = [
         "lat":"55.61043",
         "lng":"12.99763",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":5,
         "diaryID": 5
     },
     {
@@ -32,12 +32,12 @@ const locations = [
         "lat":"55.61076",
         "lng":"13.00208",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":4,
         "diaryID":4
     },
     {
         "locationID":4,
-        "title":"Vapnet",
+        "title":"Supervapnet",
         "lat":"55.61202",
         "lng":"12.99067",
         "circleRadius":100,
@@ -50,7 +50,7 @@ const locations = [
         "lat":"55.61079",
         "lng":"12.99538",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":0,
         "diaryID":0
     },
     {
@@ -59,7 +59,7 @@ const locations = [
         "lat":"55.60753",
         "lng":"12.98978",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":1,
         "diaryID":1
     },
     {
@@ -68,7 +68,7 @@ const locations = [
         "lat":"55.60762",
         "lng":"12.97840",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":3,
         "diaryID":3
     }
     ,{
@@ -77,7 +77,7 @@ const locations = [
         "lat":"55.604839",
         "lng":"12.987445",
         "circleRadius":100,
-        "mainRiddleID":8,
+        "mainRiddleID":7,
         "diaryID":7
     }
 ];
@@ -90,7 +90,7 @@ const diary = [
         "page":8,
         "title": "Första mötet",
         "bodyText": {
-            "start": "Idag var första gången jag mötte mina nya kollegor på kontoret, de var nervösa över sin första tjänst. Bethe, en av dem, verkade fascinerad och såg sig omkring på kontoret och log. Tellers intryck har jag tänkt på mycket under resten av dagen. Han hade en rädsla och ängslighet i blicken som jag aldrig tidigare skådat hos en kärnfysiker på så här hög nivå. Jag har bestämt mig för att övervaka hur han beter sig, och hur hans syn på projektet utvecklas. På lunchen berättade jag såklart om min favorittext just nu, The Bhagavad Gita, jag hoppas de tyckte om den. Jag läste delar ur den för dem. En sådan fantastisk filosofi.",
+            "start": "Idag var första gången jag mötte mina nya kollegor på kontoret, de var nervösa över sin första tjänst. Bethe, en av dem, verkade fascinerad och såg sig omkring på kontoret och log. Tellers intryck har jag tänkt på mycket under resten av dagen. Han hade en rädsla och ängslighet i blicken som jag aldrig tidigare skådat hos en kärnfysiker på så här hög nivå. Jag har bestämt mig för att övervaka hur han beter sig, och hur hans syn på projektet utvecklas. På lunchen berättade jag såklart om min favoritbok just nu, The Bhagavad Gita, jag hoppas de tyckte om den. Jag läste delar ur den för dem. En sådan fantastisk filosofi.",
             "end": "“I am the begi<span class='glitchedLetter' data-text='N'>N</span>ning, m<span class='glitchedLetter' data-text='I'>I</span>ddle, and end of creation.”"
         },  
         "img":"",
@@ -130,7 +130,7 @@ const diary = [
         "title": "Sveket",
         "bodyText": {
             "start": "Labbet har mestadels bestått av mig och Teller den här veckan. Bethe var borta och när vi frågade honom varför gav han inget tydligt svar. Idag valde vi att följa efter honom när han försvann och upptäckte att han hade fortsatt experimentera med ett projekt som vi sa att vi aldrig skulle fortsätta med. Det var sista droppen.",
-            "end": "Det var som Bethe sa, ifall vi använde det kunde vi bli mäktigast i världen. Hans girighet tog över hans förn<span class='glitchedLetter' data-text='U'>U</span>ft och projektet kanske inte ka<span class='glitchedLetter' data-text='N'>N</span> fortsätta."
+            "end": "Det var som Bethe sa, ifall vi använde det kunde vi bli mäktigast i världen. <span class='glitchedLetter' data-text='H'>H</span>ans girighet tog över hans förn<span class='glitchedLetter' data-text='U'>U</span>ft och projektet kanske inte ka<span class='glitchedLetter' data-text='N'>N</span> fortsätta."
         },  
         "img":"",
         "locationID": 7
@@ -156,7 +156,7 @@ const diary = [
         "title": "Oppenheimers hemligheter",
         "bodyText": {
             "start": "Jag vet vad Bethe gjorde fel. Jag vet vad han saknar och jag har börjat utveckla ett vapen som ingen någonsin har sett förut. Ifall informationen faller i fel händer kan det utrota allt liv på jorden.",
-            "end": "Jag behöver hålla det hemligt För alla. T<span class='glitchedLetter' data-text='Y'>Y</span> inte ens mina a<span class='glitchedLetter' data-text='R'>R</span>betskollegor kan känna till den här hemligheten."
+            "end": "Jag behöver hålla det hemligt <span class='glitchedLetter' data-text='F'>F</span>ör alla. T<span class='glitchedLetter' data-text='Y'>Y</span> inte ens mina a<span class='glitchedLetter' data-text='R'>R</span>betskollegor kan känna till den här hemligheten."
         },  
         "img":"",
         "locationID": 2
@@ -182,7 +182,7 @@ const diary = [
         "title": "Dödsbädden",
         "bodyText": {
             "start": "Hur kan jag berätta det här? Jag har fått ett besked som har gjort mina år till ett par månader. Det finns inte längre någon tid. Jag kan inte berätta för Teller och Bethe, de har inte pratat med varandra sedan The Malmö Project avslutades. Jag hade all makt i världen men jag har inte längre tiden på min sida.",
-            "end": "Den som får <span class='glitchedLetter' data-set='T'>T</span>ag i detta kan kontrollera allt men jag kan inte heller förstöra det. Under hela min karriär <span class='glitchedLetter' data-set='V'>V</span>ill jag påstå att det här är min största upptäckt. Å andra sidan vem vet vad jag hade gjort?"
+            "end": "Den som får <span class='glitchedLetter' data-set='T'>T</span>ag i detta kan kontrollera allt men jag kan inte heller förstöra det. Under hela min karriär <span class='glitchedLetter' data-set='V'>V</span>ill jag påst<span class='glitchedLetter' data-text='Å'>Å</span> att det här är min största upptäckt. Å andra sidan vem vet vad jag hade gjort?"
         },  
         "img":"",
         "locationID": 8
@@ -217,23 +217,23 @@ const messages = [
 
 const teams = [
     {
-        "teamID": 1,
+        "teamID": 0,
         "teamName": "Vishnu",
         "name": "Edward Teller",
         "avatar":"icons/vishnu_emblem.png",
         "phaseOne": [6],
-        "phaseTwo": [7, 5, 0],
-        "phaseThree": [8, 2, 1, 3],
+        "phaseTwo": [7, 5, 0, 3],
+        "phaseThree": [2, 8, 1],
         "phaseFour": [4]
     },
     {
-        "teamID": 2,
+        "teamID": 1,
         "teamName": "Shiva",
         "name": "Hans Bethe",
         "avatar":"icons/shiva_emblem.png",
         "phaseOne": [5],
-        "phaseTwo": [7, 6, 0],
-        "phaseThree": [8, 2, 1, 3],
+        "phaseTwo": [7, 0, 6, 3],
+        "phaseThree": [2, 8, 1],
         "phaseFour": [4]
     }
 ];
