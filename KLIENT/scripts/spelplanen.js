@@ -394,8 +394,8 @@ function createSpot(spot) {
   let booleanValue;
   google.maps.event.addListener(marker, 'click', function () {
     let message;
-    booleanValue = checkIfInZone(circle);
-    // booleanValue = true;
+    // booleanValue = checkIfInZone(circle);
+    booleanValue = true;
     let zoneCleared = user["locationAchieved"].includes(spot.locationID);
 
     if (zoneCleared == false) {
