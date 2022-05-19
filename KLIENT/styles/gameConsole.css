@@ -536,7 +536,7 @@ img.excerptImg {
 .codeBox {
   position: absolute;
   top: 60px;
-  z-index: 100;
+  z-index: 1000;
   background: black;
   overflow: scroll;
   display: -webkit-box;
